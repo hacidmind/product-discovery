@@ -1,27 +1,29 @@
-import fs from "fs";
-import path from "path";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getDatabase } from "@/lib/mongodb";
+import { getOwnedProductId, getRequestUser } from "@/lib/request-context";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+const COLLECTIONS = ["insights", "opportunities", "personas", "interviews", "features", "experiments", "assumptions", "research", "tree"] as const;
 
-export async function GET() {
-  const files = fs.readdirSync(DATA_DIR).filter((f) => f.endsWith(".json"));
-
-  const bundle: Record<string, unknown> = {};
-
-  for (const file of files) {
-    const key = file.replace(/\.json$/, "");
-    const raw = fs.readFileSync(path.join(DATA_DIR, file), "utf-8");
-    bundle[key] = JSON.parse(raw);
-  }
-
+export async function GET(req: NextRequest) {
+  const user = await getRequestUser(req);
+  if (!user) return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+  const db = await getDatabase();
+  const products = await db.collection("products").find({ userId: user.id }).toArray();
+  const productId = await getOwnedProductId(req);
+  const ownedProducts = productId ? products.filter((p) => p.id === productId) : products;
+  const ids = ownedProducts.map((p) => p.id);
+  const bundle: Record<string, unknown> = { products: ownedProducts };
+  await Promise.all(
+    COLLECTIONS.map(async (name) => {
+      bundle[name] = ids.length > 0 ? await db.collection(name).find({ productId: { $in: ids } }).toArray() : [];
+    })
+  );
   const body = JSON.stringify(bundle, null, 2);
-
   return new NextResponse(body, {
     status: 200,
     headers: {
       "Content-Type": "application/json",
-      "Content-Disposition": `attachment; filename="product-discovery-export.json"`,
+      "Content-Disposition": `attachment; filename="discovery-backup.json"`,
     },
   });
 }

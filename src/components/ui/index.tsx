@@ -286,8 +286,8 @@ export function Modal({
       aria-modal="true"
       aria-label={title}
     >
-      <div className="bg-[var(--bg)] border border-[var(--border)] rounded-lg w-full max-w-lg mx-4 shadow-xl animate-fadein">
-        <div className="flex items-center justify-between px-5 py-4 border-b">
+      <div className="flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--bg)] mx-4 shadow-xl animate-fadein">
+        <div className="flex shrink-0 items-center justify-between px-5 py-4 border-b">
           <h2 className="text-sm font-semibold">{title}</h2>
           <button
             onClick={onClose}
@@ -299,7 +299,7 @@ export function Modal({
             </svg>
           </button>
         </div>
-        <div className="p-5">{children}</div>
+        <div className="min-h-0 overflow-y-auto p-5">{children}</div>
       </div>
     </div>
   );

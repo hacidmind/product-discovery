@@ -49,7 +49,7 @@ export default function FeaturesPage() {
   const fetchFeatures = useCallback(async () => {
     const res = await fetch("/api/features");
     const data = await res.json();
-    setFeatures(data);
+    setFeatures(Array.isArray(data) ? data : []);
     setLoading(false);
   }, []);
 

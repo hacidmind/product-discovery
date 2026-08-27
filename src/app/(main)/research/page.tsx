@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation"
-const dummy = undefined; // ensure import hook available
 import {
   Textarea,
   Button,
@@ -57,7 +56,7 @@ export default function ResearchPage() {
   const fetchResults = async () => {
     const res = await fetch("/api/research");
     const data = await res.json();
-    setResults(data);
+    setResults(Array.isArray(data) ? data : []);
     setLoading(false);
   };
 

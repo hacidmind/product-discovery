@@ -26,7 +26,7 @@ export default function InterviewsPage() {
   const fetchInterviews = useCallback(async () => {
     const res = await fetch("/api/interviews");
     const data = await res.json();
-    setInterviews(data);
+    setInterviews(Array.isArray(data) ? data : []);
     setLoading(false);
   }, []);
 

@@ -2,11 +2,10 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Card, Badge, PriorityBadge, Spinner, Button } from "@/components/ui";
 import { AlertTriangle, ArrowUpRight, BrainCircuit, Download, FileDown, FlaskConical, Lightbulb, MessageSquare, ShieldQuestion, Sparkles, Target, Users } from "@/components/icons";
 import type {
-  Insight, Opportunity, Feature, Persona, Interview, Experiment, Assumption, ResearchResult,
+  Insight, Opportunity, Feature,
 } from "@/lib/types";
 
 function StatCard({ label, value, Icon, href, tone = "accent" }: { label: string; value: number; Icon: React.ComponentType<{ size?: number }>; href: string; tone?: "accent" | "data" }) {
@@ -49,10 +48,8 @@ const ENTITY_ICONS: Record<string, string> = {
 };
 
 export default function DashboardPage() {
-  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeProduct, setActiveProduct] = useState("");
   const [stats, setStats] = useState({
     totalInsights: 0,
     totalOpportunities: 0,
@@ -66,75 +63,21 @@ export default function DashboardPage() {
   const [commonProblems, setCommonProblems] = useState<{ theme: string; count: number }[]>([]);
   const [topFeatures, setTopFeatures] = useState<Feature[]>([]);
   const [recentInsights, setRecentInsights] = useState<Insight[]>([]);
-  const [researchResults, setResearchResults] = useState<ResearchResult[]>([]);
+  const [researchResults, setResearchResults] = useState<{ id: string; product: string; recommendations: string[] }[]>([]);
   const [activityFeed, setActivityFeed] = useState<{ type: string; title: string; createdAt: string }[]>([]);
 
   const fetchData = useCallback(async () => {
     try {
-      const [insights, opportunities, personas, interviews, features, experiments, assumptions, researchRes] =
-        await Promise.all([
-          fetch("/api/insights").then((r) => r.json()),
-          fetch("/api/opportunities").then((r) => r.json()),
-          fetch("/api/personas").then((r) => r.json()),
-          fetch("/api/interviews").then((r) => r.json()),
-          fetch("/api/features").then((r) => r.json()),
-          fetch("/api/experiments").then((r) => r.json()),
-          fetch("/api/assumptions").then((r) => r.json()),
-          fetch("/api/research").then((r) => r.json()),
-        ]);
-
-      const themeCount = new Map<string, number>();
-      for (const insight of insights as Insight[]) {
-        for (const theme of insight.themes) {
-          themeCount.set(theme, (themeCount.get(theme) || 0) + 1);
-        }
-      }
-
-      const sortedThemes = Array.from(themeCount.entries())
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 10)
-        .map(([theme, count]) => ({ theme, count }));
-
-      const sortedOpps = (opportunities as Opportunity[])
-        .sort((a, b) => b.totalScore - a.totalScore)
-        .slice(0, 5);
-
-      const sortedFeatures = (features as Feature[])
-        .sort((a, b) => b.totalScore - a.totalScore)
-        .slice(0, 5);
-
-      const recent = (insights as Insight[])
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        .slice(0, 5);
-
-      setStats({
-        totalInsights: insights.length,
-        totalOpportunities: opportunities.length,
-        totalPersonas: personas.length,
-        totalInterviews: interviews.length,
-        totalFeatures: features.length,
-        totalExperiments: experiments.length,
-        totalAssumptions: assumptions.length,
-      });
-
-      const feedItems: { type: string; title: string; createdAt: string }[] = [];
-      for (const i of insights as Insight[]) feedItems.push({ type: "insight", title: i.title, createdAt: i.createdAt });
-      for (const o of opportunities as Opportunity[]) feedItems.push({ type: "opportunity", title: o.title, createdAt: o.createdAt });
-      for (const p of personas as Persona[]) feedItems.push({ type: "persona", title: p.name, createdAt: p.createdAt });
-      for (const iv of interviews as Interview[]) feedItems.push({ type: "interview", title: iv.title, createdAt: iv.createdAt });
-      for (const f of features as Feature[]) feedItems.push({ type: "feature", title: f.title, createdAt: f.createdAt });
-      for (const ex of experiments as Experiment[]) feedItems.push({ type: "experiment", title: ex.title, createdAt: ex.createdAt });
-      for (const a of assumptions as Assumption[]) feedItems.push({ type: "assumption", title: a.statement, createdAt: a.createdAt });
-      for (const rr of researchRes as ResearchResult[]) feedItems.push({ type: "research", title: rr.query, createdAt: rr.createdAt });
-
-      feedItems.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      setActivityFeed(feedItems.slice(0, 15));
-
-      setTopOpportunities(sortedOpps);
-      setCommonProblems(sortedThemes);
-      setTopFeatures(sortedFeatures);
-      setRecentInsights(recent);
-      setResearchResults(researchRes as ResearchResult[]);
+      const res = await fetch("/api/dashboard");
+      if (!res.ok) throw new Error("Failed to load dashboard data");
+      const data = await res.json();
+      setStats(data.stats);
+      setTopOpportunities(data.topOpportunities);
+      setCommonProblems(data.commonProblems);
+      setTopFeatures(data.topFeatures);
+      setRecentInsights(data.recentInsights);
+      setResearchResults(data.researchResults);
+      setActivityFeed(data.activityFeed);
       setError(null);
     } catch {
       setError("Failed to load dashboard data. Please check your connection and try again.");

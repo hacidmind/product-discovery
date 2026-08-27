@@ -68,13 +68,13 @@ export default function SearchPage() {
     async function load() {
       const [insights, opportunities, personas, interviews, features, experiments, assumptions] =
         await Promise.all([
-          fetch("/api/insights").then((r) => r.json()),
-          fetch("/api/opportunities").then((r) => r.json()),
-          fetch("/api/personas").then((r) => r.json()),
-          fetch("/api/interviews").then((r) => r.json()),
-          fetch("/api/features").then((r) => r.json()),
-          fetch("/api/experiments").then((r) => r.json()),
-          fetch("/api/assumptions").then((r) => r.json()),
+          fetch("/api/insights").then((r) => (r.ok ? r.json() : [])),
+          fetch("/api/opportunities").then((r) => (r.ok ? r.json() : [])),
+          fetch("/api/personas").then((r) => (r.ok ? r.json() : [])),
+          fetch("/api/interviews").then((r) => (r.ok ? r.json() : [])),
+          fetch("/api/features").then((r) => (r.ok ? r.json() : [])),
+          fetch("/api/experiments").then((r) => (r.ok ? r.json() : [])),
+          fetch("/api/assumptions").then((r) => (r.ok ? r.json() : [])),
         ]);
       setData({ insights, opportunities, personas, interviews, features, experiments, assumptions });
     }

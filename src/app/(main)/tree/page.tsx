@@ -36,8 +36,8 @@ export default function SolutionTreePage() {
           fetch("/api/opportunities").then((r) => r.json()),
           fetch("/api/experiments").then((r) => r.json()),
         ]);
-        setOpportunities(opps);
-        setExperiments(exps);
+        setOpportunities(Array.isArray(opps) ? opps : []);
+        setExperiments(Array.isArray(exps) ? exps : []);
         setLoading(false);
       }
       load();
@@ -220,7 +220,7 @@ export default function SolutionTreePage() {
     return (
       <svg
         viewBox={`0 0 ${width} ${maxY}`}
-        className="w-full min-h-[400px]"
+        className="h-auto min-h-[400px] min-w-[720px] w-full"
         style={{ fontFamily: "var(--font-geist-sans)" }}
       >
         {/* Edges */}
@@ -362,9 +362,9 @@ export default function SolutionTreePage() {
           </p>
         </Card>
       ) : (
-        <Card className="p-4 overflow-hidden">
+        <Card className="overflow-hidden p-4">
           <div
-            className="overflow-hidden cursor-grab active:cursor-grabbing"
+            className="max-h-[65vh] overflow-auto overscroll-contain cursor-grab touch-pan-x touch-pan-y active:cursor-grabbing"
             onMouseDown={(e) => {
               setDragging(true);
               dragStart.current = { x: e.clientX, y: e.clientY, panX, panY };
@@ -379,7 +379,7 @@ export default function SolutionTreePage() {
             onMouseUp={() => setDragging(false)}
             onMouseLeave={() => setDragging(false)}
           >
-            <div style={{ transform: `translate(${panX}px, ${panY}px)` }}>
+            <div className="min-w-[720px]" style={{ transform: `translate(${panX}px, ${panY}px)` }}>
               {renderTree()}
             </div>
           </div>

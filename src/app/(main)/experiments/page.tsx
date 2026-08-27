@@ -29,7 +29,7 @@ export default function ExperimentsPage() {
   const fetchExperiments = useCallback(async () => {
     const res = await fetch("/api/experiments");
     const data = await res.json();
-    setExperiments(data);
+    setExperiments(Array.isArray(data) ? data : []);
     setLoading(false);
   }, []);
 

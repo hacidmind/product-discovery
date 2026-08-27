@@ -73,7 +73,7 @@ export default function PersonasPage() {
   const fetchPersonas = useCallback(async () => {
     const res = await fetch("/api/personas");
     const data = await res.json();
-    setPersonas(data);
+    setPersonas(Array.isArray(data) ? data : []);
     setLoading(false);
   }, []);
 

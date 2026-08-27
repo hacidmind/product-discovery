@@ -40,7 +40,7 @@ export default function AssumptionsPage() {
   const fetchAssumptions = useCallback(async () => {
     const res = await fetch("/api/assumptions");
     const data = await res.json();
-    setAssumptions(data);
+    setAssumptions(Array.isArray(data) ? data : []);
     setLoading(false);
   }, []);
 
