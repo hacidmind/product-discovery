@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Button, Card, Badge, EmptyState, Modal, Spinner } from "@/components/ui";
+import ProgressiveList from "@/components/progressive-list";
 import type { Persona, Insight } from "@/lib/types";
 
 // List field editor component
@@ -243,8 +244,10 @@ export default function PersonasPage() {
           }
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {personas.map((persona) => (
+        <ProgressiveList
+          items={personas}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          renderItem={(persona) => (
             <Card
               key={persona.id}
               className="p-5 cursor-pointer hover:border-[var(--accent)] transition-colors"
@@ -292,8 +295,8 @@ export default function PersonasPage() {
                 </div>
               )}
             </Card>
-          ))}
-        </div>
+          )}
+        />
       )}
 
       {/* Detail Modal */}

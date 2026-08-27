@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Textarea, Button, Card, Badge, PriorityBadge, EmptyState, Select, Spinner, Modal, ConfirmDialog, useToast } from "@/components/ui";
+import ProgressiveList from "@/components/progressive-list";
 import type { Insight, InsightSource, Emotion } from "@/lib/types";
 
 const SOURCES: { value: InsightSource; label: string }[] = [
@@ -254,8 +255,10 @@ export default function DiscoverPage() {
           }
         />
       ) : (
-        <div className="space-y-3">
-          {filteredInsights.map((insight) => (
+        <ProgressiveList
+          items={filteredInsights}
+          className="space-y-3"
+          renderItem={(insight) => (
             <Card key={insight.id} className="p-4" onClick={() => openEdit(insight)}>
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
@@ -294,8 +297,8 @@ export default function DiscoverPage() {
                 </Button>
               </div>
             </Card>
-          ))}
-        </div>
+          )}
+        />
       )}
 
       <Modal

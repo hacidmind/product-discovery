@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Textarea, Button, Card, Badge, PriorityBadge, EmptyState, Modal, ScoreSlider, Spinner, Select, ConfirmDialog, useToast } from "@/components/ui";
+import ProgressiveList from "@/components/progressive-list";
 import type { Insight, Opportunity, OpportunityScore } from "@/lib/types";
 
 const STATUS_OPTIONS = [
@@ -25,6 +26,7 @@ export default function OpportunitiesPage() {
   const [insights, setInsights] = useState<Insight[]>([]);
   const [sortKey, setSortKey] = useState<"totalScore" | "createdAt">("totalScore");
   const toast = useToast();
+  const pickerScrollRef = useRef<HTMLDivElement>(null);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -211,8 +213,10 @@ export default function OpportunitiesPage() {
           action={<Button onClick={() => setShowCreate(true)}>+ New Opportunity</Button>}
         />
       ) : (
-        <div className="space-y-3">
-          {sortedOpportunities.map((opp) => (
+        <ProgressiveList
+          items={sortedOpportunities}
+          className="space-y-3"
+          renderItem={(opp) => (
             <Card key={opp.id} className="p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
@@ -259,8 +263,8 @@ export default function OpportunitiesPage() {
                 </div>
               </div>
             </Card>
-          ))}
-        </div>
+          )}
+        />
       )}
 
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="New Opportunity">
@@ -341,21 +345,26 @@ export default function OpportunitiesPage() {
       </Modal>
 
       <Modal open={showInsightPicker} onClose={() => setShowInsightPicker(false)} title="Create Opportunity from Insight">
-        <div className="space-y-3 max-h-96 overflow-y-auto">
+        <div ref={pickerScrollRef} className="space-y-3 max-h-96 overflow-y-auto">
           {insights.length === 0 ? (
             <p className="text-xs text-[var(--text-tertiary)]">No insights available.</p>
           ) : (
-            insights.map((insight) => (
-              <Card key={insight.id} className="p-3 cursor-pointer hover:border-[var(--accent)]" onClick={() => prefillFromInsight(insight)}>
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <p className="text-sm font-medium">{insight.title}</p>
-                    <p className="text-xs text-[var(--text-secondary)] line-clamp-2 mt-0.5">{insight.description}</p>
+            <ProgressiveList
+              items={insights}
+              className="space-y-3"
+              scrollRef={pickerScrollRef}
+              renderItem={(insight) => (
+                <Card key={insight.id} className="p-3 cursor-pointer hover:border-[var(--accent)]" onClick={() => prefillFromInsight(insight)}>
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <p className="text-sm font-medium">{insight.title}</p>
+                      <p className="text-xs text-[var(--text-secondary)] line-clamp-2 mt-0.5">{insight.description}</p>
+                    </div>
+                    <Badge variant="default">{insight.source}</Badge>
                   </div>
-                  <Badge variant="default">{insight.source}</Badge>
-                </div>
-              </Card>
-            ))
+                </Card>
+              )}
+            />
           )}
         </div>
       </Modal>

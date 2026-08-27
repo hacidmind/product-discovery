@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Textarea, Button, Card, Badge, PriorityBadge, EmptyState, Modal, Select, ScoreSlider, Spinner } from "@/components/ui";
+import ProgressiveList from "@/components/progressive-list";
 import type { Feature, Framework, MoSCoW, KanoCategory } from "@/lib/types";
 
 const FRAMEWORKS: { value: Framework; label: string; description: string }[] = [
@@ -180,8 +181,10 @@ export default function FeaturesPage() {
           action={<Button onClick={() => setShowCreate(true)}>+ New Feature</Button>}
         />
       ) : (
-        <div className="space-y-3">
-          {sortedFeatures.map((feature) => (
+        <ProgressiveList
+          items={sortedFeatures}
+          className="space-y-3"
+          renderItem={(feature) => (
             <Card key={feature.id} className="p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
@@ -226,8 +229,8 @@ export default function FeaturesPage() {
                 </Button>
               </div>
             </Card>
-          ))}
-        </div>
+          )}
+        />
       )}
 
       {/* Create Modal */}
