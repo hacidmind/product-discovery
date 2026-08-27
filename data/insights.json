@@ -1,0 +1,2252 @@
+[
+  {
+    "id": "mt3jnw8r9adqs0y",
+    "title": "## Customer Pain Points - The login process is frustrating and takes too long. -",
+    "description": "## Customer Pain Points\n- The login process is frustrating and takes too long.\n- Mobile app crashes when uploading images.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "negative",
+    "tags": [
+      "customer",
+      "pain",
+      "points",
+      "login",
+      "process",
+      "frustrating",
+      "takes",
+      "long",
+      "mobile",
+      "app"
+    ],
+    "themes": [
+      "mobile"
+    ],
+    "quotes": [],
+    "priority": "high",
+    "createdAt": "2026-08-21T22:52:03.963Z",
+    "updatedAt": "2026-08-24T13:48:48.069Z"
+  },
+  {
+    "id": "mt3jnw8s870gqhi",
+    "title": "The login process is frustrating and takes too long.",
+    "description": "The login process is frustrating and takes too long.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "negative",
+    "tags": [
+      "login",
+      "process",
+      "frustrating",
+      "takes",
+      "long"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "high",
+    "createdAt": "2026-08-21T22:52:03.965Z",
+    "updatedAt": "2026-08-21T22:52:03.965Z"
+  },
+  {
+    "id": "mt3jnw8t8yqj0ce",
+    "title": "Mobile app crashes when uploading images.",
+    "description": "Mobile app crashes when uploading images.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "mobile",
+      "app",
+      "crashes",
+      "uploading",
+      "images"
+    ],
+    "themes": [
+      "mobile"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:52:03.965Z",
+    "updatedAt": "2026-08-21T22:52:03.965Z"
+  },
+  {
+    "id": "mt3jnw8w6s5jwzv",
+    "title": "Reduce time on admin tasks",
+    "description": "Reduce time on admin tasks",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "reduce",
+      "admin",
+      "tasks"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:52:03.968Z",
+    "updatedAt": "2026-08-21T22:52:03.968Z"
+  },
+  {
+    "id": "mt3jnw8wwfwp997",
+    "title": "Current tools too expensive",
+    "description": "Current tools too expensive",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "current",
+      "tools",
+      "expensive"
+    ],
+    "themes": [
+      "pricing"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:52:03.968Z",
+    "updatedAt": "2026-08-21T22:52:03.968Z"
+  },
+  {
+    "id": "mt3jnw8wg8rowhw",
+    "title": "Simple affordable analytics",
+    "description": "Simple affordable analytics",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "simple",
+      "affordable",
+      "analytics"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:52:03.968Z",
+    "updatedAt": "2026-08-21T22:52:03.968Z"
+  },
+  {
+    "id": "mt3jnw8w52blue6",
+    "title": "- See top metrics on login to make quick decisions",
+    "description": "- See top metrics on login to make quick decisions",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "see",
+      "top",
+      "metrics",
+      "login",
+      "quick",
+      "decisions"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:52:03.968Z",
+    "updatedAt": "2026-08-21T22:52:03.968Z"
+  },
+  {
+    "id": "mt3jnw8xembakcy",
+    "title": "See top metrics on login to make quick decisions",
+    "description": "See top metrics on login to make quick decisions",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "see",
+      "top",
+      "metrics",
+      "login",
+      "quick",
+      "decisions"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:52:03.969Z",
+    "updatedAt": "2026-08-21T22:52:03.969Z"
+  },
+  {
+    "id": "mt3jr12oayptcdc",
+    "title": "**Context:** B2B API middleware enabling banks and fintechs to issue and manage ",
+    "description": "**Context:** B2B API middleware enabling banks and fintechs to issue and manage virtual cards. Customers are bank/fintech product, engineering, operations, and compliance teams. End cardholders are two steps removed.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "context",
+      "b2b",
+      "api",
+      "middleware",
+      "enabling",
+      "banks",
+      "fintechs",
+      "issue",
+      "manage",
+      "virtual"
+    ],
+    "themes": [
+      "integration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.192Z",
+    "updatedAt": "2026-08-21T22:54:30.192Z"
+  },
+  {
+    "id": "mt3jr12p54cruy4",
+    "title": "| ID | Source | Complaint | Segment | Frequency Reported | |----|--------|------",
+    "description": "| ID | Source | Complaint | Segment | Frequency Reported |\n|----|--------|-----------|---------|---------------------|\n| CMP-01 | Support ticket | Card creation API times out during bulk batch issuance (500+ cards), forcing manual retry logic on their end. | Digital Bank Engineering | 14 tickets / 60 days |\n| CMP-02 | Account manager call | No webhook for card activation status. Team polls the status endpoint every 30 seconds, wasting API quota. | Fintech CTO | Recurring, 3 separate fintechs |\n| CMP-03 | Support ticket | Card freeze action succeeds on the API but takes up to 4 minutes to reflect at the card scheme, causing failed transaction disputes from end customers. | Bank Operations | 9 tickets / 30 days |\n| CMP-04 | Compliance escalation | No self-serve way to export card issuance/status logs by date range for CBN audit. Requires a support ticket and manual CSV pull by Interswitch staff. | Compliance Officer | Every audit cycle (quarterly) |\n| CMP-05 | Sandbox feedback form | Sandbox environment resets test data unpredictably, breaking QA test suites the night before a release. | Fintech Engineering | 6 reports / 45 days |\n| CMP-06 | Support ticket | Error codes returned on failed card creation are generic (\"400 Bad Request\") with no machine-readable reason, forcing manual log review by Interswitch support. | Digital Bank Engineering | 21 tickets / 90 days |\n| CMP-07 | Renewal call | Limits and controls (spend cap, merchant category restriction) can only be set at card creation, not updated afterward without reissuing the card. | Bank Product Manager | Mentioned in 4 of 6 renewal calls |",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "card",
+      "support",
+      "ticket",
+      "bank",
+      "days",
+      "creation",
+      "api",
+      "manual",
+      "engineering",
+      "tickets"
+    ],
+    "themes": [
+      "support",
+      "integration",
+      "data",
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.193Z",
+    "updatedAt": "2026-08-21T22:54:30.193Z"
+  },
+  {
+    "id": "mt3jr12pkqs06a4",
+    "title": "**Note IN-02 — Fintech, Product Manager** > Our support team gets flooded with \"",
+    "description": "**Note IN-02 — Fintech, Product Manager**\n> Our support team gets flooded with \"why is my card still not active\" complaints. We can't tell the customer anything because we don't get pushed a status change — we only find out when we poll. By the time we poll, the customer has already called in.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "customer",
+      "poll",
+      "note",
+      "in02",
+      "fintech",
+      "product",
+      "manager",
+      "support",
+      "team",
+      "gets"
+    ],
+    "themes": [
+      "navigation",
+      "support",
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.193Z",
+    "updatedAt": "2026-08-21T22:54:30.193Z"
+  },
+  {
+    "id": "mt3jr12qo3uv2ki",
+    "title": "**Note IN-03 — Bank, Operations Manager** > When fraud is suspected, every secon",
+    "description": "**Note IN-03 — Bank, Operations Manager**\n> When fraud is suspected, every second matters. We call the freeze API, our dashboard shows \"frozen,\" but the cardholder can still transact for a few minutes. We've had two disputes where the customer insists we didn't actually freeze it in time, and they're right.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "freeze",
+      "note",
+      "in03",
+      "bank",
+      "operations",
+      "manager",
+      "fraud",
+      "suspected",
+      "second",
+      "matters"
+    ],
+    "themes": [
+      "integration",
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.194Z",
+    "updatedAt": "2026-08-21T22:54:30.194Z"
+  },
+  {
+    "id": "mt3jr12q1rcku9e",
+    "title": "**Note IN-04 — Fintech, Compliance Officer** > Every CBN audit cycle, I have to ",
+    "description": "**Note IN-04 — Fintech, Compliance Officer**\n> Every CBN audit cycle, I have to open a ticket, wait for Interswitch support to pull card logs manually, then reformat the CSV myself. It's the same request every quarter. I've started keeping my own shadow spreadsheet just so I'm not fully dependent on their turnaround time.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "note",
+      "in04",
+      "fintech",
+      "compliance",
+      "officer",
+      "cbn",
+      "audit",
+      "cycle",
+      "open",
+      "ticket"
+    ],
+    "themes": [
+      "support"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.194Z",
+    "updatedAt": "2026-08-21T22:54:30.194Z"
+  },
+  {
+    "id": "mt3jr12qcswbayv",
+    "title": "**Note IN-05 — Digital Bank, QA Engineer** > We can't trust sandbox test data to",
+    "description": "**Note IN-05 — Digital Bank, QA Engineer**\n> We can't trust sandbox test data to persist between our nightly regression runs. Cards we created yesterday sometimes aren't there today. We don't know if it's a scheduled reset or a bug, so we've stopped trusting sandbox for anything beyond smoke tests.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "sandbox",
+      "note",
+      "in05",
+      "digital",
+      "bank",
+      "engineer",
+      "cant",
+      "trust",
+      "test",
+      "data"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.194Z",
+    "updatedAt": "2026-08-21T22:54:30.194Z"
+  },
+  {
+    "id": "mt3jr12s7sttrqw",
+    "title": "Scoring scale: 1 (low) – 10 (high) per dimension. Total = sum of all five dimens",
+    "description": "Scoring scale: 1 (low) – 10 (high) per dimension. Total = sum of all five dimensions (max 50).",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "scoring",
+      "scale",
+      "low",
+      "high",
+      "per",
+      "dimension",
+      "total",
+      "sum",
+      "five",
+      "dimensions"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.196Z",
+    "updatedAt": "2026-08-21T22:54:30.196Z"
+  },
+  {
+    "id": "mt3jr12s79t0h9x",
+    "title": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confiden",
+    "description": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confidence | Total |\n|--------|-----------|---------|-----------------|----------------------|------------|-------|\n| 9 | 8 | 7 | 8 | 9 | 8 | 49 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "impact",
+      "frequency",
+      "urgency",
+      "business",
+      "value",
+      "strategic",
+      "alignment",
+      "confidence",
+      "total"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.196Z",
+    "updatedAt": "2026-08-21T22:54:30.196Z"
+  },
+  {
+    "id": "mt3jr12tguw7dxn",
+    "title": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confiden",
+    "description": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confidence | Total |\n|--------|-----------|---------|-----------------|----------------------|------------|-------|\n| 8 | 6 | 6 | 7 | 8 | 7 | 42 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "impact",
+      "frequency",
+      "urgency",
+      "business",
+      "value",
+      "strategic",
+      "alignment",
+      "confidence",
+      "total"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.197Z",
+    "updatedAt": "2026-08-21T22:54:30.197Z"
+  },
+  {
+    "id": "mt3jr12u8eerxcb",
+    "title": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confiden",
+    "description": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confidence | Total |\n|--------|-----------|---------|-----------------|----------------------|------------|-------|\n| 10 | 5 | 10 | 8 | 7 | 5 | 45 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "impact",
+      "frequency",
+      "urgency",
+      "business",
+      "value",
+      "strategic",
+      "alignment",
+      "confidence",
+      "total"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.198Z",
+    "updatedAt": "2026-08-21T22:54:30.198Z"
+  },
+  {
+    "id": "mt3jr12ud3isort",
+    "title": "**Description:** Give compliance officers direct, filterable export of card issu",
+    "description": "**Description:** Give compliance officers direct, filterable export of card issuance/status logs by date range without a support ticket.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "description",
+      "give",
+      "compliance",
+      "officers",
+      "direct",
+      "filterable",
+      "export",
+      "card",
+      "issuancestatus",
+      "logs"
+    ],
+    "themes": [
+      "support",
+      "integration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.198Z",
+    "updatedAt": "2026-08-21T22:54:30.198Z"
+  },
+  {
+    "id": "mt3jr12udocdh8q",
+    "title": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confiden",
+    "description": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confidence | Total |\n|--------|-----------|---------|-----------------|----------------------|------------|-------|\n| 7 | 4 | 6 | 7 | 9 | 9 | 42 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "impact",
+      "frequency",
+      "urgency",
+      "business",
+      "value",
+      "strategic",
+      "alignment",
+      "confidence",
+      "total"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.199Z",
+    "updatedAt": "2026-08-21T22:54:30.199Z"
+  },
+  {
+    "id": "mt3jr12vo70yx19",
+    "title": "**Description:** Per-customer persistent sandbox with documented reset schedule,",
+    "description": "**Description:** Per-customer persistent sandbox with documented reset schedule, eliminating unpredictable test-data loss.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "description",
+      "percustomer",
+      "persistent",
+      "sandbox",
+      "documented",
+      "reset",
+      "schedule",
+      "eliminating",
+      "unpredictable",
+      "testdata"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.199Z",
+    "updatedAt": "2026-08-21T22:54:30.199Z"
+  },
+  {
+    "id": "mt3jr12v66gz68l",
+    "title": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confiden",
+    "description": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confidence | Total |\n|--------|-----------|---------|-----------------|----------------------|------------|-------|\n| 6 | 6 | 5 | 5 | 6 | 9 | 37 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "impact",
+      "frequency",
+      "urgency",
+      "business",
+      "value",
+      "strategic",
+      "alignment",
+      "confidence",
+      "total"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.199Z",
+    "updatedAt": "2026-08-21T22:54:30.199Z"
+  },
+  {
+    "id": "mt3jr12wbqzl262",
+    "title": "**Description:** Structured error codes with a documented reason enum for all ca",
+    "description": "**Description:** Structured error codes with a documented reason enum for all card creation/management failures, reducing back-and-forth support load.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "description",
+      "structured",
+      "error",
+      "codes",
+      "documented",
+      "reason",
+      "enum",
+      "card",
+      "creationmanagement",
+      "failures"
+    ],
+    "themes": [
+      "support"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.200Z",
+    "updatedAt": "2026-08-21T22:54:30.200Z"
+  },
+  {
+    "id": "mt3jr12wvta8exx",
+    "title": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confiden",
+    "description": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confidence | Total |\n|--------|-----------|---------|-----------------|----------------------|------------|-------|\n| 6 | 8 | 5 | 6 | 7 | 9 | 41 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "impact",
+      "frequency",
+      "urgency",
+      "business",
+      "value",
+      "strategic",
+      "alignment",
+      "confidence",
+      "total"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.200Z",
+    "updatedAt": "2026-08-21T22:54:30.200Z"
+  },
+  {
+    "id": "mt3jr12wg20qntt",
+    "title": "**Description:** Allow spend cap and merchant category restriction updates on an",
+    "description": "**Description:** Allow spend cap and merchant category restriction updates on an existing card without reissuing it.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "description",
+      "allow",
+      "spend",
+      "cap",
+      "merchant",
+      "category",
+      "restriction",
+      "updates",
+      "existing",
+      "card"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.200Z",
+    "updatedAt": "2026-08-21T22:54:30.201Z"
+  },
+  {
+    "id": "mt3jr12ximpceic",
+    "title": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confiden",
+    "description": "| Impact | Frequency | Urgency | Business Value | Strategic Alignment | Confidence | Total |\n|--------|-----------|---------|-----------------|----------------------|------------|-------|\n| 7 | 5 | 4 | 6 | 6 | 8 | 36 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "impact",
+      "frequency",
+      "urgency",
+      "business",
+      "value",
+      "strategic",
+      "alignment",
+      "confidence",
+      "total"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.201Z",
+    "updatedAt": "2026-08-21T22:54:30.201Z"
+  },
+  {
+    "id": "mt3jr130f8m39nz",
+    "title": "**Demographics:** 34, Lagos, 8 years in banking product roles, manages a team re",
+    "description": "**Demographics:** 34, Lagos, 8 years in banking product roles, manages a team responsible for a neobank's card products",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "demographics",
+      "lagos",
+      "years",
+      "banking",
+      "product",
+      "roles",
+      "manages",
+      "team",
+      "responsible",
+      "neobanks"
+    ],
+    "themes": [
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.205Z",
+    "updatedAt": "2026-08-21T22:54:30.205Z"
+  },
+  {
+    "id": "mt3jr131t8gkln9",
+    "title": "**Goals:** Launch card-based campaigns fast, keep integration overhead low, avoi",
+    "description": "**Goals:** Launch card-based campaigns fast, keep integration overhead low, avoid engineering escalations reaching her desk",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "positive",
+    "tags": [
+      "goals",
+      "launch",
+      "cardbased",
+      "campaigns",
+      "fast",
+      "keep",
+      "integration",
+      "overhead",
+      "low",
+      "avoid"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.205Z",
+    "updatedAt": "2026-08-21T22:54:30.205Z"
+  },
+  {
+    "id": "mt3jr131my7up0u",
+    "title": "**Behaviors:** Reviews API changelogs monthly, escalates to account manager when",
+    "description": "**Behaviors:** Reviews API changelogs monthly, escalates to account manager when a workaround costs her team more than two engineering days",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "behaviors",
+      "reviews",
+      "api",
+      "changelogs",
+      "monthly",
+      "escalates",
+      "account",
+      "manager",
+      "workaround",
+      "costs"
+    ],
+    "themes": [
+      "integration",
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.205Z",
+    "updatedAt": "2026-08-21T22:54:30.205Z"
+  },
+  {
+    "id": "mt3jr132gfvtz6x",
+    "title": "- **Role:** Operations Lead, Card Services - **Demographics:** 41, Lagos, backgr",
+    "description": "- **Role:** Operations Lead, Card Services\n- **Demographics:** 41, Lagos, background in retail banking operations, oversees day-to-day card issue/block/dispute handling\n- **Goals:** Resolve fraud and dispute cases quickly, minimize customer complaint escalations to his desk\n- **Frustrations:** Delay between freeze confirmation and scheme-level enforcement; disputes where the timeline doesn't match what the dashboard shows\n- **Behaviors:** Monitors the ops dashboard multiple times a day, personally handles high-severity fraud escalations\n- **Needs:** Real-time confirmation that a freeze is actually enforced at the scheme level, audit trail timestamps that match reality\n- **Quote:** \"When I tell a customer their card is frozen, it needs to actually be frozen. Right now I'm not always telling the truth.\"\n- **Jobs to be Done:** When fraud is reported, I want the freeze to take effect instantly and verifiably, so I can protect the customer and defend the bank's position in a dispute.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "card",
+      "fraud",
+      "customer",
+      "freeze",
+      "operations",
+      "dispute",
+      "escalations",
+      "confirmation",
+      "match",
+      "dashboard"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.206Z",
+    "updatedAt": "2026-08-21T22:54:30.206Z"
+  },
+  {
+    "id": "mt3jr132ikejmcg",
+    "title": "**Demographics:** 41, Lagos, background in retail banking operations, oversees d",
+    "description": "**Demographics:** 41, Lagos, background in retail banking operations, oversees day-to-day card issue/block/dispute handling",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "demographics",
+      "lagos",
+      "background",
+      "retail",
+      "banking",
+      "operations",
+      "oversees",
+      "daytoday",
+      "card",
+      "issueblockdispute"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.206Z",
+    "updatedAt": "2026-08-21T22:54:30.206Z"
+  },
+  {
+    "id": "mt3jr133bgadmmc",
+    "title": "**Goals:** Resolve fraud and dispute cases quickly, minimize customer complaint ",
+    "description": "**Goals:** Resolve fraud and dispute cases quickly, minimize customer complaint escalations to his desk",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "goals",
+      "resolve",
+      "fraud",
+      "dispute",
+      "cases",
+      "quickly",
+      "minimize",
+      "customer",
+      "complaint",
+      "escalations"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.207Z",
+    "updatedAt": "2026-08-21T22:54:30.207Z"
+  },
+  {
+    "id": "mt3jr1332mxnxbb",
+    "title": "**Frustrations:** Delay between freeze confirmation and scheme-level enforcement",
+    "description": "**Frustrations:** Delay between freeze confirmation and scheme-level enforcement; disputes where the timeline doesn't match what the dashboard shows",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "frustrations",
+      "delay",
+      "between",
+      "freeze",
+      "confirmation",
+      "schemelevel",
+      "enforcement",
+      "disputes",
+      "timeline",
+      "doesnt"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.207Z",
+    "updatedAt": "2026-08-21T22:54:30.207Z"
+  },
+  {
+    "id": "mt3jr133i6qeleu",
+    "title": "**Behaviors:** Monitors the ops dashboard multiple times a day, personally handl",
+    "description": "**Behaviors:** Monitors the ops dashboard multiple times a day, personally handles high-severity fraud escalations",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "behaviors",
+      "monitors",
+      "ops",
+      "dashboard",
+      "multiple",
+      "times",
+      "personally",
+      "handles",
+      "highseverity",
+      "fraud"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.207Z",
+    "updatedAt": "2026-08-21T22:54:30.207Z"
+  },
+  {
+    "id": "mt3jr1331ubagfg",
+    "title": "**Needs:** Real-time confirmation that a freeze is actually enforced at the sche",
+    "description": "**Needs:** Real-time confirmation that a freeze is actually enforced at the scheme level, audit trail timestamps that match reality",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "needs",
+      "realtime",
+      "confirmation",
+      "freeze",
+      "actually",
+      "enforced",
+      "scheme",
+      "level",
+      "audit",
+      "trail"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.207Z",
+    "updatedAt": "2026-08-21T22:54:30.207Z"
+  },
+  {
+    "id": "mt3jr133b5lyeah",
+    "title": "**Quote:** \"When I tell a customer their card is frozen, it needs to actually be",
+    "description": "**Quote:** \"When I tell a customer their card is frozen, it needs to actually be frozen. Right now I'm not always telling the truth.\"",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "frozen",
+      "quote",
+      "tell",
+      "customer",
+      "card",
+      "needs",
+      "actually",
+      "right",
+      "now",
+      "always"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.207Z",
+    "updatedAt": "2026-08-21T22:54:30.207Z"
+  },
+  {
+    "id": "mt3jr1335qw7dwc",
+    "title": "**Demographics:** 37, Lagos, ex-Konga engineering background, leads a 12-person ",
+    "description": "**Demographics:** 37, Lagos, ex-Konga engineering background, leads a 12-person engineering team",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "engineering",
+      "demographics",
+      "lagos",
+      "exkonga",
+      "background",
+      "leads",
+      "12person",
+      "team"
+    ],
+    "themes": [
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.207Z",
+    "updatedAt": "2026-08-21T22:54:30.207Z"
+  },
+  {
+    "id": "mt3jr134ja7g4x7",
+    "title": "**Goals:** Ship integrations fast with minimal back-and-forth, keep infrastructu",
+    "description": "**Goals:** Ship integrations fast with minimal back-and-forth, keep infrastructure lean, avoid building workaround systems for gaps in vendor APIs",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "positive",
+    "tags": [
+      "goals",
+      "ship",
+      "integrations",
+      "fast",
+      "minimal",
+      "backandforth",
+      "keep",
+      "infrastructure",
+      "lean",
+      "avoid"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.208Z",
+    "updatedAt": "2026-08-21T22:54:30.208Z"
+  },
+  {
+    "id": "mt3jr134ggwffce",
+    "title": "**Frustrations:** No webhooks force polling architecture; ambiguous error codes ",
+    "description": "**Frustrations:** No webhooks force polling architecture; ambiguous error codes require manual log correlation with Interswitch support; unreliable sandbox breaks CI/CD",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "frustrations",
+      "webhooks",
+      "force",
+      "polling",
+      "architecture",
+      "ambiguous",
+      "error",
+      "codes",
+      "require",
+      "manual"
+    ],
+    "themes": [
+      "support"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.208Z",
+    "updatedAt": "2026-08-21T22:54:30.208Z"
+  },
+  {
+    "id": "mt3jr134yjy51vp",
+    "title": "**Needs:** Event-driven architecture support (webhooks), structured error respon",
+    "description": "**Needs:** Event-driven architecture support (webhooks), structured error responses, stable sandbox parity with production",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "needs",
+      "eventdriven",
+      "architecture",
+      "support",
+      "webhooks",
+      "structured",
+      "error",
+      "responses",
+      "stable",
+      "sandbox"
+    ],
+    "themes": [
+      "support"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.208Z",
+    "updatedAt": "2026-08-21T22:54:30.208Z"
+  },
+  {
+    "id": "mt3jr136mnto9jt",
+    "title": "**Demographics:** 45, Abuja, legal/compliance background, responsible for CBN au",
+    "description": "**Demographics:** 45, Abuja, legal/compliance background, responsible for CBN audit readiness",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "demographics",
+      "abuja",
+      "legalcompliance",
+      "background",
+      "responsible",
+      "cbn",
+      "audit",
+      "readiness"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.210Z",
+    "updatedAt": "2026-08-21T22:54:30.210Z"
+  },
+  {
+    "id": "mt3jr136et2h0x3",
+    "title": "**Goals:** Produce accurate, complete audit documentation on demand, avoid manua",
+    "description": "**Goals:** Produce accurate, complete audit documentation on demand, avoid manual data reconciliation",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "goals",
+      "produce",
+      "accurate",
+      "complete",
+      "audit",
+      "documentation",
+      "demand",
+      "avoid",
+      "manual",
+      "data"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.210Z",
+    "updatedAt": "2026-08-21T22:54:30.210Z"
+  },
+  {
+    "id": "mt3jr137qksw9yn",
+    "title": "**Frustrations:** No self-serve log export; dependent on Interswitch support tur",
+    "description": "**Frustrations:** No self-serve log export; dependent on Interswitch support turnaround during audit windows; keeps a shadow spreadsheet to compensate",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "frustrations",
+      "selfserve",
+      "log",
+      "export",
+      "dependent",
+      "interswitch",
+      "support",
+      "turnaround",
+      "during",
+      "audit"
+    ],
+    "themes": [
+      "support",
+      "integration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.211Z",
+    "updatedAt": "2026-08-21T22:54:30.211Z"
+  },
+  {
+    "id": "mt3jr137ri9gwv5",
+    "title": "**Behaviors:** Runs a quarterly audit prep cycle, escalates to account managemen",
+    "description": "**Behaviors:** Runs a quarterly audit prep cycle, escalates to account management two weeks before CBN deadlines",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "behaviors",
+      "runs",
+      "quarterly",
+      "audit",
+      "prep",
+      "cycle",
+      "escalates",
+      "account",
+      "management",
+      "weeks"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.211Z",
+    "updatedAt": "2026-08-21T22:54:30.211Z"
+  },
+  {
+    "id": "mt3jr137yq6jxmk",
+    "title": "**Needs:** Self-serve, filterable export of issuance and status logs, exportable",
+    "description": "**Needs:** Self-serve, filterable export of issuance and status logs, exportable in audit-ready format",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "needs",
+      "selfserve",
+      "filterable",
+      "export",
+      "issuance",
+      "status",
+      "logs",
+      "exportable",
+      "auditready",
+      "format"
+    ],
+    "themes": [
+      "integration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.211Z",
+    "updatedAt": "2026-08-21T22:54:30.211Z"
+  },
+  {
+    "id": "mt3jr13885aqo21",
+    "title": "**Interviewee:** Engineering Lead, Digital Bank (persona: Ngozi Adeyemi's team)",
+    "description": "**Interviewee:** Engineering Lead, Digital Bank (persona: Ngozi Adeyemi's team)",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "interviewee",
+      "engineering",
+      "lead",
+      "digital",
+      "bank",
+      "persona",
+      "ngozi",
+      "adeyemis",
+      "team"
+    ],
+    "themes": [
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.212Z",
+    "updatedAt": "2026-08-21T22:54:30.212Z"
+  },
+  {
+    "id": "mt3jr1384yi8hz1",
+    "title": "**Transcript:** > **Interviewer:** Walk me through the last time you issued a ba",
+    "description": "**Transcript:**\n> **Interviewer:** Walk me through the last time you issued a batch of virtual cards for a campaign.\n>\n> **Interviewee:** We had a BNPL promo, needed 2,000 cards live in under 10 minutes for a flash campaign tied to a marketing push. We hit rate limits almost immediately when we tried to push all 2,000 through at once.\n>\n> **Interviewer:** What did you do?\n>\n> **Interviewee:** We had to build our own internal queue that chunks requests into batches of 50 with a delay between each chunk. It works, but it's fragile — if the delay is too short we get throttled, too long and we miss the campaign window.\n>\n> **Interviewer:** How often does this come up?\n>\n> **Interviewee:** Every major campaign. At least once a month. It's become expected overhead in our planning now, which honestly shouldn't be normal.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** An async batch endpoint. We submit the whole batch, get a job ID, and get notified when it's done. We don't need synchronous responses for 2,000 cards — we need reliability and a completion signal.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "interviewer",
+      "campaign",
+      "interviewee",
+      "batch",
+      "cards",
+      "2000",
+      "need",
+      "through",
+      "push",
+      "once"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.212Z",
+    "updatedAt": "2026-08-21T22:54:30.212Z"
+  },
+  {
+    "id": "mt3jr139ku3lci9",
+    "title": "**Interviewee:** Product Manager, Fintech (persona: Chidinma Okoro's product cou",
+    "description": "**Interviewee:** Product Manager, Fintech (persona: Chidinma Okoro's product counterpart)",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "product",
+      "interviewee",
+      "manager",
+      "fintech",
+      "persona",
+      "chidinma",
+      "okoros",
+      "counterpart"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.213Z",
+    "updatedAt": "2026-08-21T22:54:30.213Z"
+  },
+  {
+    "id": "mt3jr13abm96d9e",
+    "title": "**Transcript:** > **Interviewer:** Tell me about a time a customer complained ab",
+    "description": "**Transcript:**\n> **Interviewer:** Tell me about a time a customer complained about their virtual card experience.\n>\n> **Interviewee:** Constantly, actually. Card gets created, and there's a lag before it's active. We don't get told when it flips to active — we just have to guess, or poll and hope we catch it soon after.\n>\n> **Interviewer:** What happens when you don't catch it in time?\n>\n> **Interviewee:** Customer calls support asking why the card isn't working. Half the time it actually is active by then, we just didn't know yet. So we're getting complaints about a problem that's already resolved on the backend — we just haven't heard about it.\n>\n> **Interviewer:** How does your team currently handle it?\n>\n> **Interviewee:** We poll every 30 seconds for the first five minutes after card creation. It's wasteful, and it still isn't fast enough to avoid the complaint volume.\n>\n> **Interviewer:** What would solve this?\n>\n> **Interviewee:** A webhook. Card status changes, you tell us immediately, we tell the customer immediately. That's it. It's not complicated on your end, I'd guess.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "positive",
+    "tags": [
+      "card",
+      "interviewer",
+      "interviewee",
+      "tell",
+      "customer",
+      "active",
+      "actually",
+      "dont",
+      "guess",
+      "poll"
+    ],
+    "themes": [
+      "performance",
+      "support",
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.214Z",
+    "updatedAt": "2026-08-21T22:54:30.214Z"
+  },
+  {
+    "id": "mt3jr13b8x0j4gi",
+    "title": "**Interviewee:** Operations Manager, Bank (persona: Tunde Balogun)",
+    "description": "**Interviewee:** Operations Manager, Bank (persona: Tunde Balogun)",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "interviewee",
+      "operations",
+      "manager",
+      "bank",
+      "persona",
+      "tunde",
+      "balogun"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.215Z",
+    "updatedAt": "2026-08-21T22:54:30.216Z"
+  },
+  {
+    "id": "mt3jr13dxtf53jn",
+    "title": "**Transcript:** > **Interviewer:** Walk me through what happens when a card gets",
+    "description": "**Transcript:**\n> **Interviewer:** Walk me through what happens when a card gets blocked or frozen.\n>\n> **Interviewee:** Customer calls in reporting suspected fraud. We hit the freeze endpoint, get a 200 success response, dashboard shows \"frozen.\" We tell the customer they're protected.\n>\n> **Interviewer:** And then?\n>\n> **Interviewee:** Sometimes a transaction still goes through in the next few minutes. We've had two disputes where the customer swears they saw a charge after we told them it was frozen — and they're right, it did happen, because the scheme hadn't caught up yet.\n>\n> **Interviewer:** How did that make your team feel?\n>\n> **Interviewee:** Exposed. We're telling customers something is true based on what your API tells us, and it turns out that's not always the real-time truth. That's a liability problem for us, not just an inconvenience.\n>\n> **Interviewer:** What would need to be true for this not to happen?\n>\n> **Interviewee:** I need confirmation that the freeze is actually live at the scheme level before I tell my dashboard — and my customer — that it's done.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "interviewer",
+      "interviewee",
+      "customer",
+      "frozen",
+      "through",
+      "freeze",
+      "dashboard",
+      "tell",
+      "theyre",
+      "happen"
+    ],
+    "themes": [
+      "integration",
+      "data",
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.217Z",
+    "updatedAt": "2026-08-21T22:54:30.217Z"
+  },
+  {
+    "id": "mt3jr13dvpdy45p",
+    "title": "**Interviewee:** Compliance Officer, Fintech (persona: Amara Nwachukwu)",
+    "description": "**Interviewee:** Compliance Officer, Fintech (persona: Amara Nwachukwu)",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "interviewee",
+      "compliance",
+      "officer",
+      "fintech",
+      "persona",
+      "amara",
+      "nwachukwu"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.217Z",
+    "updatedAt": "2026-08-21T22:54:30.217Z"
+  },
+  {
+    "id": "mt3jr13exlbstfs",
+    "title": "**Transcript:** > **Interviewer:** Think of the most painful part of your curren",
+    "description": "**Transcript:**\n> **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up?\n>\n> **Interviewee:** Every CBN audit cycle. I need issuance and status logs for a specific date range. There's no self-serve way to get that — I open a support ticket and wait.\n>\n> **Interviewer:** How long does that usually take?\n>\n> **Interviewee:** Anywhere from two to five business days, depending on how backed up support is. If the audit deadline is tight, that's genuinely stressful.\n>\n> **Interviewer:** What do you do to work around it?\n>\n> **Interviewee:** I keep my own shadow spreadsheet, updated manually, so I'm not fully dependent on their turnaround. It's extra work I shouldn't have to do.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** A dashboard where I filter by date range and export the log myself. I don't need anything fancy. I need independence from the ticket queue.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "negative",
+    "tags": [
+      "interviewer",
+      "interviewee",
+      "need",
+      "specific",
+      "audit",
+      "date",
+      "range",
+      "support",
+      "ticket",
+      "work"
+    ],
+    "themes": [
+      "support",
+      "integration",
+      "data"
+    ],
+    "quotes": [],
+    "priority": "high",
+    "createdAt": "2026-08-21T22:54:30.218Z",
+    "updatedAt": "2026-08-21T22:54:30.218Z"
+  },
+  {
+    "id": "mt3jr13f7ah0mh2",
+    "title": "**Framework:** RICE **Description:** Event-driven push notifications for card st",
+    "description": "**Framework:** RICE\n**Description:** Event-driven push notifications for card status changes (created, activated, frozen, blocked, expired), replacing polling.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "framework",
+      "rice",
+      "description",
+      "eventdriven",
+      "push",
+      "notifications",
+      "card",
+      "status",
+      "changes",
+      "created"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.219Z",
+    "updatedAt": "2026-08-21T22:54:30.219Z"
+  },
+  {
+    "id": "mt3jr13g5cbvrfa",
+    "title": "| Reach | Impact | Confidence | Effort | |-------|--------|------------|--------",
+    "description": "| Reach | Impact | Confidence | Effort |\n|-------|--------|------------|--------|\n| 9 | 9 | 8 | 6 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "reach",
+      "impact",
+      "confidence",
+      "effort"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.220Z",
+    "updatedAt": "2026-08-21T22:54:30.220Z"
+  },
+  {
+    "id": "mt3jr13hr2jsht7",
+    "title": "**Framework:** RICE **Description:** Submit large card batches as a single async",
+    "description": "**Framework:** RICE\n**Description:** Submit large card batches as a single async job with a completion callback instead of chunked synchronous calls.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "framework",
+      "rice",
+      "description",
+      "submit",
+      "large",
+      "card",
+      "batches",
+      "single",
+      "async",
+      "job"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.221Z",
+    "updatedAt": "2026-08-21T22:54:30.221Z"
+  },
+  {
+    "id": "mt3jr13ivjyq9xj",
+    "title": "| Reach | Impact | Confidence | Effort | |-------|--------|------------|--------",
+    "description": "| Reach | Impact | Confidence | Effort |\n|-------|--------|------------|--------|\n| 6 | 8 | 7 | 7 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "reach",
+      "impact",
+      "confidence",
+      "effort"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.222Z",
+    "updatedAt": "2026-08-21T22:54:30.222Z"
+  },
+  {
+    "id": "mt3jr13i3s6i4mn",
+    "title": "| Reach | Impact | Confidence | Effort | |-------|--------|------------|--------",
+    "description": "| Reach | Impact | Confidence | Effort |\n|-------|--------|------------|--------|\n| 5 | 10 | 5 | 8 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "reach",
+      "impact",
+      "confidence",
+      "effort"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.222Z",
+    "updatedAt": "2026-08-21T22:54:30.222Z"
+  },
+  {
+    "id": "mt3jr13i4iekqki",
+    "title": "| Reach | Impact | Confidence | Effort | |-------|--------|------------|--------",
+    "description": "| Reach | Impact | Confidence | Effort |\n|-------|--------|------------|--------|\n| 4 | 7 | 9 | 4 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "reach",
+      "impact",
+      "confidence",
+      "effort"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.222Z",
+    "updatedAt": "2026-08-21T22:54:30.222Z"
+  },
+  {
+    "id": "mt3jr13ifwjvh8h",
+    "title": "**Framework:** KANO — Performance Attribute **Description:** Machine-readable, d",
+    "description": "**Framework:** KANO — Performance Attribute\n**Description:** Machine-readable, documented error codes and reason enums across all card management endpoints.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "framework",
+      "kano",
+      "performance",
+      "attribute",
+      "description",
+      "machinereadable",
+      "documented",
+      "error",
+      "codes",
+      "reason"
+    ],
+    "themes": [
+      "performance"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.222Z",
+    "updatedAt": "2026-08-21T22:54:30.222Z"
+  },
+  {
+    "id": "mt3jr13iy6dxtgr",
+    "title": "| Reach | Impact | Confidence | Effort | |-------|--------|------------|--------",
+    "description": "| Reach | Impact | Confidence | Effort |\n|-------|--------|------------|--------|\n| 8 | 6 | 9 | 3 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "reach",
+      "impact",
+      "confidence",
+      "effort"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.222Z",
+    "updatedAt": "2026-08-21T22:54:30.222Z"
+  },
+  {
+    "id": "mt3jr13icp0leib",
+    "title": "**Framework:** KANO — Basic Expectation **Description:** Dedicated sandbox envir",
+    "description": "**Framework:** KANO — Basic Expectation\n**Description:** Dedicated sandbox environment per customer with a documented, predictable reset schedule.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "framework",
+      "kano",
+      "basic",
+      "expectation",
+      "description",
+      "dedicated",
+      "sandbox",
+      "environment",
+      "per",
+      "customer"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.222Z",
+    "updatedAt": "2026-08-21T22:54:30.222Z"
+  },
+  {
+    "id": "mt3jr13jdyhkuxn",
+    "title": "| Reach | Impact | Confidence | Effort | |-------|--------|------------|--------",
+    "description": "| Reach | Impact | Confidence | Effort |\n|-------|--------|------------|--------|\n| 6 | 6 | 9 | 5 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "reach",
+      "impact",
+      "confidence",
+      "effort"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13jw8o5izy",
+    "title": "| Reach | Impact | Confidence | Effort | |-------|--------|------------|--------",
+    "description": "| Reach | Impact | Confidence | Effort |\n|-------|--------|------------|--------|\n| 5 | 7 | 8 | 5 |",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "reach",
+      "impact",
+      "confidence",
+      "effort"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13j4gah24b",
+    "title": "- **Hypothesis:** If we provide webhook notifications for card status changes, p",
+    "description": "- **Hypothesis:** If we provide webhook notifications for card status changes, participating fintechs will reduce polling-related support complaints by at least 40%.\n- **Success Metric:** ≥40% reduction in \"card not active\" support tickets among beta participants within 30 days of enabling webhooks.\n- **Failure Metric:** <15% reduction, or webhook delivery failure rate >2%.\n- **Duration:** 6 weeks\n- **Cost:** Medium — engineering time for webhook delivery infrastructure, retry logic, and beta monitoring\n- **Risk:** Medium — delivery reliability at scale is unproven internally\n- **Expected Learning:** Whether push-based status delivery meaningfully changes downstream support volume, and what delivery reliability threshold customers require to trust the mechanism.\n- **Results:** Beta with 3 fintechs showed a 52% reduction in status-related tickets; webhook delivery failure rate held at 0.8%. Hypothesis supported — recommend general availability.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "delivery",
+      "webhook",
+      "support",
+      "reduction",
+      "beta",
+      "failure",
+      "hypothesis",
+      "card",
+      "status",
+      "changes"
+    ],
+    "themes": [
+      "pricing",
+      "support",
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13jjx5t6s4",
+    "title": "**Hypothesis:** If we provide webhook notifications for card status changes, par",
+    "description": "**Hypothesis:** If we provide webhook notifications for card status changes, participating fintechs will reduce polling-related support complaints by at least 40%.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "hypothesis",
+      "provide",
+      "webhook",
+      "notifications",
+      "card",
+      "status",
+      "changes",
+      "participating",
+      "fintechs",
+      "reduce"
+    ],
+    "themes": [
+      "support"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13jpe8n00v",
+    "title": "**Success Metric:** ≥40% reduction in \"card not active\" support tickets among be",
+    "description": "**Success Metric:** ≥40% reduction in \"card not active\" support tickets among beta participants within 30 days of enabling webhooks.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "success",
+      "metric",
+      "reduction",
+      "card",
+      "active",
+      "support",
+      "tickets",
+      "among",
+      "beta",
+      "participants"
+    ],
+    "themes": [
+      "support",
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13jlewtl89",
+    "title": "**Failure Metric:** <15% reduction, or webhook delivery failure rate >2%.",
+    "description": "**Failure Metric:** <15% reduction, or webhook delivery failure rate >2%.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "failure",
+      "metric",
+      "reduction",
+      "webhook",
+      "delivery",
+      "rate"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13j57gumv3",
+    "title": "**Duration:** 6 weeks",
+    "description": "**Duration:** 6 weeks",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "duration",
+      "weeks"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13jodxjidf",
+    "title": "**Cost:** Medium — engineering time for webhook delivery infrastructure, retry l",
+    "description": "**Cost:** Medium — engineering time for webhook delivery infrastructure, retry logic, and beta monitoring",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "cost",
+      "medium",
+      "engineering",
+      "webhook",
+      "delivery",
+      "infrastructure",
+      "retry",
+      "logic",
+      "beta",
+      "monitoring"
+    ],
+    "themes": [
+      "pricing"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13jnjgel4i",
+    "title": "**Risk:** Medium — delivery reliability at scale is unproven internally",
+    "description": "**Risk:** Medium — delivery reliability at scale is unproven internally",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "risk",
+      "medium",
+      "delivery",
+      "reliability",
+      "scale",
+      "unproven",
+      "internally"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13kp3klx6g",
+    "title": "**Expected Learning:** Whether push-based status delivery meaningfully changes d",
+    "description": "**Expected Learning:** Whether push-based status delivery meaningfully changes downstream support volume, and what delivery reliability threshold customers require to trust the mechanism.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "delivery",
+      "expected",
+      "learning",
+      "whether",
+      "pushbased",
+      "status",
+      "meaningfully",
+      "changes",
+      "downstream",
+      "support"
+    ],
+    "themes": [
+      "support"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13kczqjrg9",
+    "title": "**Results:** Beta with 3 fintechs showed a 52% reduction in status-related ticke",
+    "description": "**Results:** Beta with 3 fintechs showed a 52% reduction in status-related tickets; webhook delivery failure rate held at 0.8%. Hypothesis supported — recommend general availability.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "results",
+      "beta",
+      "fintechs",
+      "showed",
+      "reduction",
+      "statusrelated",
+      "tickets",
+      "webhook",
+      "delivery",
+      "failure"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13k7201iw7",
+    "title": "**Hypothesis:** If banks can submit card issuance as an async batch job instead ",
+    "description": "**Hypothesis:** If banks can submit card issuance as an async batch job instead of chunked synchronous calls, campaign-related engineering escalations will drop by at least 30%.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "hypothesis",
+      "banks",
+      "submit",
+      "card",
+      "issuance",
+      "async",
+      "batch",
+      "job",
+      "instead",
+      "chunked"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13ktitidsr",
+    "title": "**Success Metric:** ≥30% reduction in campaign-related engineering escalations a",
+    "description": "**Success Metric:** ≥30% reduction in campaign-related engineering escalations among pilot banks over two campaign cycles.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "success",
+      "metric",
+      "reduction",
+      "campaignrelated",
+      "engineering",
+      "escalations",
+      "among",
+      "pilot",
+      "banks",
+      "over"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13kx73u7p6",
+    "title": "**Failure Metric:** No measurable reduction, or job completion time exceeds curr",
+    "description": "**Failure Metric:** No measurable reduction, or job completion time exceeds current chunked-call throughput.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "failure",
+      "metric",
+      "measurable",
+      "reduction",
+      "job",
+      "completion",
+      "exceeds",
+      "current",
+      "chunkedcall",
+      "throughput"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13kvei3gqk",
+    "title": "**Duration:** 8 weeks (covering two campaign cycles)",
+    "description": "**Duration:** 8 weeks (covering two campaign cycles)",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "duration",
+      "weeks",
+      "covering",
+      "campaign",
+      "cycles"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13kdky3z26",
+    "title": "**Cost:** High — requires new async job infrastructure and status tracking",
+    "description": "**Cost:** High — requires new async job infrastructure and status tracking",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "cost",
+      "high",
+      "requires",
+      "async",
+      "job",
+      "infrastructure",
+      "status",
+      "tracking"
+    ],
+    "themes": [
+      "pricing"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13k3up4gtp",
+    "title": "**Risk:** Medium — job queue reliability under peak load is untested",
+    "description": "**Risk:** Medium — job queue reliability under peak load is untested",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "risk",
+      "medium",
+      "job",
+      "queue",
+      "reliability",
+      "under",
+      "peak",
+      "load",
+      "untested"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13ko81g166",
+    "title": "**Results:** Pending — pilot scheduled for next quarter, not yet run.",
+    "description": "**Results:** Pending — pilot scheduled for next quarter, not yet run.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "results",
+      "pending",
+      "pilot",
+      "scheduled",
+      "next",
+      "quarter",
+      "yet",
+      "run"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.225Z"
+  },
+  {
+    "id": "mt3jr13l7bzqsiw",
+    "title": "**Hypothesis:** If freeze confirmation is only returned after scheme-level enfor",
+    "description": "**Hypothesis:** If freeze confirmation is only returned after scheme-level enforcement, dispute cases citing \"delayed freeze\" will drop to near zero.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "freeze",
+      "hypothesis",
+      "confirmation",
+      "returned",
+      "after",
+      "schemelevel",
+      "enforcement",
+      "dispute",
+      "cases",
+      "citing"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.225Z",
+    "updatedAt": "2026-08-21T22:54:30.225Z"
+  },
+  {
+    "id": "mt3jr13lq1obr05",
+    "title": "**Success Metric:** Zero delayed-freeze dispute cases among pilot banks over 60 ",
+    "description": "**Success Metric:** Zero delayed-freeze dispute cases among pilot banks over 60 days.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "success",
+      "metric",
+      "zero",
+      "delayedfreeze",
+      "dispute",
+      "cases",
+      "among",
+      "pilot",
+      "banks",
+      "over"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.225Z",
+    "updatedAt": "2026-08-21T22:54:30.225Z"
+  },
+  {
+    "id": "mt3jr13l23wpv01",
+    "title": "**Failure Metric:** Any recurrence of delayed-freeze disputes, or freeze confirm",
+    "description": "**Failure Metric:** Any recurrence of delayed-freeze disputes, or freeze confirmation latency exceeding 5 seconds.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "failure",
+      "metric",
+      "recurrence",
+      "delayedfreeze",
+      "disputes",
+      "freeze",
+      "confirmation",
+      "latency",
+      "exceeding",
+      "seconds"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.225Z",
+    "updatedAt": "2026-08-21T22:54:30.225Z"
+  },
+  {
+    "id": "mt3jr13l9lnsnhx",
+    "title": "**Duration:** 10 weeks",
+    "description": "**Duration:** 10 weeks",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "duration",
+      "weeks"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.225Z",
+    "updatedAt": "2026-08-21T22:54:30.225Z"
+  },
+  {
+    "id": "mt3jr13lhha3ha5",
+    "title": "**Cost:** High — requires scheme-level status polling or callback integration",
+    "description": "**Cost:** High — requires scheme-level status polling or callback integration",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "cost",
+      "high",
+      "requires",
+      "schemelevel",
+      "status",
+      "polling",
+      "callback",
+      "integration"
+    ],
+    "themes": [
+      "pricing"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.225Z",
+    "updatedAt": "2026-08-21T22:54:30.225Z"
+  },
+  {
+    "id": "mt3jr13mc71d1gk",
+    "title": "**Risk:** High — dependent on card scheme response times outside Interswitch's d",
+    "description": "**Risk:** High — dependent on card scheme response times outside Interswitch's direct control",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "risk",
+      "high",
+      "dependent",
+      "card",
+      "scheme",
+      "response",
+      "times",
+      "outside",
+      "interswitchs",
+      "direct"
+    ],
+    "themes": [],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.226Z",
+    "updatedAt": "2026-08-21T22:54:30.226Z"
+  },
+  {
+    "id": "mt3jr13mxkemwyj",
+    "title": "**Results:** Pending — technical feasibility spike in progress with scheme integ",
+    "description": "**Results:** Pending — technical feasibility spike in progress with scheme integration team.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "results",
+      "pending",
+      "technical",
+      "feasibility",
+      "spike",
+      "progress",
+      "scheme",
+      "integration",
+      "team"
+    ],
+    "themes": [
+      "collaboration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.226Z",
+    "updatedAt": "2026-08-21T22:54:30.226Z"
+  },
+  {
+    "id": "mt3jr13mwe23laa",
+    "title": "**Hypothesis:** If compliance officers can self-serve export issuance/status log",
+    "description": "**Hypothesis:** If compliance officers can self-serve export issuance/status logs by date range, dependency on support tickets for audit prep will drop to near zero.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "hypothesis",
+      "compliance",
+      "officers",
+      "selfserve",
+      "export",
+      "issuancestatus",
+      "logs",
+      "date",
+      "range",
+      "dependency"
+    ],
+    "themes": [
+      "support",
+      "integration"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.226Z",
+    "updatedAt": "2026-08-21T22:54:30.226Z"
+  },
+  {
+    "id": "mt3jr13mg276m86",
+    "title": "**Success Metric:** ≥90% of audit-related log requests handled via self-serve ex",
+    "description": "**Success Metric:** ≥90% of audit-related log requests handled via self-serve export within one quarter of launch, with zero related support tickets.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "success",
+      "metric",
+      "auditrelated",
+      "log",
+      "requests",
+      "handled",
+      "via",
+      "selfserve",
+      "export",
+      "within"
+    ],
+    "themes": [
+      "support",
+      "integration",
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.226Z",
+    "updatedAt": "2026-08-21T22:54:30.226Z"
+  },
+  {
+    "id": "mt3jr13m7qf2hz8",
+    "title": "**Failure Metric:** <50% adoption, or continued reliance on manual ticket-based ",
+    "description": "**Failure Metric:** <50% adoption, or continued reliance on manual ticket-based requests.",
+    "source": "interview",
+    "category": "pain_point",
+    "emotion": "neutral",
+    "tags": [
+      "failure",
+      "metric",
+      "adoption",
+      "continued",
+      "reliance",
+      "manual",
+      "ticketbased",
+      "requests"
+    ],
+    "themes": [
+      "data"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.227Z",
+    "updatedAt": "2026-08-21T22:54:30.227Z"
+  },
+  {
+    "id": "mt3jr13n0wwpgri",
+    "title": "**Expected Learning:** Whether the proposed export/filter UX matches how complia",
+    "description": "**Expected Learning:** Whether the proposed export/filter UX matches how compliance officers actually structure audit requests, before committing engineering resources.",
+    "source": "interview",
+    "category": "problem",
+    "emotion": "neutral",
+    "tags": [
+      "expected",
+      "learning",
+      "whether",
+      "proposed",
+      "exportfilter",
+      "matches",
+      "compliance",
+      "officers",
+      "actually",
+      "structure"
+    ],
+    "themes": [
+      "integration",
+      "ux"
+    ],
+    "quotes": [],
+    "priority": "low",
+    "createdAt": "2026-08-21T22:54:30.227Z",
+    "updatedAt": "2026-08-21T22:54:30.227Z"
+  }
+]

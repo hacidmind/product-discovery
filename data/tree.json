@@ -1,0 +1,50 @@
+[
+  {
+    "id": "root",
+    "label": "Desired Outcome",
+    "type": "outcome",
+    "children": [
+      {
+        "id": "opp-mt3jnw8uph9hscw",
+        "label": "- There is a market gap for small business analytics.",
+        "type": "opportunity",
+        "children": [],
+        "opportunityId": "mt3jnw8uph9hscw",
+        "expanded": false
+      },
+      {
+        "id": "opp-mt3jr12t5k9bzbb",
+        "label": "**Description:** Reduce the gap between API freeze confirmation and actual schem",
+        "type": "opportunity",
+        "children": [],
+        "opportunityId": "mt3jr12t5k9bzbb",
+        "expanded": false
+      },
+      {
+        "id": "opp-mt3jr13imu3fzdc",
+        "label": "**Framework:** MoSCoW — Must Have **Description:** Return freeze confirmation on",
+        "type": "opportunity",
+        "children": [],
+        "opportunityId": "mt3jr13imu3fzdc",
+        "expanded": false
+      },
+      {
+        "id": "opp-mt3jr13j7arqph9",
+        "label": "**Framework:** MoSCoW — Could Have **Description:** Update spend caps and mercha",
+        "type": "opportunity",
+        "children": [],
+        "opportunityId": "mt3jr13j7arqph9",
+        "expanded": false
+      },
+      {
+        "id": "opp-mt3jr13l2as8joa",
+        "label": "- **Hypothesis:** If freeze confirmation is only returned after scheme-level enf",
+        "type": "opportunity",
+        "children": [],
+        "opportunityId": "mt3jr13l2as8joa",
+        "expanded": false
+      }
+    ],
+    "expanded": true
+  }
+]

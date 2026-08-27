@@ -1,0 +1,47 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "aigateway/deepseek-v4-pro",
+  "provider": {
+    "aigateway": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "AI Gateway",
+      "options": {
+        "baseURL": "https://ai-gateway.isw.la/v1",
+        "apiKey": "{env:sk-Qx-HCPvYPfAKRMSrv5wDZg}"
+      },
+      "models": {
+        "claude-opus-4-5": {
+          "name": "Opus 4.5"
+        },
+        "gpt-5-codex": {
+          "name": "GPT 5 Codex"
+        },
+        "deepseek-v4-pro": {
+          "name": "deepseek v4 pro"
+        },
+        "kimi-k2.6": {
+          "name": "kimi-k2.6"
+        },
+        "deepseek-v4-flash": {
+          "name": "deepseek-v4-flash"
+        },
+        "gemma4": {
+          "name": "gemma4"
+        },
+        "claude-sonnet-4.6": {
+          "name": "claude-sonnet-4.6"
+        },
+        "danfo": {
+          "name": "danfo",
+          "attachment": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

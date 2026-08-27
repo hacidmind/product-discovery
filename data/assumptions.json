@@ -1,0 +1,35 @@
+[
+  {
+    "id": "mt3jnw8vml4t3q6",
+    "statement": "- We believe users prefer simpler onboarding flows.",
+    "area": "unknown",
+    "risk": "medium",
+    "evidence": "",
+    "validationStatus": "untested",
+    "relatedExperimentIds": [],
+    "createdAt": "2026-08-21T22:52:03.967Z",
+    "updatedAt": "2026-08-21T22:52:03.967Z"
+  },
+  {
+    "id": "mt3jr13a0a7kofb",
+    "statement": "**Transcript:** > **Interviewer:** Tell me about a time a customer complained about their virtual card experience. > > **Interviewee:** Constantly, actually. Card gets created, and there's a lag befor",
+    "area": "desirability",
+    "risk": "low",
+    "evidence": "",
+    "validationStatus": "untested",
+    "relatedExperimentIds": [],
+    "createdAt": "2026-08-21T22:54:30.215Z",
+    "updatedAt": "2026-08-21T22:54:30.215Z"
+  },
+  {
+    "id": "mt3jr13esnbp2iv",
+    "statement": "**Transcript:** > **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up? > > **Interviewee:** Every CBN audit cycle. I n",
+    "area": "desirability",
+    "risk": "high",
+    "evidence": "",
+    "validationStatus": "untested",
+    "relatedExperimentIds": [],
+    "createdAt": "2026-08-21T22:54:30.218Z",
+    "updatedAt": "2026-08-21T22:54:30.218Z"
+  }
+]

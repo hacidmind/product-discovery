@@ -1,0 +1,102 @@
+[
+  {
+    "id": "mt3jnw8uph9hscw",
+    "title": "- There is a market gap for small business analytics.",
+    "description": "- There is a market gap for small business analytics.",
+    "scores": {
+      "impact": 2,
+      "frequency": 5,
+      "urgency": 5,
+      "businessValue": 5,
+      "strategicAlignment": 5,
+      "confidence": 5
+    },
+    "totalScore": 2.1,
+    "priority": "low",
+    "reasoning": "Moderate scores across all dimensions — consider further analysis",
+    "relatedInsightIds": [],
+    "status": "new",
+    "createdAt": "2026-08-21T22:52:03.966Z",
+    "updatedAt": "2026-08-21T22:52:03.966Z"
+  },
+  {
+    "id": "mt3jr12t5k9bzbb",
+    "title": "**Description:** Reduce the gap between API freeze confirmation and actual schem",
+    "description": "**Description:** Reduce the gap between API freeze confirmation and actual scheme-level enforcement, closing the dispute window on fraud cases.",
+    "scores": {
+      "impact": 5,
+      "frequency": 5,
+      "urgency": 5,
+      "businessValue": 5,
+      "strategicAlignment": 5,
+      "confidence": 5
+    },
+    "totalScore": 2.5,
+    "priority": "low",
+    "reasoning": "Moderate scores across all dimensions — consider further analysis",
+    "relatedInsightIds": [],
+    "status": "new",
+    "createdAt": "2026-08-21T22:54:30.197Z",
+    "updatedAt": "2026-08-21T22:54:30.197Z"
+  },
+  {
+    "id": "mt3jr13imu3fzdc",
+    "title": "**Framework:** MoSCoW — Must Have **Description:** Return freeze confirmation on",
+    "description": "**Framework:** MoSCoW — Must Have\n**Description:** Return freeze confirmation only after scheme-level enforcement is verified, closing the dispute liability gap.",
+    "scores": {
+      "impact": 5,
+      "frequency": 5,
+      "urgency": 5,
+      "businessValue": 5,
+      "strategicAlignment": 5,
+      "confidence": 5
+    },
+    "totalScore": 2.5,
+    "priority": "low",
+    "reasoning": "Moderate scores across all dimensions — consider further analysis",
+    "relatedInsightIds": [],
+    "status": "new",
+    "createdAt": "2026-08-21T22:54:30.222Z",
+    "updatedAt": "2026-08-21T22:54:30.222Z"
+  },
+  {
+    "id": "mt3jr13j7arqph9",
+    "title": "**Framework:** MoSCoW — Could Have **Description:** Update spend caps and mercha",
+    "description": "**Framework:** MoSCoW — Could Have\n**Description:** Update spend caps and merchant category restrictions on an existing card without reissuance.",
+    "scores": {
+      "impact": 5,
+      "frequency": 5,
+      "urgency": 5,
+      "businessValue": 5,
+      "strategicAlignment": 5,
+      "confidence": 5
+    },
+    "totalScore": 2.5,
+    "priority": "low",
+    "reasoning": "Moderate scores across all dimensions — consider further analysis",
+    "relatedInsightIds": [],
+    "status": "new",
+    "createdAt": "2026-08-21T22:54:30.223Z",
+    "updatedAt": "2026-08-21T22:54:30.223Z"
+  },
+  {
+    "id": "mt3jr13l2as8joa",
+    "title": "- **Hypothesis:** If freeze confirmation is only returned after scheme-level enf",
+    "description": "- **Hypothesis:** If freeze confirmation is only returned after scheme-level enforcement, dispute cases citing \"delayed freeze\" will drop to near zero.\n- **Success Metric:** Zero delayed-freeze dispute cases among pilot banks over 60 days.\n- **Failure Metric:** Any recurrence of delayed-freeze disputes, or freeze confirmation latency exceeding 5 seconds.\n- **Duration:** 10 weeks\n- **Cost:** High — requires scheme-level status polling or callback integration\n- **Risk:** High — dependent on card scheme response times outside Interswitch's direct control\n- **Expected Learning:** Whether true scheme-level confirmation is technically achievable within an acceptable latency window, and whether it fully eliminates the liability gap operations teams described.\n- **Results:** Pending — technical feasibility spike in progress with scheme integration team.",
+    "scores": {
+      "impact": 5,
+      "frequency": 5,
+      "urgency": 5,
+      "businessValue": 5,
+      "strategicAlignment": 5,
+      "confidence": 5
+    },
+    "totalScore": 2.5,
+    "priority": "low",
+    "reasoning": "Moderate scores across all dimensions — consider further analysis",
+    "relatedInsightIds": [],
+    "status": "new",
+    "createdAt": "2026-08-21T22:54:30.225Z",
+    "updatedAt": "2026-08-21T22:54:30.225Z"
+  }
+]

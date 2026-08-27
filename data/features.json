@@ -1,0 +1,560 @@
+[
+  {
+    "id": "mt3jnw8titaewvj",
+    "title": "- We need a dark mode toggle - Add export to PDF functionality",
+    "description": "- We need a dark mode toggle\n- Add export to PDF functionality",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 8,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 8,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:52:03.965Z",
+    "updatedAt": "2026-08-21T22:52:03.965Z"
+  },
+  {
+    "id": "mt3jnw8tr7o0pc8",
+    "title": "We need a dark mode toggle",
+    "description": "We need a dark mode toggle",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 4,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 4,
+    "priority": "medium",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:52:03.965Z",
+    "updatedAt": "2026-08-21T22:52:03.965Z"
+  },
+  {
+    "id": "mt3jnw8uj5r7zup",
+    "title": "Add export to PDF functionality",
+    "description": "Add export to PDF functionality",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 4,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 4,
+    "priority": "medium",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:52:03.966Z",
+    "updatedAt": "2026-08-21T22:52:03.966Z"
+  },
+  {
+    "id": "mt3jr12pa10hqns",
+    "title": "**Note IN-01 — Digital Bank, Engineering Lead** > Batch issuance is our biggest ",
+    "description": "**Note IN-01 — Digital Bank, Engineering Lead**\n> Batch issuance is our biggest bottleneck. When we run a BNPL campaign, we need 2,000 cards created and activated in under 10 minutes. Current API throughput forces us to chunk into 50-card batches with manual delay between chunks or we get rate-limited. We built our own queuing system just to work around this.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.193Z",
+    "updatedAt": "2026-08-21T22:54:30.193Z"
+  },
+  {
+    "id": "mt3jr12sxvop673",
+    "title": "**Description:** Push-based event notifications for card lifecycle state changes",
+    "description": "**Description:** Push-based event notifications for card lifecycle state changes (created, activated, frozen, blocked, expired) so bank/fintech systems no longer need to poll.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.196Z",
+    "updatedAt": "2026-08-21T22:54:30.196Z"
+  },
+  {
+    "id": "mt3jr12s3fvp1ts",
+    "title": "**Description:** Increase API throughput and provide an async batch-issuance end",
+    "description": "**Description:** Increase API throughput and provide an async batch-issuance endpoint with a completion callback, removing the need for customer-side chunking/queuing workarounds.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.196Z",
+    "updatedAt": "2026-08-21T22:54:30.196Z"
+  },
+  {
+    "id": "mt3jr12xbdp0sjx",
+    "title": "- **Role:** Product Manager, Digital Banking Division - **Demographics:** 34, La",
+    "description": "- **Role:** Product Manager, Digital Banking Division\n- **Demographics:** 34, Lagos, 8 years in banking product roles, manages a team responsible for a neobank's card products\n- **Goals:** Launch card-based campaigns fast, keep integration overhead low, avoid engineering escalations reaching her desk\n- **Frustrations:** Feature requests to Interswitch take multiple cycles to be scoped; no visibility into API roadmap; limit changes require full card reissuance\n- **Behaviors:** Reviews API changelogs monthly, escalates to account manager when a workaround costs her team more than two engineering days\n- **Needs:** Predictable roadmap communication, ability to adjust card controls without reissuance, clear SLAs for feature requests\n- **Quote:** \"I don't need more features. I need to stop being the translator between my engineers and your support team.\"\n- **Jobs to be Done:** When rolling out a new card-based product, I want to configure and adjust card behavior without engineering rework, so I can hit launch dates without escalation.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.201Z",
+    "updatedAt": "2026-08-21T22:54:30.201Z"
+  },
+  {
+    "id": "mt3jr131m6g9kgb",
+    "title": "**Frustrations:** Feature requests to Interswitch take multiple cycles to be sco",
+    "description": "**Frustrations:** Feature requests to Interswitch take multiple cycles to be scoped; no visibility into API roadmap; limit changes require full card reissuance",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.205Z",
+    "updatedAt": "2026-08-21T22:54:30.205Z"
+  },
+  {
+    "id": "mt3jr131moivntn",
+    "title": "**Needs:** Predictable roadmap communication, ability to adjust card controls wi",
+    "description": "**Needs:** Predictable roadmap communication, ability to adjust card controls without reissuance, clear SLAs for feature requests",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.205Z",
+    "updatedAt": "2026-08-21T22:54:30.205Z"
+  },
+  {
+    "id": "mt3jr1312yneb7q",
+    "title": "**Quote:** \"I don't need more features. I need to stop being the translator betw",
+    "description": "**Quote:** \"I don't need more features. I need to stop being the translator between my engineers and your support team.\"",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.205Z",
+    "updatedAt": "2026-08-21T22:54:30.205Z"
+  },
+  {
+    "id": "mt3jr132byj2g6u",
+    "title": "**Jobs to be Done:** When rolling out a new card-based product, I want to config",
+    "description": "**Jobs to be Done:** When rolling out a new card-based product, I want to configure and adjust card behavior without engineering rework, so I can hit launch dates without escalation.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.206Z",
+    "updatedAt": "2026-08-21T22:54:30.206Z"
+  },
+  {
+    "id": "mt3jr1321i9prf5",
+    "title": "- **Role:** Operations Lead, Card Services - **Demographics:** 41, Lagos, backgr",
+    "description": "- **Role:** Operations Lead, Card Services\n- **Demographics:** 41, Lagos, background in retail banking operations, oversees day-to-day card issue/block/dispute handling\n- **Goals:** Resolve fraud and dispute cases quickly, minimize customer complaint escalations to his desk\n- **Frustrations:** Delay between freeze confirmation and scheme-level enforcement; disputes where the timeline doesn't match what the dashboard shows\n- **Behaviors:** Monitors the ops dashboard multiple times a day, personally handles high-severity fraud escalations\n- **Needs:** Real-time confirmation that a freeze is actually enforced at the scheme level, audit trail timestamps that match reality\n- **Quote:** \"When I tell a customer their card is frozen, it needs to actually be frozen. Right now I'm not always telling the truth.\"\n- **Jobs to be Done:** When fraud is reported, I want the freeze to take effect instantly and verifiably, so I can protect the customer and defend the bank's position in a dispute.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.206Z",
+    "updatedAt": "2026-08-21T22:54:30.206Z"
+  },
+  {
+    "id": "mt3jr133qy68xfh",
+    "title": "**Jobs to be Done:** When fraud is reported, I want the freeze to take effect in",
+    "description": "**Jobs to be Done:** When fraud is reported, I want the freeze to take effect instantly and verifiably, so I can protect the customer and defend the bank's position in a dispute.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.207Z",
+    "updatedAt": "2026-08-21T22:54:30.207Z"
+  },
+  {
+    "id": "mt3jr133cgvyhek",
+    "title": "- **Role:** Chief Technology Officer, mid-stage fintech - **Demographics:** 37, ",
+    "description": "- **Role:** Chief Technology Officer, mid-stage fintech\n- **Demographics:** 37, Lagos, ex-Konga engineering background, leads a 12-person engineering team\n- **Goals:** Ship integrations fast with minimal back-and-forth, keep infrastructure lean, avoid building workaround systems for gaps in vendor APIs\n- **Frustrations:** No webhooks force polling architecture; ambiguous error codes require manual log correlation with Interswitch support; unreliable sandbox breaks CI/CD\n- **Behaviors:** Evaluates competing middleware providers annually, makes build-vs-workaround calls based on engineering hours lost per quarter\n- **Needs:** Event-driven architecture support (webhooks), structured error responses, stable sandbox parity with production\n- **Quote:** \"Every workaround we build for your API is a workaround we're stuck maintaining forever.\"\n- **Jobs to be Done:** When integrating card lifecycle events into our product, I want event-driven notifications instead of polling, so I can build a responsive customer experience without wasting API calls.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.207Z",
+    "updatedAt": "2026-08-21T22:54:30.207Z"
+  },
+  {
+    "id": "mt3jr1346tlkcxb",
+    "title": "**Behaviors:** Evaluates competing middleware providers annually, makes build-vs",
+    "description": "**Behaviors:** Evaluates competing middleware providers annually, makes build-vs-workaround calls based on engineering hours lost per quarter",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.208Z",
+    "updatedAt": "2026-08-21T22:54:30.208Z"
+  },
+  {
+    "id": "mt3jr134os76uf9",
+    "title": "**Quote:** \"Every workaround we build for your API is a workaround we're stuck m",
+    "description": "**Quote:** \"Every workaround we build for your API is a workaround we're stuck maintaining forever.\"",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 7,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 7,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.208Z",
+    "updatedAt": "2026-08-21T22:54:30.208Z"
+  },
+  {
+    "id": "mt3jr134pjdg9fq",
+    "title": "**Jobs to be Done:** When integrating card lifecycle events into our product, I ",
+    "description": "**Jobs to be Done:** When integrating card lifecycle events into our product, I want event-driven notifications instead of polling, so I can build a responsive customer experience without wasting API calls.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.208Z",
+    "updatedAt": "2026-08-21T22:54:30.208Z"
+  },
+  {
+    "id": "mt3jr134u8b7s48",
+    "title": "- **Role:** Compliance Officer, fintech card program - **Demographics:** 45, Abu",
+    "description": "- **Role:** Compliance Officer, fintech card program\n- **Demographics:** 45, Abuja, legal/compliance background, responsible for CBN audit readiness\n- **Goals:** Produce accurate, complete audit documentation on demand, avoid manual data reconciliation\n- **Frustrations:** No self-serve log export; dependent on Interswitch support turnaround during audit windows; keeps a shadow spreadsheet to compensate\n- **Behaviors:** Runs a quarterly audit prep cycle, escalates to account management two weeks before CBN deadlines\n- **Needs:** Self-serve, filterable export of issuance and status logs, exportable in audit-ready format\n- **Quote:** \"I shouldn't need a support ticket to prove we're compliant.\"\n- **Jobs to be Done:** When preparing for a CBN audit, I want to independently pull card issuance and status logs by date range, so I can complete the audit report without depending on vendor turnaround.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.208Z",
+    "updatedAt": "2026-08-21T22:54:30.208Z"
+  },
+  {
+    "id": "mt3jr1379edbwd4",
+    "title": "**Quote:** \"I shouldn't need a support ticket to prove we're compliant.\"",
+    "description": "**Quote:** \"I shouldn't need a support ticket to prove we're compliant.\"",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 7,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 7,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.211Z",
+    "updatedAt": "2026-08-21T22:54:30.211Z"
+  },
+  {
+    "id": "mt3jr137r8rqiff",
+    "title": "**Jobs to be Done:** When preparing for a CBN audit, I want to independently pul",
+    "description": "**Jobs to be Done:** When preparing for a CBN audit, I want to independently pull card issuance and status logs by date range, so I can complete the audit report without depending on vendor turnaround.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.211Z",
+    "updatedAt": "2026-08-21T22:54:30.211Z"
+  },
+  {
+    "id": "mt3jr13870gw2pm",
+    "title": "**Transcript:** > **Interviewer:** Walk me through the last time you issued a ba",
+    "description": "**Transcript:**\n> **Interviewer:** Walk me through the last time you issued a batch of virtual cards for a campaign.\n>\n> **Interviewee:** We had a BNPL promo, needed 2,000 cards live in under 10 minutes for a flash campaign tied to a marketing push. We hit rate limits almost immediately when we tried to push all 2,000 through at once.\n>\n> **Interviewer:** What did you do?\n>\n> **Interviewee:** We had to build our own internal queue that chunks requests into batches of 50 with a delay between each chunk. It works, but it's fragile — if the delay is too short we get throttled, too long and we miss the campaign window.\n>\n> **Interviewer:** How often does this come up?\n>\n> **Interviewee:** Every major campaign. At least once a month. It's become expected overhead in our planning now, which honestly shouldn't be normal.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** An async batch endpoint. We submit the whole batch, get a job ID, and get notified when it's done. We don't need synchronous responses for 2,000 cards — we need reliability and a completion signal.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.212Z",
+    "updatedAt": "2026-08-21T22:54:30.212Z"
+  },
+  {
+    "id": "mt3jr13diozt70l",
+    "title": "**Transcript:** > **Interviewer:** Walk me through what happens when a card gets",
+    "description": "**Transcript:**\n> **Interviewer:** Walk me through what happens when a card gets blocked or frozen.\n>\n> **Interviewee:** Customer calls in reporting suspected fraud. We hit the freeze endpoint, get a 200 success response, dashboard shows \"frozen.\" We tell the customer they're protected.\n>\n> **Interviewer:** And then?\n>\n> **Interviewee:** Sometimes a transaction still goes through in the next few minutes. We've had two disputes where the customer swears they saw a charge after we told them it was frozen — and they're right, it did happen, because the scheme hadn't caught up yet.\n>\n> **Interviewer:** How did that make your team feel?\n>\n> **Interviewee:** Exposed. We're telling customers something is true based on what your API tells us, and it turns out that's not always the real-time truth. That's a liability problem for us, not just an inconvenience.\n>\n> **Interviewer:** What would need to be true for this not to happen?\n>\n> **Interviewee:** I need confirmation that the freeze is actually live at the scheme level before I tell my dashboard — and my customer — that it's done.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.217Z",
+    "updatedAt": "2026-08-21T22:54:30.217Z"
+  },
+  {
+    "id": "mt3jr13f7giziyw",
+    "title": "**Transcript:** > **Interviewer:** Think of the most painful part of your curren",
+    "description": "**Transcript:**\n> **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up?\n>\n> **Interviewee:** Every CBN audit cycle. I need issuance and status logs for a specific date range. There's no self-serve way to get that — I open a support ticket and wait.\n>\n> **Interviewer:** How long does that usually take?\n>\n> **Interviewee:** Anywhere from two to five business days, depending on how backed up support is. If the audit deadline is tight, that's genuinely stressful.\n>\n> **Interviewer:** What do you do to work around it?\n>\n> **Interviewee:** I keep my own shadow spreadsheet, updated manually, so I'm not fully dependent on their turnaround. It's extra work I shouldn't have to do.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** A dashboard where I filter by date range and export the log myself. I don't need anything fancy. I need independence from the ticket queue.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.219Z",
+    "updatedAt": "2026-08-21T22:54:30.219Z"
+  },
+  {
+    "id": "mt3jr13ii9durgq",
+    "title": "**Framework:** MoSCoW — Should Have **Description:** Filterable, downloadable ca",
+    "description": "**Framework:** MoSCoW — Should Have\n**Description:** Filterable, downloadable card issuance/status log export for compliance teams.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.222Z",
+    "updatedAt": "2026-08-21T22:54:30.222Z"
+  },
+  {
+    "id": "mt3jr13kc4evgly",
+    "title": "- **Hypothesis:** If banks can submit card issuance as an async batch job instea",
+    "description": "- **Hypothesis:** If banks can submit card issuance as an async batch job instead of chunked synchronous calls, campaign-related engineering escalations will drop by at least 30%.\n- **Success Metric:** ≥30% reduction in campaign-related engineering escalations among pilot banks over two campaign cycles.\n- **Failure Metric:** No measurable reduction, or job completion time exceeds current chunked-call throughput.\n- **Duration:** 8 weeks (covering two campaign cycles)\n- **Cost:** High — requires new async job infrastructure and status tracking\n- **Risk:** Medium — job queue reliability under peak load is untested\n- **Expected Learning:** Whether async issuance removes the need for customer-side workaround queues, and what batch size/throughput ceiling is realistic.\n- **Results:** Pending — pilot scheduled for next quarter, not yet run.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13k1t7xml9",
+    "title": "**Expected Learning:** Whether async issuance removes the need for customer-side",
+    "description": "**Expected Learning:** Whether async issuance removes the need for customer-side workaround queues, and what batch size/throughput ceiling is realistic.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.224Z",
+    "updatedAt": "2026-08-21T22:54:30.224Z"
+  },
+  {
+    "id": "mt3jr13mopcd73i",
+    "title": "- **Hypothesis:** If compliance officers can self-serve export issuance/status l",
+    "description": "- **Hypothesis:** If compliance officers can self-serve export issuance/status logs by date range, dependency on support tickets for audit prep will drop to near zero.\n- **Success Metric:** ≥90% of audit-related log requests handled via self-serve export within one quarter of launch, with zero related support tickets.\n- **Failure Metric:** <50% adoption, or continued reliance on manual ticket-based requests.\n- **Duration:** 4 weeks (prototype walkthrough, not full build)\n- **Cost:** Low — clickable prototype only, no backend build\n- **Risk:** Low\n- **Expected Learning:** Whether the proposed export/filter UX matches how compliance officers actually structure audit requests, before committing engineering resources.\n- **Results:** Prototype walkthrough with 3 compliance officers across 3 customers — all 3 completed the export flow without assistance and confirmed the filter fields matched their audit format. Hypothesis supported — recommend moving to build.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.226Z",
+    "updatedAt": "2026-08-21T22:54:30.226Z"
+  },
+  {
+    "id": "mt3jr13nwpr5owi",
+    "title": "**Duration:** 4 weeks (prototype walkthrough, not full build)",
+    "description": "**Duration:** 4 weeks (prototype walkthrough, not full build)",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 6,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 6,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.227Z",
+    "updatedAt": "2026-08-21T22:54:30.227Z"
+  },
+  {
+    "id": "mt3jr13n4rk7z5f",
+    "title": "**Cost:** Low — clickable prototype only, no backend build",
+    "description": "**Cost:** Low — clickable prototype only, no backend build",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 6,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 6,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.227Z",
+    "updatedAt": "2026-08-21T22:54:30.227Z"
+  },
+  {
+    "id": "mt3jr13npoimi9i",
+    "title": "**Results:** Prototype walkthrough with 3 compliance officers across 3 customers",
+    "description": "**Results:** Prototype walkthrough with 3 compliance officers across 3 customers — all 3 completed the export flow without assistance and confirmed the filter fields matched their audit format. Hypothesis supported — recommend moving to build.",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.227Z",
+    "updatedAt": "2026-08-21T22:54:30.227Z"
+  },
+  {
+    "id": "mt3jr13oxea4ojm",
+    "title": "| Assumption Statement | Evidence | |------------------------|----------| | Poll",
+    "description": "| Assumption Statement | Evidence |\n|------------------------|----------|\n| Polling for card status is a significant source of downstream support burden for fintechs. | 3 out of 5 interviewees mentioned this unprompted |\n| Delayed scheme-level freeze enforcement creates real dispute/liability exposure for banks, not just inconvenience. | 2 out of 5 interviewees described a specific dispute case caused by this |\n| Compliance officers will adopt a self-serve export tool if it matches their existing audit data format. | 3 out of 3 compliance interviewees confirmed this in prototype testing |\n| Banks running card-based campaigns build their own workaround infrastructure to compensate for API throughput limits. | 4 out of 5 interviewees confirmed building internal queuing/chunking logic |\n| Ambiguous error codes cause engineering teams to file support tickets rather than self-diagnose. | 21 support tickets over 90 days traced to generic error responses (CMP-06) |\n| Sandbox instability actively erodes trust in using sandbox beyond basic smoke testing. | 2 out of 5 interviewees stated they no longer trust sandbox for regression testing |\n| Post-issuance limit/control changes are a recurring ask but not an urgent blocker for most bank product teams. | Mentioned in 4 of 6 renewal calls (CMP-07), but not raised unprompted in story-based interviews |",
+    "framework": "rice",
+    "scores": {
+      "reach": 5,
+      "impact": 10,
+      "confidence": 5,
+      "effort": 5
+    },
+    "totalScore": 10,
+    "priority": "high",
+    "status": "backlog",
+    "relatedOpportunityIds": [],
+    "createdAt": "2026-08-21T22:54:30.228Z",
+    "updatedAt": "2026-08-21T22:54:30.228Z"
+  }
+]

@@ -1,0 +1,328 @@
+[
+  {
+    "id": "mt3jr12nnzuhw4a",
+    "name": "** Product Manager, Digital Banking Division",
+    "role": "** Product Manager, Digital Banking Division",
+    "demographics": "",
+    "goals": [
+      "* Launch card-based campaigns fast, keep integration overhead low, avoid engineering escalations reaching her desk",
+      "**Frustrations:** Feature requests to Interswitch take multiple cycles to be scoped; no visibility into API roadmap; limit changes require full card reissuance",
+      "**Behaviors:** Reviews API changelogs monthly, escalates to account manager when a workaround costs her team more than two engineering days",
+      "**Needs:** Predictable roadmap communication, ability to adjust card controls without reissuance, clear SLAs for feature requests",
+      "**Quote:** \"I don't need more features. I need to stop being the translator between my engineers and your support team.\"",
+      "**Jobs to be Done:** When rolling out a new card-based product, I want to configure and adjust card behavior without engineering rework, so I can hit launch dates without escalation."
+    ],
+    "frustrations": [
+      "* Feature requests to Interswitch take multiple cycles to be scoped; no visibility into API roadmap; limit changes require full card reissuance",
+      "**Behaviors:** Reviews API changelogs monthly, escalates to account manager when a workaround costs her team more than two engineering days",
+      "**Needs:** Predictable roadmap communication, ability to adjust card controls without reissuance, clear SLAs for feature requests",
+      "**Quote:** \"I don't need more features. I need to stop being the translator between my engineers and your support team.\"",
+      "**Jobs to be Done:** When rolling out a new card-based product, I want to configure and adjust card behavior without engineering rework, so I can hit launch dates without escalation."
+    ],
+    "behaviors": [
+      "* Reviews API changelogs monthly, escalates to account manager when a workaround costs her team more than two engineering days",
+      "**Needs:** Predictable roadmap communication, ability to adjust card controls without reissuance, clear SLAs for feature requests",
+      "**Quote:** \"I don't need more features. I need to stop being the translator between my engineers and your support team.\"",
+      "**Jobs to be Done:** When rolling out a new card-based product, I want to configure and adjust card behavior without engineering rework, so I can hit launch dates without escalation."
+    ],
+    "needs": [
+      "* Predictable roadmap communication, ability to adjust card controls without reissuance, clear SLAs for feature requests",
+      "**Quote:** \"I don't need more features. I need to stop being the translator between my engineers and your support team.\"",
+      "**Jobs to be Done:** When rolling out a new card-based product, I want to configure and adjust card behavior without engineering rework, so I can hit launch dates without escalation."
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "* When rolling out a new card-based product, I want to configure and adjust card behavior without engineering rework, so I can hit launch dates without escalation."
+    ],
+    "createdAt": "2026-08-21T22:54:30.191Z",
+    "updatedAt": "2026-08-21T22:54:30.191Z"
+  },
+  {
+    "id": "mt3jr12nobkzjgu",
+    "name": "** Operations Lead, Card Services",
+    "role": "** Operations Lead, Card Services",
+    "demographics": "",
+    "goals": [
+      "* Resolve fraud and dispute cases quickly, minimize customer complaint escalations to his desk",
+      "**Frustrations:** Delay between freeze confirmation and scheme-level enforcement; disputes where the timeline doesn't match what the dashboard shows",
+      "**Behaviors:** Monitors the ops dashboard multiple times a day, personally handles high-severity fraud escalations",
+      "**Needs:** Real-time confirmation that a freeze is actually enforced at the scheme level, audit trail timestamps that match reality",
+      "**Quote:** \"When I tell a customer their card is frozen, it needs to actually be frozen. Right now I'm not always telling the truth.\"",
+      "**Jobs to be Done:** When fraud is reported, I want the freeze to take effect instantly and verifiably, so I can protect the customer and defend the bank's position in a dispute."
+    ],
+    "frustrations": [
+      "* Delay between freeze confirmation and scheme-level enforcement; disputes where the timeline doesn't match what the dashboard shows",
+      "**Behaviors:** Monitors the ops dashboard multiple times a day, personally handles high-severity fraud escalations",
+      "**Needs:** Real-time confirmation that a freeze is actually enforced at the scheme level, audit trail timestamps that match reality",
+      "**Quote:** \"When I tell a customer their card is frozen, it needs to actually be frozen. Right now I'm not always telling the truth.\"",
+      "**Jobs to be Done:** When fraud is reported, I want the freeze to take effect instantly and verifiably, so I can protect the customer and defend the bank's position in a dispute."
+    ],
+    "behaviors": [
+      "* Monitors the ops dashboard multiple times a day, personally handles high-severity fraud escalations",
+      "**Needs:** Real-time confirmation that a freeze is actually enforced at the scheme level, audit trail timestamps that match reality",
+      "**Quote:** \"When I tell a customer their card is frozen, it needs to actually be frozen. Right now I'm not always telling the truth.\"",
+      "**Jobs to be Done:** When fraud is reported, I want the freeze to take effect instantly and verifiably, so I can protect the customer and defend the bank's position in a dispute."
+    ],
+    "needs": [
+      "* Real-time confirmation that a freeze is actually enforced at the scheme level, audit trail timestamps that match reality",
+      "**Quote:** \"When I tell a customer their card is frozen, it needs to actually be frozen. Right now I'm not always telling the truth.\"",
+      "**Jobs to be Done:** When fraud is reported, I want the freeze to take effect instantly and verifiably, so I can protect the customer and defend the bank's position in a dispute."
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "* When fraud is reported, I want the freeze to take effect instantly and verifiably, so I can protect the customer and defend the bank's position in a dispute."
+    ],
+    "createdAt": "2026-08-21T22:54:30.191Z",
+    "updatedAt": "2026-08-21T22:54:30.191Z"
+  },
+  {
+    "id": "mt3jr12n2eduhlt",
+    "name": "** Chief Technology Officer, mid-stage fintech",
+    "role": "** Chief Technology Officer, mid-stage fintech",
+    "demographics": "",
+    "goals": [
+      "* Ship integrations fast with minimal back-and-forth, keep infrastructure lean, avoid building workaround systems for gaps in vendor APIs",
+      "**Frustrations:** No webhooks force polling architecture; ambiguous error codes require manual log correlation with Interswitch support; unreliable sandbox breaks CI/CD",
+      "**Behaviors:** Evaluates competing middleware providers annually, makes build-vs-workaround calls based on engineering hours lost per quarter",
+      "**Needs:** Event-driven architecture support (webhooks), structured error responses, stable sandbox parity with production",
+      "**Quote:** \"Every workaround we build for your API is a workaround we're stuck maintaining forever.\"",
+      "**Jobs to be Done:** When integrating card lifecycle events into our product, I want event-driven notifications instead of polling, so I can build a responsive customer experience without wasting API calls."
+    ],
+    "frustrations": [
+      "* No webhooks force polling architecture; ambiguous error codes require manual log correlation with Interswitch support; unreliable sandbox breaks CI/CD",
+      "**Behaviors:** Evaluates competing middleware providers annually, makes build-vs-workaround calls based on engineering hours lost per quarter",
+      "**Needs:** Event-driven architecture support (webhooks), structured error responses, stable sandbox parity with production",
+      "**Quote:** \"Every workaround we build for your API is a workaround we're stuck maintaining forever.\"",
+      "**Jobs to be Done:** When integrating card lifecycle events into our product, I want event-driven notifications instead of polling, so I can build a responsive customer experience without wasting API calls."
+    ],
+    "behaviors": [
+      "* Evaluates competing middleware providers annually, makes build-vs-workaround calls based on engineering hours lost per quarter",
+      "**Needs:** Event-driven architecture support (webhooks), structured error responses, stable sandbox parity with production",
+      "**Quote:** \"Every workaround we build for your API is a workaround we're stuck maintaining forever.\"",
+      "**Jobs to be Done:** When integrating card lifecycle events into our product, I want event-driven notifications instead of polling, so I can build a responsive customer experience without wasting API calls."
+    ],
+    "needs": [
+      "* Event-driven architecture support (webhooks), structured error responses, stable sandbox parity with production",
+      "**Quote:** \"Every workaround we build for your API is a workaround we're stuck maintaining forever.\"",
+      "**Jobs to be Done:** When integrating card lifecycle events into our product, I want event-driven notifications instead of polling, so I can build a responsive customer experience without wasting API calls."
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "* When integrating card lifecycle events into our product, I want event-driven notifications instead of polling, so I can build a responsive customer experience without wasting API calls."
+    ],
+    "createdAt": "2026-08-21T22:54:30.191Z",
+    "updatedAt": "2026-08-21T22:54:30.191Z"
+  },
+  {
+    "id": "mt3jr12niii6p4u",
+    "name": "** Compliance Officer, fintech card program",
+    "role": "** Compliance Officer, fintech card program",
+    "demographics": "",
+    "goals": [
+      "* Produce accurate, complete audit documentation on demand, avoid manual data reconciliation",
+      "**Frustrations:** No self-serve log export; dependent on Interswitch support turnaround during audit windows; keeps a shadow spreadsheet to compensate",
+      "**Behaviors:** Runs a quarterly audit prep cycle, escalates to account management two weeks before CBN deadlines",
+      "**Needs:** Self-serve, filterable export of issuance and status logs, exportable in audit-ready format",
+      "**Quote:** \"I shouldn't need a support ticket to prove we're compliant.\"",
+      "**Jobs to be Done:** When preparing for a CBN audit, I want to independently pull card issuance and status logs by date range, so I can complete the audit report without depending on vendor turnaround."
+    ],
+    "frustrations": [
+      "* No self-serve log export; dependent on Interswitch support turnaround during audit windows; keeps a shadow spreadsheet to compensate",
+      "**Behaviors:** Runs a quarterly audit prep cycle, escalates to account management two weeks before CBN deadlines",
+      "**Needs:** Self-serve, filterable export of issuance and status logs, exportable in audit-ready format",
+      "**Quote:** \"I shouldn't need a support ticket to prove we're compliant.\"",
+      "**Jobs to be Done:** When preparing for a CBN audit, I want to independently pull card issuance and status logs by date range, so I can complete the audit report without depending on vendor turnaround."
+    ],
+    "behaviors": [
+      "* Runs a quarterly audit prep cycle, escalates to account management two weeks before CBN deadlines",
+      "**Needs:** Self-serve, filterable export of issuance and status logs, exportable in audit-ready format",
+      "**Quote:** \"I shouldn't need a support ticket to prove we're compliant.\"",
+      "**Jobs to be Done:** When preparing for a CBN audit, I want to independently pull card issuance and status logs by date range, so I can complete the audit report without depending on vendor turnaround."
+    ],
+    "needs": [
+      "* Self-serve, filterable export of issuance and status logs, exportable in audit-ready format",
+      "**Quote:** \"I shouldn't need a support ticket to prove we're compliant.\"",
+      "**Jobs to be Done:** When preparing for a CBN audit, I want to independently pull card issuance and status logs by date range, so I can complete the audit report without depending on vendor turnaround."
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "* When preparing for a CBN audit, I want to independently pull card issuance and status logs by date range, so I can complete the audit report without depending on vendor turnaround."
+    ],
+    "createdAt": "2026-08-21T22:54:30.191Z",
+    "updatedAt": "2026-08-21T22:54:30.191Z"
+  },
+  {
+    "id": "mt7c0epyffqpzdi",
+    "name": "Data User",
+    "role": "interview",
+    "demographics": "Auto-generated from insights",
+    "goals": [
+      "Improve data experience"
+    ],
+    "frustrations": [
+      "**Transcript:**\n> **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up?\n>\n> **Interviewee:** Every CBN audit cycle. I need issuance and status logs for a specific date range. There's no self-serve way to get that — I open a support ticket and wait.\n>\n> **Interviewer:** How long does that usually take?\n>\n> **Interviewee:** Anywhere from two to five business days, depending on how backed up support is. If the audit deadline is tight, that's genuinely stressful.\n>\n> **Interviewer:** What do you do to work around it?\n>\n> **Interviewee:** I keep my own shadow spreadsheet, updated manually, so I'm not fully dependent on their turnaround. It's extra work I shouldn't have to do.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** A dashboard where I filter by date range and export the log myself. I don't need anything fancy. I need independence from the ticket queue."
+    ],
+    "behaviors": [
+      "Interacts with data features"
+    ],
+    "needs": [
+      "simple",
+      "affordable",
+      "analytics",
+      "card",
+      "support"
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "Complete tasks related to data",
+      "Navigate data successfully"
+    ],
+    "createdAt": "2026-08-24T14:28:55.558Z",
+    "updatedAt": "2026-08-24T14:28:55.558Z"
+  },
+  {
+    "id": "mt7c0eti2kvq9zu",
+    "name": "Support User",
+    "role": "interview",
+    "demographics": "Auto-generated from insights",
+    "goals": [
+      "Improve support experience"
+    ],
+    "frustrations": [
+      "**Transcript:**\n> **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up?\n>\n> **Interviewee:** Every CBN audit cycle. I need issuance and status logs for a specific date range. There's no self-serve way to get that — I open a support ticket and wait.\n>\n> **Interviewer:** How long does that usually take?\n>\n> **Interviewee:** Anywhere from two to five business days, depending on how backed up support is. If the audit deadline is tight, that's genuinely stressful.\n>\n> **Interviewer:** What do you do to work around it?\n>\n> **Interviewee:** I keep my own shadow spreadsheet, updated manually, so I'm not fully dependent on their turnaround. It's extra work I shouldn't have to do.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** A dashboard where I filter by date range and export the log myself. I don't need anything fancy. I need independence from the ticket queue."
+    ],
+    "behaviors": [
+      "Interacts with support features"
+    ],
+    "needs": [
+      "card",
+      "support",
+      "ticket",
+      "bank",
+      "days"
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "Complete tasks related to support",
+      "Navigate support successfully"
+    ],
+    "createdAt": "2026-08-24T14:28:55.686Z",
+    "updatedAt": "2026-08-24T14:28:55.686Z"
+  },
+  {
+    "id": "mt7c0ewvj2c617f",
+    "name": "Integration User",
+    "role": "interview",
+    "demographics": "Auto-generated from insights",
+    "goals": [
+      "Improve integration experience"
+    ],
+    "frustrations": [
+      "**Transcript:**\n> **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up?\n>\n> **Interviewee:** Every CBN audit cycle. I need issuance and status logs for a specific date range. There's no self-serve way to get that — I open a support ticket and wait.\n>\n> **Interviewer:** How long does that usually take?\n>\n> **Interviewee:** Anywhere from two to five business days, depending on how backed up support is. If the audit deadline is tight, that's genuinely stressful.\n>\n> **Interviewer:** What do you do to work around it?\n>\n> **Interviewee:** I keep my own shadow spreadsheet, updated manually, so I'm not fully dependent on their turnaround. It's extra work I shouldn't have to do.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** A dashboard where I filter by date range and export the log myself. I don't need anything fancy. I need independence from the ticket queue."
+    ],
+    "behaviors": [
+      "Interacts with integration features"
+    ],
+    "needs": [
+      "context",
+      "b2b",
+      "api",
+      "middleware",
+      "enabling"
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "Complete tasks related to integration",
+      "Navigate integration successfully"
+    ],
+    "createdAt": "2026-08-24T14:28:55.807Z",
+    "updatedAt": "2026-08-24T14:28:55.807Z"
+  },
+  {
+    "id": "mt7c0jivkow78lh",
+    "name": "Data User",
+    "role": "interview",
+    "demographics": "Auto-generated from insights",
+    "goals": [
+      "Improve data experience"
+    ],
+    "frustrations": [
+      "**Transcript:**\n> **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up?\n>\n> **Interviewee:** Every CBN audit cycle. I need issuance and status logs for a specific date range. There's no self-serve way to get that — I open a support ticket and wait.\n>\n> **Interviewer:** How long does that usually take?\n>\n> **Interviewee:** Anywhere from two to five business days, depending on how backed up support is. If the audit deadline is tight, that's genuinely stressful.\n>\n> **Interviewer:** What do you do to work around it?\n>\n> **Interviewee:** I keep my own shadow spreadsheet, updated manually, so I'm not fully dependent on their turnaround. It's extra work I shouldn't have to do.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** A dashboard where I filter by date range and export the log myself. I don't need anything fancy. I need independence from the ticket queue."
+    ],
+    "behaviors": [
+      "Interacts with data features"
+    ],
+    "needs": [
+      "simple",
+      "affordable",
+      "analytics",
+      "card",
+      "support"
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "Complete tasks related to data",
+      "Navigate data successfully"
+    ],
+    "createdAt": "2026-08-24T14:29:01.783Z",
+    "updatedAt": "2026-08-24T14:29:01.783Z"
+  },
+  {
+    "id": "mt7c0jl2bm6a41k",
+    "name": "Support User",
+    "role": "interview",
+    "demographics": "Auto-generated from insights",
+    "goals": [
+      "Improve support experience"
+    ],
+    "frustrations": [
+      "**Transcript:**\n> **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up?\n>\n> **Interviewee:** Every CBN audit cycle. I need issuance and status logs for a specific date range. There's no self-serve way to get that — I open a support ticket and wait.\n>\n> **Interviewer:** How long does that usually take?\n>\n> **Interviewee:** Anywhere from two to five business days, depending on how backed up support is. If the audit deadline is tight, that's genuinely stressful.\n>\n> **Interviewer:** What do you do to work around it?\n>\n> **Interviewee:** I keep my own shadow spreadsheet, updated manually, so I'm not fully dependent on their turnaround. It's extra work I shouldn't have to do.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** A dashboard where I filter by date range and export the log myself. I don't need anything fancy. I need independence from the ticket queue."
+    ],
+    "behaviors": [
+      "Interacts with support features"
+    ],
+    "needs": [
+      "card",
+      "support",
+      "ticket",
+      "bank",
+      "days"
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "Complete tasks related to support",
+      "Navigate support successfully"
+    ],
+    "createdAt": "2026-08-24T14:29:01.862Z",
+    "updatedAt": "2026-08-24T14:29:01.862Z"
+  },
+  {
+    "id": "mt7c0jnw147lqdo",
+    "name": "Integration User",
+    "role": "interview",
+    "demographics": "Auto-generated from insights",
+    "goals": [
+      "Improve integration experience"
+    ],
+    "frustrations": [
+      "**Transcript:**\n> **Interviewer:** Think of the most painful part of your current workflow. Can you describe a specific moment when that pain showed up?\n>\n> **Interviewee:** Every CBN audit cycle. I need issuance and status logs for a specific date range. There's no self-serve way to get that — I open a support ticket and wait.\n>\n> **Interviewer:** How long does that usually take?\n>\n> **Interviewee:** Anywhere from two to five business days, depending on how backed up support is. If the audit deadline is tight, that's genuinely stressful.\n>\n> **Interviewer:** What do you do to work around it?\n>\n> **Interviewee:** I keep my own shadow spreadsheet, updated manually, so I'm not fully dependent on their turnaround. It's extra work I shouldn't have to do.\n>\n> **Interviewer:** What would need to be true for this not to be a problem?\n>\n> **Interviewee:** A dashboard where I filter by date range and export the log myself. I don't need anything fancy. I need independence from the ticket queue."
+    ],
+    "behaviors": [
+      "Interacts with integration features"
+    ],
+    "needs": [
+      "context",
+      "b2b",
+      "api",
+      "middleware",
+      "enabling"
+    ],
+    "quotes": [],
+    "jobsToBeDone": [
+      "Complete tasks related to integration",
+      "Navigate integration successfully"
+    ],
+    "createdAt": "2026-08-24T14:29:01.964Z",
+    "updatedAt": "2026-08-24T14:29:01.964Z"
+  }
+]
