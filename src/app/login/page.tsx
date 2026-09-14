@@ -18,7 +18,7 @@ export default function LoginPage() {
   useEffect(() => {
     fetchSession().then((user) => {
       setReady(true);
-      if (user) router.replace("/dashboard");
+      if (user) router.replace("/library");
     });
   }, [router]);
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
         setSubmitting(false);
         return;
       }
-      router.replace("/dashboard");
+      router.replace("/library");
     } catch {
       setError("Network error. Please try again.");
       setSubmitting(false);

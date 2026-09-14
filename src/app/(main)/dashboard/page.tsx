@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { Card, Badge, PriorityBadge, Spinner, Button } from "@/components/ui";
+import { GettingStarted } from "@/components/workspace-motion";
+import { Card, Badge, PriorityBadge, Spinner, Button, useToast } from "@/components/ui";
 import { AlertTriangle, ArrowUpRight, BrainCircuit, Download, FileDown, FlaskConical, Lightbulb, MessageSquare, ShieldQuestion, Sparkles, Target, Users } from "@/components/icons";
 import type {
   Insight, Opportunity, Feature,
@@ -48,6 +49,8 @@ const ENTITY_ICONS: Record<string, string> = {
 };
 
 export default function DashboardPage() {
+  const { addToast } = useToast();
+  const [exporting, setExporting] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState({
@@ -159,9 +162,12 @@ export default function DashboardPage() {
           <Button
             variant="secondary"
             size="sm"
+            disabled={exporting}
             onClick={async () => {
               try {
+                setExporting(true);
                 const res = await fetch("/api/export");
+                if (!res.ok) throw new Error("Export failed");
                 const blob = await res.blob();
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement("a");
@@ -170,14 +176,18 @@ export default function DashboardPage() {
                 a.click();
                 URL.revokeObjectURL(url);
               } catch {
-                // silently ignore
+                addToast("Could not download the backup. Please try again.", "error");
+              } finally {
+                setExporting(false);
               }
             }}
           >
-            <FileDown size={15} /> Download backup
+            <FileDown size={15} /> {exporting ? "Preparing backup..." : "Download backup"}
           </Button>
         </div>
       </div>
+
+      <GettingStarted />
 
       {/* Stat cards */}
       <div className="mb-9 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7">

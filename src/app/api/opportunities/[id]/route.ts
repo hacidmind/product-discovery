@@ -1,3 +1,4 @@
+import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import { getRecord, updateRecord, deleteRecord } from "@/lib/storage";
 import { scoreOpportunity } from "@/lib/analysis";
@@ -17,7 +18,9 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const { id } = await params;
   const productId = await getOwnedProductId(req);
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("opportunities", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
   const existing = await getRecord<Opportunity>("opportunities.json", id);
   if (!existing || existing.productId !== productId) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
@@ -34,6 +37,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   const updated = await updateRecord<Opportunity>("opportunities.json", id, {
     ...body,
+    productId,
     scores: newScores,
     totalScore: result.totalScore,
     priority: result.priority,

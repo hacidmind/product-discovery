@@ -1,3 +1,4 @@
+import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import { getRecords, createRecord, generateId, updateRecord, filterByProduct } from "@/lib/storage";
 import { scoreRICE, scoreICE } from "@/lib/analysis";
@@ -14,7 +15,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const productId = await getOwnedProductId(req);
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("features", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
   const framework: Framework = body.framework || "rice";
   let totalScore = 0;
 
@@ -81,11 +84,14 @@ export async function POST(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   const productId = await getOwnedProductId(req);
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("features", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
   const existing = await getRecords<Feature>("features.json");
   if (!existing.some(feature => feature.id === body.id && feature.productId === productId)) return NextResponse.json({ error: "Not found" }, { status: 404 });
   const updated = await updateRecord<Feature>("features.json", body.id, {
     ...body,
+    productId,
     updatedAt: new Date().toISOString(),
   });
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });

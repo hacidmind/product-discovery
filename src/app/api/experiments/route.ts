@@ -1,3 +1,4 @@
+import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import { getRecords, createRecord, generateId, filterByProduct } from "@/lib/storage";
 import type { Experiment } from "@/lib/types";
@@ -13,7 +14,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const productId = await getOwnedProductId(req);
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("experiments", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
 
   const experiment: Experiment = {
     id: generateId(),

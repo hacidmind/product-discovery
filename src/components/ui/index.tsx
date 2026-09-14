@@ -9,6 +9,7 @@ interface TextareaProps {
   className?: string;
   minRows?: number;
   autoFocus?: boolean;
+  "aria-label"?: string;
 }
 
 // Auto-resizing textarea
@@ -18,6 +19,7 @@ export function Textarea({
   placeholder = "",
   className = "",
   minRows = 3,
+  "aria-label": ariaLabel,
   autoFocus = false,
 }: TextareaProps) {
   const ref = useRef<HTMLTextAreaElement>(null);
@@ -38,6 +40,7 @@ export function Textarea({
   return (
     <textarea
       ref={ref}
+      aria-label={ariaLabel || placeholder || "Text"}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
@@ -73,6 +76,9 @@ export function Badge({
   return (
     <span
       onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={event => { if (onClick && event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onClick(); } }}
       className={`
         inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium
         ${colors[variant]}
@@ -116,6 +122,9 @@ export function Card({
   return (
     <div
       onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={event => { if (onClick && event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onClick(); } }}
       className={`
         rounded-[var(--radius)] border border-[var(--border)] bg-[var(--bg)]
         p-4 transition-shadow hover:shadow-sm
@@ -137,6 +146,7 @@ export function Button({
   disabled = false,
   className = "",
   type = "button",
+  "aria-label": ariaLabel,
 }: {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "ghost" | "danger";
@@ -145,6 +155,7 @@ export function Button({
   disabled?: boolean;
   className?: string;
   type?: "button" | "submit";
+  "aria-label"?: string;
 }) {
   const base = "inline-flex items-center gap-2 font-medium rounded-[var(--radius)] transition-colors focus-visible:outline-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
@@ -155,7 +166,7 @@ export function Button({
   };
 
   const variants: Record<string, string> = {
-    primary: "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]",
+    primary: "bg-[var(--accent)] text-[var(--bg)] hover:bg-[var(--accent-hover)]",
     secondary: "bg-[var(--bg-tertiary)] text-[var(--text)] hover:bg-[var(--border)]",
     ghost: "text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)]",
     danger: "bg-[var(--danger)] text-white hover:bg-red-700",
@@ -164,6 +175,7 @@ export function Button({
   return (
     <button
       type={type}
+      aria-label={ariaLabel}
       onClick={onClick}
       disabled={disabled}
       className={`${base} ${sizes[size]} ${variants[variant]} ${className}`}
@@ -218,6 +230,8 @@ export function Input({
 export function Spinner({ size = 16 }: { size?: number }) {
   return (
     <svg
+      role="status"
+      aria-label="Loading"
       className="animate-spin text-[var(--text-tertiary)]"
       width={size}
       height={size}
@@ -232,7 +246,7 @@ export function Spinner({ size = 16 }: { size?: number }) {
 
 // Empty state
 export function EmptyState({
-  icon = "??",
+  icon = "\u25c7",
   title,
   description,
   action,
@@ -264,15 +278,29 @@ export function Modal({
   title: string;
   children: React.ReactNode;
 }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef(onClose);
+  useEffect(() => { closeRef.current = onClose; }, [onClose]);
   useEffect(() => {
-    if (open) {
-      const handler = (e: KeyboardEvent) => {
-        if (e.key === "Escape") onClose();
-      };
-      window.addEventListener("keydown", handler);
-      return () => window.removeEventListener("keydown", handler);
-    }
-  }, [open, onClose]);
+    if (!open) return;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusable = () => Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]') || []);
+    (focusable()[0] || dialogRef.current)?.focus();
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { event.preventDefault(); closeRef.current(); }
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (!first) { event.preventDefault(); dialogRef.current?.focus(); return; }
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === dialogRef.current)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    window.addEventListener("keydown", handler);
+    return () => { window.removeEventListener("keydown", handler); document.body.style.overflow = previousOverflow; previousFocus?.focus(); };
+  }, [open]);
 
   if (!open) return null;
 
@@ -282,6 +310,8 @@ export function Modal({
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
+      ref={dialogRef}
+      tabIndex={-1}
       role="dialog"
       aria-modal="true"
       aria-label={title}
@@ -311,14 +341,20 @@ export function Select({
   onChange,
   options,
   className = "",
+  "aria-label": ariaLabel,
+  disabled = false,
 }: {
   value: string;
   onChange: (value: string) => void;
   options: { value: string; label: string }[];
   className?: string;
+  "aria-label"?: string;
+  disabled?: boolean;
 }) {
   return (
     <select
+      aria-label={ariaLabel || options[0]?.label || "Choose an option"}
+      disabled={disabled}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className={`
@@ -427,6 +463,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             </span>
             <span className="flex-1">{toast.message}</span>
             <button
+              aria-label="Dismiss notification"
               onClick={() => removeToast(toast.id)}
               className="text-current opacity-50 hover:opacity-100"
             >
@@ -462,15 +499,29 @@ export function ConfirmDialog({
   confirmLabel?: string;
   variant?: "danger" | "primary";
 }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef(onClose);
+  useEffect(() => { closeRef.current = onClose; }, [onClose]);
   useEffect(() => {
-    if (open) {
-      const handler = (e: KeyboardEvent) => {
-        if (e.key === "Escape") onClose();
-      };
-      window.addEventListener("keydown", handler);
-      return () => window.removeEventListener("keydown", handler);
-    }
-  }, [open, onClose]);
+    if (!open) return;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusable = () => Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]') || []);
+    (focusable()[0] || dialogRef.current)?.focus();
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { event.preventDefault(); closeRef.current(); }
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (!first) { event.preventDefault(); dialogRef.current?.focus(); return; }
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === dialogRef.current)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    window.addEventListener("keydown", handler);
+    return () => { window.removeEventListener("keydown", handler); document.body.style.overflow = previousOverflow; previousFocus?.focus(); };
+  }, [open]);
 
   if (!open) return null;
 
@@ -478,6 +529,9 @@ export function ConfirmDialog({
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 animate-fadein"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      ref={dialogRef}
+      tabIndex={-1}
+      aria-label={title}
       role="alertdialog"
       aria-modal="true"
     >

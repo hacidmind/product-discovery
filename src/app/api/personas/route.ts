@@ -1,3 +1,4 @@
+import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import { getRecords, createRecord, updateRecord, generateId, filterByProduct } from "@/lib/storage";
 import type { Persona } from "@/lib/types";
@@ -13,7 +14,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const productId = await getOwnedProductId(req);
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("personas", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
 
   const persona: Persona = {
     id: generateId(),
@@ -38,11 +41,14 @@ export async function POST(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   const productId = await getOwnedProductId(req);
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("personas", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
   const existing = await getRecords<Persona>("personas.json");
   if (!existing.some(persona => persona.id === body.id && persona.productId === productId)) return NextResponse.json({ error: "Not found" }, { status: 404 });
   const updated = await updateRecord<Persona>("personas.json", body.id, {
     ...body,
+    productId,
     updatedAt: new Date().toISOString(),
   });
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });

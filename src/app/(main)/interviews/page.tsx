@@ -1,5 +1,9 @@
 "use client";
 
+import { checkedFetch as fetch } from "@/lib/api-client";
+import { ConfirmDialog } from "@/components/ui";
+import { ModuleError } from "@/components/module-feedback";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Textarea, Button, Card, Badge, EmptyState, Modal, Spinner } from "@/components/ui";
 import type { Interview, Emotion } from "@/lib/types";
@@ -12,6 +16,11 @@ const emotionEmoji: Record<Emotion, string> = {
 };
 
 export default function InterviewsPage() {
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [requestError, setRequestError] = useState("");
+  const handleDelete = (id: string) => { setRequestError(""); setDeleteId(id); };
+  const [busy, setBusy] = useState(false);
+  const busyRef = useRef(false);
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
@@ -24,10 +33,15 @@ export default function InterviewsPage() {
   const [transcript, setTranscript] = useState("");
 
   const fetchInterviews = useCallback(async () => {
+    setRequestError("");
+    try {
     const res = await fetch("/api/interviews");
     const data = await res.json();
     setInterviews(Array.isArray(data) ? data : []);
     setLoading(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { setLoading(false); }
   }, []);
 
   const previousProductRef = useRef("");
@@ -50,6 +64,9 @@ export default function InterviewsPage() {
   }, [fetchInterviews]);
 
   const handleSubmit = async () => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     if (!transcript.trim()) return;
     setSubmitting(true);
 
@@ -71,14 +88,24 @@ export default function InterviewsPage() {
     setTranscript("");
     setShowCreate(false);
     setSubmitting(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); setSubmitting(false); }
   };
 
-  const handleDelete = async (id: string) => {
+  const deleteRecord = async (id: string) => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch(`/api/interviews/${id}`, { method: "DELETE" });
     if (res.ok) {
+      setDeleteId(null);
       setInterviews((prev) => prev.filter((i) => i.id !== id));
       if (selectedInterview?.id === id) setSelectedInterview(null);
     }
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   if (loading) {
@@ -91,14 +118,15 @@ export default function InterviewsPage() {
 
   return (
     <div className="max-w-4xl mx-auto animate-fadein">
-      <div className="flex items-center justify-between mb-6">
+      <ModuleError message={requestError} retry={fetchInterviews} />
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold tracking-tight">Interviews</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight">Interviews</h1>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
             Paste interview transcripts and automatically extract pain points, themes, and opportunities.
           </p>
         </div>
-        <Button onClick={() => setShowCreate(true)}>+ New Interview</Button>
+        <Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Interview</Button>
       </div>
 
       {interviews.length === 0 ? (
@@ -106,7 +134,7 @@ export default function InterviewsPage() {
           icon="💬"
           title="No interviews yet"
           description="Paste an interview transcript and the system will automatically analyze it for pain points, feature requests, emotions, and opportunities."
-          action={<Button onClick={() => setShowCreate(true)}>+ New Interview</Button>}
+          action={<Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Interview</Button>}
         />
       ) : (
         <div className="space-y-3">
@@ -150,6 +178,7 @@ export default function InterviewsPage() {
 
       {/* Create Modal */}
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="New Interview Analysis">
+        <ModuleError message={requestError} />
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -189,8 +218,8 @@ export default function InterviewsPage() {
           </div>
 
           <div className="flex justify-end gap-2 pt-2">
-            <Button variant="ghost" onClick={() => setShowCreate(false)}>Cancel</Button>
-            <Button onClick={handleSubmit} disabled={!transcript.trim() || submitting}>
+            <Button disabled={busy} variant="ghost" onClick={() => setShowCreate(false)}>Cancel</Button>
+            <Button onClick={handleSubmit} disabled={busy || (!transcript.trim() || submitting)}>
               {submitting ? <Spinner size={14} /> : "Analyze Transcript"}
             </Button>
           </div>
@@ -203,6 +232,7 @@ export default function InterviewsPage() {
         onClose={() => setSelectedInterview(null)}
         title={selectedInterview?.title || ""}
       >
+        <ModuleError message={requestError} />
         {selectedInterview && (
           <div className="space-y-4 max-h-[70vh] overflow-y-auto">
             <div className="flex items-center gap-3 text-xs text-[var(--text-secondary)]">
@@ -320,6 +350,7 @@ export default function InterviewsPage() {
           </div>
         )}
       </Modal>
+      <ConfirmDialog open={!!deleteId} onClose={() => setDeleteId(null)} title="Delete this record?" message={requestError || "This permanently removes this record from the workspace."} onConfirm={() => { if (deleteId) void deleteRecord(deleteId); }} />
     </div>
   );
 }

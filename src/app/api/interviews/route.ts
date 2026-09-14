@@ -1,3 +1,4 @@
+import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import { getRecords, createRecord, generateId, filterByProduct } from "@/lib/storage";
 import { analyzeSentiment, extractKeywords, detectThemes } from "@/lib/analysis";
@@ -95,7 +96,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const productId = await getOwnedProductId(req);
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("interviews", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
   const transcript = body.transcript || "";
   const analysis = analyzeTranscript(transcript);
   const tags = extractKeywords(transcript);

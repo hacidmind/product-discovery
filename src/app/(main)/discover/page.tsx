@@ -46,7 +46,7 @@ export default function DiscoverPage() {
   const [sourceFilter, setSourceFilter] = useState<InsightSource | "">("");
   const [emotionFilter, setEmotionFilter] = useState<Emotion | "">("");
   const [error, setError] = useState<string | null>(null);
-  const toast = useToast();
+  const { addToast } = useToast();
 
   const fetchInsights = useCallback(async () => {
     try {
@@ -57,11 +57,11 @@ export default function DiscoverPage() {
       setError(null);
     } catch {
       setError("Failed to load insights. Check your connection.");
-      toast.addToast("Failed to load insights", "error");
+      addToast("Failed to load insights", "error");
     } finally {
       setLoading(false);
     }
-  }, [toast]);
+  }, [addToast]);
 
   const previousProductRef = useRef("");
   const loaded = useRef(false);
@@ -96,9 +96,9 @@ export default function DiscoverPage() {
       setInsights((prev) => [insight, ...prev]);
       setDescription("");
       setShowForm(false);
-      toast.addToast("Insight created successfully", "success");
+      addToast("Insight created successfully", "success");
     } catch {
-      toast.addToast("Failed to create insight", "error");
+      addToast("Failed to create insight", "error");
     } finally {
       setSubmitting(false);
     }
@@ -113,9 +113,9 @@ export default function DiscoverPage() {
       const res = await fetch(`/api/insights/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Failed to delete");
       setInsights((prev) => prev.filter((i) => i.id !== id));
-      toast.addToast("Insight deleted", "success");
+      addToast("Insight deleted", "success");
     } catch {
-      toast.addToast("Failed to delete insight", "error");
+      addToast("Failed to delete insight", "error");
     } finally {
       setDeleteTarget(null);
     }
@@ -139,10 +139,10 @@ export default function DiscoverPage() {
       if (!res.ok) throw new Error("Failed to update");
       const updated = await res.json();
       setInsights((prev) => prev.map((i) => (i.id === updated.id ? updated : i)));
-      toast.addToast("Insight updated", "success");
+      addToast("Insight updated", "success");
       setEditingInsight(null);
     } catch {
-      toast.addToast("Failed to update insight", "error");
+      addToast("Failed to update insight", "error");
     } finally {
       setSavingEdit(false);
     }
@@ -187,9 +187,9 @@ export default function DiscoverPage() {
 
   return (
     <div className="max-w-3xl mx-auto animate-fadein">
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold tracking-tight">Problem Discovery</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight">Problem Discovery</h1>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
             Capture ideas, feedback, and complaints. The system analyzes them automatically.
           </p>

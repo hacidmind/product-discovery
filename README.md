@@ -77,22 +77,22 @@ ADMIN_PASSWORD_HASH=your-bcrypt-hash
 
 You can also copy `.env.example` as a starting point. Never commit `.env.local`; environment files are already ignored by Git.
 
-### 5. Generate the login password hash
+### 5. Optional administrator login
 
-The app stores a bcrypt hash rather than a plain-text password. Run:
+Colleagues can use `/signup` without an administrator account. Set `ADMIN_EMAIL` and `ADMIN_PASSWORD_HASH` only if you want a configured administrator login. The app stores a bcrypt hash rather than a plain-text password. Run:
 
 ```bash
 node -e "require('bcryptjs').hash(process.argv[1], 12).then(console.log)" "your-password"
 ```
 
-Copy the output into `ADMIN_PASSWORD_HASH`:
+Copy the output into `ADMIN_PASSWORD_HASH`, adding a backslash before every dollar sign in the `.env` or `.env.local` file. Next.js expands unescaped dollar signs as environment-variable references, which corrupts bcrypt hashes:
 
 ```env
 ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD_HASH=$2b$12$paste-the-generated-hash-here
+ADMIN_PASSWORD_HASH=\$2b\$12\$paste-the-generated-hash-here
 ```
 
-Use the original password when signing in. Restart the dev server after changing `.env.local`.
+Use the original password when signing in, not the hash. Restart the dev server after changing `.env` or `.env.local`. When setting the hash directly in a hosting provider's environment-variable dashboard, use the original hash without these backslashes.
 
 ## Start the App
 
@@ -108,7 +108,7 @@ On Windows PowerShell, use `npm.cmd` if required:
 npm.cmd run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). You will be redirected to `/login`; sign in with `ADMIN_EMAIL` and the password used to create the hash.
+Open [http://localhost:3000](http://localhost:3000). Colleagues can create their own account at `/signup`, then sign in at `/login`. The optional administrator account uses `ADMIN_EMAIL` and the password used to create the hash.
 
 The development server reloads automatically when you edit files.
 
@@ -168,6 +168,19 @@ Create `.env.local` beside `package.json`, add `MONGODB_URI`, and restart the se
 
 Check the URI, database credentials, URL-encode special characters in the password, allow your IP in Atlas, and confirm that a local MongoDB service is running when using a local URI.
 
+### `querySrv ESERVFAIL` or `MongoDB DNS lookup failed`
+
+This happens before MongoDB checks your database username or password. The DNS server used by the development machine must resolve the Atlas SRV record and each cluster host. Check both from PowerShell:
+
+```powershell
+Resolve-DnsName -Type SRV _mongodb._tcp.cluster0.qdccd3c.mongodb.net
+Resolve-DnsName -Type SRV _mongodb._tcp.cluster0.qdccd3c.mongodb.net -Server 8.8.8.8
+```
+
+If the first command fails but the second returns cluster hosts, your default DNS resolver is the issue. Configure the active network adapter or VPN to use a DNS server that resolves Atlas records, such as Google Public DNS (`8.8.8.8` and `8.8.4.4`), if your network policy permits it. Then disconnect/reconnect the network or run `Clear-DnsClientCache` and restart `npm run dev`. Check an individual host returned by the SRV query with `Resolve-DnsName -Type A <host>`; the standard `mongodb://` URI only helps if those hostnames resolve too.
+
+Atlas also offers a standard `mongodb://` URI in **Connect ? Drivers** with the **SRV Connection String** toggle off. Copy that full URI if SRV lookups alone fail, keeping the TLS, replica-set, and authentication options Atlas provides. Do not invent shard names or remove TLS. Confirm that the cluster is running and that your current IP is allowed in Atlas Network Access if DNS succeeds but connection still fails.
+
 ### Login always says `Invalid email or password`
 
 Confirm that `ADMIN_EMAIL` matches the entered email and that the bcrypt hash was generated from the password being entered. Restart the server after changing environment variables.
@@ -213,9 +226,59 @@ src/components/          Shared UI and application layout
 src/lib/mongodb.ts       MongoDB connection helper
 src/lib/storage.ts       MongoDB CRUD abstraction
 src/lib/auth.ts          Session creation and verification
-src/middleware.ts        Login protection for pages and APIs
+src/proxy.ts             Login protection for pages and APIs
 data/                    Existing JSON seed/reference data
 public/                  Static assets
 ```
 
 The JSON files in `data/` are not the primary runtime database. MongoDB is the source of truth for records created through the application.
+
+## Helping colleagues get started
+
+1. Share the URL of your hosted application. Each colleague creates an account using **Sign up**.
+2. Create a workspace named after the product or initiative (for example, Customer onboarding).
+3. Follow the dashboard guide: capture evidence, review opportunities, then plan an experiment.
+4. Use **Import** for existing documents or **Research** for a research query. Review generated findings against the original evidence.
+5. Use **Switch** to change workspaces and **Download backup** to export the active workspace.
+
+Accounts have private workspaces. Shared editing, invitations, and team permissions are not implemented; giving a colleague the same workspace name does not share your data.
+
+The sidebar provides navigation, search, and light/dark mode. Use Ctrl/Cmd+K to search and Ctrl/Cmd+B to toggle navigation. Animations use GSAP for page entrances and Anime.js for the workflow guide, and respect the device's reduced-motion setting.
+
+### Production sessions and existing workspaces
+
+Set a private, randomly generated `SESSION_SECRET` before running a production build/server. Production session cookies require HTTPS. The app refuses to sign production sessions using the development fallback secret.
+
+New workspaces have unique IDs independent of their names. If legacy workspaces share an ID across accounts, access is blocked to prevent exposing another person's records. An administrator must review ownership before migrating those records; the app does not guess who owns ambiguous legacy data.
+
+### Animation delivery
+
+GSAP 3.13.0 and Anime.js 4.0.2 load from version-pinned jsDelivr URLs using Next.js Script. Animation loading never blocks workspace content. Restricted networks that block jsDelivr will show the same functional interface without these animations. This checkout could not reach the npm registry during implementation, so these libraries are not bundled npm dependencies.
+
+Run the workspace ownership regression checks with `node --test workspace-isolation.test.cjs`.
+
+
+## Working through a discovery
+
+After signing in, **Your research** shows your saved reports across your private workspaces. Search for a report, open a workspace, or choose **Start your first research** when there are no reports yet. A new workspace opens the research form automatically.
+
+Use the navigation groups to move through your work:
+- **Understand:** research reports, customer insights, interviews, imported evidence, and personas.
+- **Decide:** opportunities and feature priorities.
+- **Validate:** assumptions, experiments, and the Solution Tree.
+
+In the **Solution Tree**, start with a measurable outcome. Select a card to edit its title or add the next level: customer opportunity, possible solution, then experiment. You can link existing workspace records. Including existing evidence uses explicit opportunity-to-feature links. Removing a branch keeps the linked workspace records. Changes are saved after the server confirms them; conflicting edits prompt you to reload.
+
+Record findings using **Record results** in Experiments. Research report notes and Markdown downloads are available on the report detail page.
+
+## Regression checks
+
+```bash
+node --test workspace-isolation.test.cjs tests/modules.test.cjs
+npm run lint
+npm run build
+```
+
+The regression suite uses isolated in-memory storage and covers record validation, ownership, import normalization, research history, and tree conflicts. Live MongoDB connectivity and external research providers require a separately configured integration environment. GSAP and Anime.js load from pinned CDN URLs; the interface remains usable when those scripts are unavailable and respects reduced-motion preferences.
+
+For the isolated browser walkthrough and its setup, see [tests/README.md](tests/README.md).

@@ -1,5 +1,9 @@
 "use client";
 
+import { checkedFetch as fetch } from "@/lib/api-client";
+import { ConfirmDialog } from "@/components/ui";
+import { ModuleError } from "@/components/module-feedback";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Button, Card, Badge, EmptyState, Modal, Spinner } from "@/components/ui";
 import type { Assumption, AssumptionArea } from "@/lib/types";
@@ -28,6 +32,11 @@ const RISK_CONFIG: Record<string, { label: string; variant: "default" | "warning
 };
 
 export default function AssumptionsPage() {
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [requestError, setRequestError] = useState("");
+  const handleDelete = (id: string) => { setRequestError(""); setDeleteId(id); };
+  const [busy, setBusy] = useState(false);
+  const busyRef = useRef(false);
   const [assumptions, setAssumptions] = useState<Assumption[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
@@ -38,10 +47,15 @@ export default function AssumptionsPage() {
   const [evidence, setEvidence] = useState("");
 
   const fetchAssumptions = useCallback(async () => {
+    setRequestError("");
+    try {
     const res = await fetch("/api/assumptions");
     const data = await res.json();
     setAssumptions(Array.isArray(data) ? data : []);
     setLoading(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { setLoading(false); }
   }, []);
 
   const previousProductRef = useRef("");
@@ -64,6 +78,9 @@ export default function AssumptionsPage() {
   }, [fetchAssumptions]);
 
   const handleCreate = async () => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     if (!statement.trim()) return;
 
     const res = await fetch("/api/assumptions", {
@@ -77,16 +94,29 @@ export default function AssumptionsPage() {
     setStatement("");
     setEvidence("");
     setShowCreate(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
-  const handleDelete = async (id: string) => {
+  const deleteRecord = async (id: string) => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch(`/api/assumptions/${id}`, { method: "DELETE" });
     if (res.ok) {
+      setDeleteId(null);
       setAssumptions((prev) => prev.filter((a) => a.id !== id));
     }
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   const updateStatus = async (id: string, validationStatus: string) => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch("/api/assumptions", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -97,6 +127,9 @@ export default function AssumptionsPage() {
         prev.map((a) => (a.id === id ? { ...a, validationStatus: validationStatus as Assumption["validationStatus"] } : a))
       );
     }
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   const filtered = selectedArea === "all"
@@ -119,14 +152,15 @@ export default function AssumptionsPage() {
 
   return (
     <div className="max-w-4xl mx-auto animate-fadein">
-      <div className="flex items-center justify-between mb-6">
+      <ModuleError message={requestError} retry={fetchAssumptions} />
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold tracking-tight">Assumption Mapper</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight">Assumption Mapper</h1>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
             Identify and classify assumptions by desirability, feasibility, viability, usability, and risk.
           </p>
         </div>
-        <Button onClick={() => setShowCreate(true)}>+ New Assumption</Button>
+        <Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Assumption</Button>
       </div>
 
       {/* Area filter bar */}
@@ -164,7 +198,7 @@ export default function AssumptionsPage() {
           icon="❓"
           title="No assumptions yet"
           description="Start mapping your assumptions — beliefs you hold about users, technology, and the market."
-          action={<Button onClick={() => setShowCreate(true)}>+ New Assumption</Button>}
+          action={<Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Assumption</Button>}
         />
       ) : (
         <div className="space-y-3">
@@ -205,7 +239,7 @@ export default function AssumptionsPage() {
                       ))}
                     </div>
                   </div>
-                  <Button variant="ghost" size="xs" onClick={() => handleDelete(assumption.id)}>
+                  <Button disabled={busy} variant="ghost" size="xs" aria-label="Delete record" onClick={() => handleDelete(assumption.id)}>
                     <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                       <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
@@ -219,6 +253,7 @@ export default function AssumptionsPage() {
 
       {/* Create Modal */}
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="New Assumption">
+        <ModuleError message={requestError} />
         <div className="space-y-4">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)] block mb-1">Statement</label>
@@ -245,11 +280,12 @@ export default function AssumptionsPage() {
             The system will automatically classify this as Desirability, Feasibility, Viability, Usability, or Risk.
           </p>
           <div className="flex justify-end gap-2 pt-2">
-            <Button variant="ghost" onClick={() => setShowCreate(false)}>Cancel</Button>
-            <Button onClick={handleCreate} disabled={!statement.trim()}>Create</Button>
+            <Button disabled={busy} variant="ghost" onClick={() => setShowCreate(false)}>Cancel</Button>
+            <Button onClick={handleCreate} disabled={busy || (!statement.trim())}>Create</Button>
           </div>
         </div>
       </Modal>
+      <ConfirmDialog open={!!deleteId} onClose={() => setDeleteId(null)} title="Delete this record?" message={requestError || "This permanently removes this record from the workspace."} onConfirm={() => { if (deleteId) void deleteRecord(deleteId); }} />
     </div>
   );
 }

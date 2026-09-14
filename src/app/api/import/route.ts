@@ -1,3 +1,4 @@
+import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import {
   analyzeSentiment,
@@ -309,6 +310,7 @@ function extractFromText(text: string): ExtractedItem[] {
 
 function extractFromStructuredJSON(json: Record<string, unknown>): ExtractedItem[] {
   const items: ExtractedItem[] = [];
+  const remap = new Map<string, string>();
 
   const entityMappings: { key: string; type: ExtractedItem["type"] }[] = [
     { key: "insights", type: "insight" },
@@ -324,7 +326,19 @@ function extractFromStructuredJSON(json: Record<string, unknown>): ExtractedItem
       for (const item of arr) {
         if (item && typeof item === "object") {
           const data = { ...item } as Record<string, unknown>;
-          data.id = (data.id as string) || generateId();
+          const invalid = validateRecordInput(key, data, false);
+          if (invalid) throw new Error(`Invalid ${key} record: ${invalid}`);
+          delete data._id;
+          delete data.productId;
+          const oldId = data.id;
+          data.id = generateId();
+          if (typeof oldId === "string") remap.set(oldId, data.id as string);
+          if (type === "insight") Object.assign(data, { title: data.title || String(data.description).slice(0, 80), description: data.description || data.title, source: data.source || "other", category: data.category || "unknown", emotion: data.emotion || "neutral", tags: data.tags || [], themes: data.themes || [], quotes: data.quotes || [], priority: data.priority || "medium" });
+          if (type === "persona") for (const field of ["goals", "frustrations", "behaviors", "needs", "quotes", "jobsToBeDone"]) data[field] ||= [];
+          if (type === "persona") Object.assign(data, { role: data.role || "", demographics: data.demographics || "" });
+          if (type === "opportunity") { const scores = { impact: 5, frequency: 5, urgency: 5, businessValue: 5, strategicAlignment: 5, confidence: 5, ...(data.scores as object || {}) }; Object.assign(data, { scores, ...scoreOpportunity(scores), description: data.description || "", relatedInsightIds: data.relatedInsightIds || [], status: data.status || "new" }); }
+          if (type === "feature") Object.assign(data, { description: data.description || "", framework: data.framework || "rice", scores: data.scores || {}, totalScore: typeof data.totalScore === "number" ? data.totalScore : 0, priority: data.priority || "medium", status: data.status || "backlog", relatedOpportunityIds: data.relatedOpportunityIds || [] });
+          if (type === "assumption") Object.assign(data, { area: data.area || "unknown", risk: data.risk || "medium", evidence: data.evidence || "", validationStatus: data.validationStatus || "untested", relatedExperimentIds: [] });
           data.createdAt = (data.createdAt as string) || new Date().toISOString();
           data.updatedAt = new Date().toISOString();
           items.push({ type, data: data as never });
@@ -333,6 +347,11 @@ function extractFromStructuredJSON(json: Record<string, unknown>): ExtractedItem
     }
   }
 
+  for (const item of items) {
+    const data = item.data as unknown as Record<string, unknown>;
+    for (const key of ["relatedInsightIds", "relatedOpportunityIds"]) if (Array.isArray(data[key])) data[key] = (data[key] as string[]).map(id => remap.get(id)).filter(Boolean);
+    delete data.interviewId;
+  }
   return items;
 }
 
@@ -343,8 +362,7 @@ async function parseDocument(buffer: Buffer, filename: string): Promise<string> 
     try {
       const pdfModule = await import("pdf-parse");
       const pdf = new pdfModule.PDFParse({ data: new Uint8Array(buffer) });
-      const result = await pdf.getText();
-      return result.text;
+      try { const result = await pdf.getText(); return result.text; } finally { await pdf.destroy(); }
     } catch (e) {
       throw new Error(`Failed to parse PDF: ${e instanceof Error ? e.message : String(e)}`);
     }
@@ -378,6 +396,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
+    if (!(file instanceof File)) return NextResponse.json({ error: "Choose a document file." }, { status: 400 });
+    if (file.size > 10 * 1024 * 1024) return NextResponse.json({ error: "Choose a file smaller than 10 MB." }, { status: 400 });
+    if (!/\.(pdf|docx|txt|md|json)$/i.test(file.name)) return NextResponse.json({ error: "Use a PDF, DOCX, TXT, Markdown, or JSON file." }, { status: 400 });
     const buffer = Buffer.from(await file.arrayBuffer());
     const filename = file.name;
 
@@ -389,14 +410,15 @@ export async function POST(req: NextRequest) {
       try {
         const parsed = JSON.parse(text);
         items = extractFromStructuredJSON(parsed);
-      } catch {
-        items = extractFromText(text);
+      } catch (error) {
+        return NextResponse.json({ error: error instanceof Error ? error.message : "Use a valid JSON evidence file." }, { status: 400 });
       }
     } else {
       items = extractFromText(text);
     }
 
     items = items.slice(0, 200);
+    if (!items.length) return NextResponse.json({ error: "No usable evidence found. Try a document with customer feedback, findings, or clearly named evidence lists." }, { status: 400 });
 
     let savedCount = 0;
     const fileMapping: Record<string, string> = {

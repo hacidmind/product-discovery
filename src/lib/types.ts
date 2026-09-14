@@ -230,6 +230,9 @@ export interface Experiment {
 // ─── Opportunity Solution Tree ──────────────────────────────────────
 
 export interface TreeNode {
+  revision?: number;
+  updatedAt?: string;
+  featureId?: string;
   id: string;
   productId?: string;
   label: string;

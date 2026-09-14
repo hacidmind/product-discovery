@@ -1,3 +1,4 @@
+import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import { getRecord, updateRecord, deleteRecord } from "@/lib/storage";
 import type { Assumption } from "@/lib/types";
@@ -16,11 +17,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const { id } = await params;
   const productId = await getOwnedProductId(req);
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("assumptions", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
   const existing = await getRecord<Assumption>("assumptions.json", id);
   if (!existing || existing.productId !== productId) return NextResponse.json({ error: "Not found" }, { status: 404 });
   const updated = await updateRecord<Assumption>("assumptions.json", id, {
     ...body,
+    productId,
     updatedAt: new Date().toISOString(),
   });
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });

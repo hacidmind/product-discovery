@@ -1,0 +1,58 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+const {SignJWT}=await import('jose');
+const token=await new SignJWT({name:'Review PM',email:'review@example.test'}).setProtectedHeader({alg:'HS256'}).setSubject('review').setIssuedAt().setExpirationTime('1h').sign(new TextEncoder().encode('module-review-only-session-secret'));
+console.log('Launching browser');
+const browser=await chromium.launch({headless:true,channel:'msedge'});
+try {
+const context=await browser.newContext({viewport:{width:1440,height:1000}});
+await context.addCookies([{name:'pda_session',value:token,url:'http://localhost:3007'}]);
+let signedIn=false;let empty=false,tree=null,failTree=false,failNotes=false,failResearch=false;let report={id:'report1',productId:'review-product',query:'Why do customers abandon setup?',product:'Onboarding discovery',category:'product',sources:[],summary:'Research summary from customer interviews.',insights:[],marketSize:'',competitors:[],recommendations:['Test guided setup'],notes:'',createdAt:new Date().toISOString()}; const errors=[];
+const product={id:'review-product',name:'Onboarding discovery',createdAt:new Date().toISOString(),researchCount:1};
+const base={productId:product.id,createdAt:product.createdAt,updatedAt:product.createdAt};
+const records={
+insights:[{...base,id:'i1',title:'Setup friction',description:'Customers struggle with setup',source:'interview',category:'pain_point',emotion:'negative',tags:[],themes:['onboarding'],quotes:[],priority:'high'}],
+opportunities:[{...base,id:'o1',title:'Simplify onboarding',description:'Help new customers',scores:{impact:6,frequency:6,urgency:5,businessValue:5,strategicAlignment:5,confidence:5},totalScore:5.4,priority:'high',reasoning:'Customer evidence',relatedInsightIds:['i1'],status:'new'}],
+personas:[{...base,id:'p1',name:'New customer',role:'Business owner',demographics:'Small business',goals:['Complete setup'],frustrations:['Too many steps'],behaviors:[],needs:[],quotes:[],jobsToBeDone:[]}],
+interviews:[{...base,id:'v1',title:'Setup interview',interviewee:'Test participant',date:'2026-09-14',transcript:'I need help with setup.',tags:[],analysis:{painPoints:['Setup is confusing'],featureRequests:[],emotions:[],repeatedThemes:[],opportunities:[],unknowns:[],assumptions:[]}}],
+features:[{...base,id:'f1',title:'Welcome checklist',description:'Guide setup',framework:'rice',scores:{reach:5,impact:6,confidence:7,effort:5},totalScore:4.2,priority:'medium',status:'backlog',relatedOpportunityIds:['o1']}],
+assumptions:[{...base,id:'a1',statement:'Guidance improves activation',area:'desirability',risk:'high',evidence:'Customer interviews',validationStatus:'untested',relatedExperimentIds:[]}],
+experiments:[{...base,id:'e1',title:'Checklist prototype',hypothesis:'Guidance improves completion',metrics:{successMetric:'80% complete',failureMetric:'Under 50%'},duration:'One week',cost:'Low',risk:'low',expectedLearning:'Where users hesitate',status:'planned',results:'',relatedAssumptionIds:['a1']}]
+};
+await context.addInitScript(()=>localStorage.setItem('active-product','review-product'));
+await context.route('**/*',async route=>{
+const u=new URL(route.request().url());if(u.hostname!=='localhost') return route.abort();
+if(!u.pathname.startsWith('/api/')) return route.continue();
+const path=u.pathname;let data=[];
+if(path==='/api/auth/login') {signedIn=true;data={user:{id:'review',name:'Review PM',email:'review@example.test'}};}
+else if(path==='/api/auth/session'&&!signedIn)return route.fulfill({status:401,json:{error:'Authentication required'}});
+else if(path==='/api/auth/session') data={user:{id:'review',name:'Review PM',email:'review@example.test'}};
+else if(path==='/api/products') {if(route.request().method()==='POST'){empty=false;product.name=route.request().postDataJSON().name;data=product;}else data=empty?[]:[product];}
+else if(path==='/api/library') data={products:empty?[]:[product],reports:empty?[]:[{id:'report1',productId:product.id,query:'Why do customers abandon setup?',product:product.name,category:'product',createdAt:product.createdAt}]};
+else if(path==='/api/research'&&route.request().method()==='POST'){if(failResearch)return route.fulfill({status:500,json:{error:'Research provider unavailable'}});report={...report,...route.request().postDataJSON()};data=report;}
+else if(path==='/api/research/report1/download'){assert.equal(route.request().headers()['x-product-context'],product.id);return route.fulfill({status:200,contentType:'text/markdown',body:'# Test report'});}
+else if(path==='/api/research/report1'){if(route.request().method()==='PATCH'){if(failNotes)return route.fulfill({status:500,json:{error:'Notes save failed'}});report={...report,...route.request().postDataJSON()};}data=report;}
+else if(path==='/api/tree') {if(route.request().method()==='POST'){if(failTree)return route.fulfill({status:500,json:{error:'Save failed. Please retry.'}});tree={...route.request().postDataJSON(),revision:(tree?.revision||0)+1};}data=tree;}
+else if(path==='/api/dashboard') data={stats:{totalInsights:0,totalOpportunities:0,totalPersonas:0,totalInterviews:0,totalFeatures:0,totalExperiments:0,totalAssumptions:0},topOpportunities:[],commonProblems:[],topFeatures:[],recentInsights:[],researchResults:[],activityFeed:[]};
+else if(path==='/api/search') data={insights:[],opportunities:[],personas:[],interviews:[],features:[],experiments:[],assumptions:[]};
+const name=path.split('/')[2];if(records[name]) {if(route.request().method()==='PATCH'){const update=route.request().postDataJSON();const record=records[name].find(item=>item.id===(path.split('/')[3]||update.id));Object.assign(record,update);data=record;}else data=records[name];}
+return route.fulfill({status:200,json:data});
+});
+const page=await context.newPage();page.setDefaultTimeout(25000);page.setDefaultNavigationTimeout(40000); console.log('Browser ready');page.on('pageerror',e=>errors.push(e.message));
+await page.goto('http://localhost:3007/login');await page.getByLabel('Email').fill('review@example.test');await page.getByLabel('Password',{exact:true}).fill('test-only-password');await page.getByRole('button',{name:'Log in',exact:true}).click();await page.waitForURL('**/library');console.log('PASS sign-in redirects to research library');await page.getByRole('heading',{name:'Why do customers abandon setup?'}).waitFor();
+await page.screenshot({path:'browser-library-desktop.png',fullPage:true});console.log('PASS saved research landing');
+await page.getByRole('button',{name:/Why do customers abandon setup/}).click();await page.getByRole('heading',{name:'Working notes'}).waitFor();await page.locator('textarea').fill('Test with five new customers');failNotes=true;await page.getByRole('button',{name:'Save notes'}).click();await page.getByRole('alert').filter({hasText:'Notes save failed'}).waitFor();assert.equal(await page.locator('textarea').inputValue(),'Test with five new customers');failNotes=false;await page.getByRole('button',{name:'Save notes'}).click();await page.getByText('Saved',{exact:true}).waitFor();const downloadPromise=page.waitForEvent('download');await page.getByRole('button',{name:'Download report'}).click();await downloadPromise;console.log('PASS report open, notes recovery and scoped download');
+for(const path of ['dashboard','discover','opportunities','personas','interviews','features','assumptions','experiments','research','import','search']){
+await page.goto('http://localhost:3007/'+path);await page.locator('main h1').waitFor();await page.waitForTimeout(500);assert.equal(await page.locator('main [role=alert]').count(),0,path+' has an error');console.log('PASS module '+path);
+}
+await page.goto('http://localhost:3007/experiments');await page.getByRole('button',{name:'Record results'}).click();await page.getByRole('dialog').locator('textarea').fill('Four of five customers completed setup');await page.getByRole('button',{name:'Save results'}).click();await page.getByText('Results: Four of five customers completed setup',{exact:true}).waitFor();assert.equal(records.experiments[0].results,'Four of five customers completed setup');console.log('PASS experiment results');
+await page.goto('http://localhost:3007/tree');await page.getByLabel('Desired outcome').fill('Increase activation to 40%');await page.getByRole('checkbox').uncheck();await page.getByRole('button',{name:'Create Solution Tree'}).click();await page.getByRole('button',{name:'+ Add opportunity',exact:true}).click();await page.getByRole('dialog').getByLabel('Title',{exact:true}).fill('Customers struggle with setup');await page.getByRole('button',{name:'Add to tree'}).click();await page.getByRole('button',{name:/Opportunity Customers struggle/}).click();
+await page.getByRole('button',{name:'+ Add solution',exact:true}).click();await page.getByRole('dialog').getByLabel('Title',{exact:true}).fill('Guided checklist');await page.getByRole('button',{name:'Add to tree'}).click();await page.getByRole('button',{name:/Solution Guided checklist/}).click();
+failTree=true;await page.getByRole('complementary',{name:'Edit selected item'}).locator('textarea').fill('Edited checklist');await page.getByRole('button',{name:'Save title'}).click();await page.getByRole('alert').filter({hasText:'Save failed'}).waitFor();assert.equal(tree.children[0].children[0].label,'Guided checklist');failTree=false;await page.getByRole('button',{name:'Save title'}).click();await page.getByText('Changes saved',{exact:true}).waitFor();assert.equal(tree.children[0].children[0].label,'Edited checklist');console.log('PASS tree creation, hierarchy and save failure recovery');
+await page.screenshot({path:'browser-tree-desktop.png',fullPage:true});
+await page.setViewportSize({width:390,height:844});await page.reload();await page.getByRole('heading',{name:'Solution Tree',exact:true}).waitFor();await page.waitForTimeout(600);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Mobile horizontal overflow');await page.screenshot({path:'browser-tree-mobile.png',fullPage:true});console.log('PASS mobile tree width');
+empty=true;await page.goto('http://localhost:3007/library');await page.getByRole('button',{name:'Start your first research'}).click();await page.getByRole('dialog').waitFor();await page.getByLabel('New workspace name').fill('New PM initiative');await page.screenshot({path:'browser-first-research-mobile.png',fullPage:true});console.log('PASS empty research onboarding');await page.getByRole('button',{name:'Create workspace',exact:true}).click();await page.getByRole('dialog',{name:'Start new research'}).waitFor();await page.getByLabel('Research question',{exact:true}).fill('How can we improve activation?');await page.getByLabel('Product or market',{exact:true}).fill('New PM initiative');failResearch=true;await page.getByRole('button',{name:'Start research',exact:true}).click();await page.getByRole('dialog').getByRole('alert').waitFor();assert.equal(await page.getByRole('dialog').locator('textarea').inputValue(),'How can we improve activation?');failResearch=false;await page.getByRole('button',{name:'Start research',exact:true}).click();await page.getByRole('heading',{name:'Working notes'}).waitFor();console.log('PASS workspace creation and first research recovery');assert.deepEqual(errors,[]);console.log('PASS no browser JavaScript errors');
+} finally {await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1});

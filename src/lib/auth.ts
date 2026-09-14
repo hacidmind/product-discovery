@@ -10,7 +10,9 @@ export const SESSION_COOKIE = "pda_session";
 const SESSION_MAX_AGE = 60 * 60 * 24 * 30;
 
 function getSecret(): Uint8Array {
-  return new TextEncoder().encode(process.env.SESSION_SECRET || "product-discovery-dev-secret");
+  const secret = process.env.SESSION_SECRET;
+  if (!secret && process.env.NODE_ENV === "production") throw new Error("SESSION_SECRET is required in production");
+  return new TextEncoder().encode(secret || "product-discovery-dev-secret");
 }
 
 export async function createSessionToken(user: SessionUser): Promise<string> {
@@ -38,6 +40,7 @@ export async function verifySession(token: string | undefined): Promise<SessionU
 
 export const SESSION_COOKIE_OPTIONS = {
   httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
   sameSite: "lax" as const,
   path: "/",
   maxAge: SESSION_MAX_AGE,
@@ -64,9 +67,6 @@ export async function fetchSession(): Promise<SessionUser | null> {
 }
 
 export async function signOut(): Promise<void> {
-  try {
-    await fetch("/api/auth/logout", { method: "POST" });
-  } catch {
-    // Network failure — the cookie expires on its own.
-  }
+  const response = await fetch("/api/auth/logout", { method: "POST" });
+  if (!response.ok) throw new Error("Could not sign out");
 }

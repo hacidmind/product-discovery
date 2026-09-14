@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getRecords } from "@/lib/storage";
 import { SESSION_COOKIE, SESSION_COOKIE_OPTIONS, adminCredentials, createSessionToken, type SessionUser } from "@/lib/auth";
 import type { User } from "@/lib/types";
+import { databaseFailureResponse } from "@/lib/database-errors";
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);
@@ -19,7 +20,9 @@ export async function POST(req: NextRequest) {
   if (admin && admin.email === email && (await bcrypt.compare(password, admin.passwordHash))) {
     user = { id: "admin", name: "Admin", email: admin.email };
   } else {
-    const users = await getRecords<User>("users.json");
+    let users: User[];
+    try { users = await getRecords<User>("users.json"); }
+    catch (error) { const response = databaseFailureResponse(error); if (response) return response; throw error; }
     const record = users.find((item) => item.email === email);
     if (record && (await bcrypt.compare(password, record.passwordHash))) {
       user = { id: record.id, name: record.name, email: record.email };
@@ -27,9 +30,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (!user) {
-    const message = admin && admin.email === email
-      ? "Incorrect password. Try again."
-      : "No account found with that email. Check the address or sign up.";
+    const message = "Incorrect email or password. Please try again.";
     return NextResponse.json({ error: message }, { status: 401 });
   }
 

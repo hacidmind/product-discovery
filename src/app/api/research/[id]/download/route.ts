@@ -19,7 +19,7 @@ export async function GET(
   return new NextResponse(markdown, {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
-      "Content-Disposition": `attachment; filename="${result.savedFile || `${result.product.replace(/\s+/g, "-").toLowerCase()}.md`}"`,
+      "Content-Disposition": `attachment; filename="${(result.savedFile || "research-report.md").replace(/[^a-zA-Z0-9._-]/g, "-")}"`,
     },
   });
 }

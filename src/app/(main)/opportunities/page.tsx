@@ -25,7 +25,7 @@ export default function OpportunitiesPage() {
   const [showInsightPicker, setShowInsightPicker] = useState(false);
   const [insights, setInsights] = useState<Insight[]>([]);
   const [sortKey, setSortKey] = useState<"totalScore" | "createdAt">("totalScore");
-  const toast = useToast();
+  const { addToast } = useToast();
   const pickerScrollRef = useRef<HTMLDivElement>(null);
 
   const [title, setTitle] = useState("");
@@ -43,11 +43,11 @@ export default function OpportunitiesPage() {
       setError(null);
     } catch {
       setError("Failed to load opportunities.");
-      toast.addToast("Failed to load opportunities", "error");
+      addToast("Failed to load opportunities", "error");
     } finally {
       setLoading(false);
     }
-  }, [toast]);
+  }, [addToast]);
 
   const previousProductRef = useRef("");
   const loaded = useRef(false);
@@ -82,9 +82,9 @@ export default function OpportunitiesPage() {
       setShowCreate(false);
       setTitle(""); setDescription("");
       setScores({ impact: 5, frequency: 5, urgency: 5, businessValue: 5, strategicAlignment: 5, confidence: 5 });
-      toast.addToast("Opportunity created", "success");
+      addToast("Opportunity created", "success");
     } catch {
-      toast.addToast("Failed to create opportunity", "error");
+      addToast("Failed to create opportunity", "error");
     }
   };
 
@@ -97,12 +97,12 @@ export default function OpportunitiesPage() {
       });
       if (res.ok) {
         setOpportunities((prev) => prev.map((o) => (o.id === id ? { ...o, status: status as Opportunity["status"] } : o)));
-        toast.addToast("Status updated", "success");
+        addToast("Status updated", "success");
       } else {
-        toast.addToast("Failed to update status", "error");
+        addToast("Failed to update status", "error");
       }
     } catch {
-      toast.addToast("Failed to update status", "error");
+      addToast("Failed to update status", "error");
     }
   };
 
@@ -118,12 +118,12 @@ export default function OpportunitiesPage() {
         const updated = await res.json();
         setOpportunities((prev) => prev.map((o) => (o.id === updated.id ? updated : o)));
         setShowEdit(false); setEditingOpp(null);
-        toast.addToast("Opportunity updated", "success");
+        addToast("Opportunity updated", "success");
       } else {
-        toast.addToast("Failed to update", "error");
+        addToast("Failed to update", "error");
       }
     } catch {
-      toast.addToast("Failed to update", "error");
+      addToast("Failed to update", "error");
     }
   };
 
@@ -133,10 +133,10 @@ export default function OpportunitiesPage() {
       const res = await fetch(`/api/opportunities/${deletingId}`, { method: "DELETE" });
       if (res.ok) {
         setOpportunities((prev) => prev.filter((o) => o.id !== deletingId));
-        toast.addToast("Opportunity deleted", "success");
+        addToast("Opportunity deleted", "success");
       }
     } catch {
-      toast.addToast("Failed to delete", "error");
+      addToast("Failed to delete", "error");
     } finally {
       setShowDelete(false); setDeletingId(null);
     }
@@ -149,7 +149,7 @@ export default function OpportunitiesPage() {
       setInsights(Array.isArray(data) ? data : []);
       setShowInsightPicker(true);
     } catch {
-      toast.addToast("Failed to load insights", "error");
+      addToast("Failed to load insights", "error");
     }
   };
 
@@ -184,9 +184,9 @@ export default function OpportunitiesPage() {
 
   return (
     <div className="max-w-3xl mx-auto animate-fadein">
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold tracking-tight">Opportunities</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight">Opportunities</h1>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
             Score and prioritize opportunities using a transparent framework.
           </p>

@@ -14,5 +14,9 @@ export async function getOwnedProductId(request: NextRequest): Promise<string | 
 
     const db = await getDatabase();
     const product = await db.collection<Product>("products").findOne({ id: productId, userId: user.id });
-    return product ? product.id : null;
+    if (!product) return null;
+    // Legacy name-based IDs may belong to more than one account. Fail closed:
+    // existing records cannot safely be assigned to either owner automatically.
+    const collisions = await db.collection<Product>("products").countDocuments({ id: productId }, { limit: 2 });
+    return collisions === 1 ? product.id : null;
 }

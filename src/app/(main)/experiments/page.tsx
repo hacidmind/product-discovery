@@ -1,5 +1,9 @@
 "use client";
 
+import { checkedFetch as fetch } from "@/lib/api-client";
+import { ConfirmDialog } from "@/components/ui";
+import { ModuleError } from "@/components/module-feedback";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Button, Card, Badge, EmptyState, Modal, Spinner, Select } from "@/components/ui";
 import type { Experiment, ExperimentStatus } from "@/lib/types";
@@ -11,6 +15,13 @@ const STATUS_CONFIG: Record<string, { label: string; variant: "default" | "accen
 };
 
 export default function ExperimentsPage() {
+  const [resultExperiment, setResultExperiment] = useState<Experiment | null>(null);
+  const [resultDraft, setResultDraft] = useState("");
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [requestError, setRequestError] = useState("");
+  const handleDelete = (id: string) => { setRequestError(""); setDeleteId(id); };
+  const [busy, setBusy] = useState(false);
+  const busyRef = useRef(false);
   const [experiments, setExperiments] = useState<Experiment[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
@@ -27,10 +38,15 @@ export default function ExperimentsPage() {
   const [results, setResults] = useState("");
 
   const fetchExperiments = useCallback(async () => {
+    setRequestError("");
+    try {
     const res = await fetch("/api/experiments");
     const data = await res.json();
     setExperiments(Array.isArray(data) ? data : []);
     setLoading(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { setLoading(false); }
   }, []);
 
   const previousProductRef = useRef("");
@@ -53,6 +69,9 @@ export default function ExperimentsPage() {
   }, [fetchExperiments]);
 
   const handleCreate = async () => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     if (!title.trim()) return;
 
     const res = await fetch("/api/experiments", {
@@ -82,16 +101,29 @@ export default function ExperimentsPage() {
     setExpectedLearning("");
     setResults("");
     setShowCreate(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
-  const handleDelete = async (id: string) => {
+  const deleteRecord = async (id: string) => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch(`/api/experiments/${id}`, { method: "DELETE" });
     if (res.ok) {
+      setDeleteId(null);
       setExperiments((prev) => prev.filter((e) => e.id !== id));
     }
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   const updateStatus = async (id: string, status: ExperimentStatus) => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch(`/api/experiments/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -102,6 +134,21 @@ export default function ExperimentsPage() {
         prev.map((e) => (e.id === id ? { ...e, status } : e))
       );
     }
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
+  };
+
+  const saveResults = async () => {
+    if (!resultExperiment || busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
+      const response = await fetch(`/api/experiments/${resultExperiment.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ results: resultDraft }) });
+      const updated = await response.json();
+      setExperiments(previous => previous.map(item => item.id === updated.id ? updated : item));
+      setResultExperiment(null);
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Could not save results."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   if (loading) {
@@ -114,14 +161,15 @@ export default function ExperimentsPage() {
 
   return (
     <div className="max-w-4xl mx-auto animate-fadein">
-      <div className="flex items-center justify-between mb-6">
+      <ModuleError message={requestError} retry={fetchExperiments} />
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold tracking-tight">Experiments</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight">Experiments</h1>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
             Design experiments to validate your riskiest assumptions.
           </p>
         </div>
-        <Button onClick={() => setShowCreate(true)}>+ New Experiment</Button>
+        <Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Experiment</Button>
       </div>
 
       {experiments.length === 0 ? (
@@ -129,7 +177,7 @@ export default function ExperimentsPage() {
           icon="🔬"
           title="No experiments yet"
           description="Create experiments to test your assumptions. Each experiment includes a hypothesis, success/failure metrics, and expected learning."
-          action={<Button onClick={() => setShowCreate(true)}>+ New Experiment</Button>}
+          action={<Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Experiment</Button>}
         />
       ) : (
         <div className="space-y-3">
@@ -175,8 +223,8 @@ export default function ExperimentsPage() {
                         <span className="font-medium">Results:</span> {exp.results}
                       </p>
                     )}
-                    <div className="flex items-center gap-2 mt-2">
-                      <Select
+                    <div className="flex flex-wrap items-center gap-2 mt-2"><Button disabled={busy} variant="secondary" onClick={() => { setRequestError(""); setResultExperiment(exp); setResultDraft(exp.results || ""); }}>Record results</Button>
+                      <Select disabled={busy}
                         value={exp.status}
                         onChange={(v) => updateStatus(exp.id, v as ExperimentStatus)}
                         options={[
@@ -188,7 +236,7 @@ export default function ExperimentsPage() {
                       />
                     </div>
                   </div>
-                  <Button variant="ghost" size="xs" onClick={() => handleDelete(exp.id)}>
+                  <Button disabled={busy} variant="ghost" size="xs" aria-label="Delete record" onClick={() => handleDelete(exp.id)}>
                     <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                       <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
@@ -202,6 +250,7 @@ export default function ExperimentsPage() {
 
       {/* Create Modal */}
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="New Experiment">
+        <ModuleError message={requestError} />
         <div className="space-y-4">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)] block mb-1">Title</label>
@@ -302,11 +351,13 @@ export default function ExperimentsPage() {
             />
           </div>
           <div className="flex justify-end gap-2 pt-2">
-            <Button variant="ghost" onClick={() => setShowCreate(false)}>Cancel</Button>
-            <Button onClick={handleCreate} disabled={!title.trim()}>Create</Button>
+            <Button disabled={busy} variant="ghost" onClick={() => setShowCreate(false)}>Cancel</Button>
+            <Button onClick={handleCreate} disabled={busy || (!title.trim())}>Create</Button>
           </div>
         </div>
       </Modal>
+      <ConfirmDialog open={!!deleteId} onClose={() => setDeleteId(null)} title="Delete this record?" message={requestError || "This permanently removes this record from the workspace."} onConfirm={() => { if (deleteId) void deleteRecord(deleteId); }} />
+      <Modal open={!!resultExperiment} onClose={() => { if (!busy) setResultExperiment(null); }} title="Record experiment results"><ModuleError message={requestError} /><form onSubmit={event => { event.preventDefault(); void saveResults(); }} className="space-y-4"><p className="text-sm font-medium">{resultExperiment?.title}</p><label className="block text-sm">What did you learn?<textarea rows={6} value={resultDraft} onChange={event => setResultDraft(event.target.value)} placeholder="Record observations, metrics, and your next decision." className="mt-2 w-full rounded-lg border border-[var(--border)] bg-[var(--bg)] p-3" /></label><Button type="submit" disabled={busy}>Save results</Button></form></Modal>
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function SignupPage() {
   useEffect(() => {
     fetchSession().then((user) => {
       setReady(true);
-      if (user) router.replace("/dashboard");
+      if (user) router.replace("/library");
     });
   }, [router]);
 
@@ -45,7 +45,7 @@ export default function SignupPage() {
         setSubmitting(false);
         return;
       }
-      router.replace("/dashboard");
+      router.replace("/library");
     } catch {
       setError("Network error. Please try again.");
       setSubmitting(false);

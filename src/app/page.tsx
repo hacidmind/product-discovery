@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     fetchSession().then((user) => {
       setReady(true);
-      if (user) router.replace("/dashboard");
+      if (user) router.replace("/library");
     });
   }, [router]);
 

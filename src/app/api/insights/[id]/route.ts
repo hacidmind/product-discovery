@@ -1,3 +1,4 @@
+import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import { getRecord, updateRecord, deleteRecord } from "@/lib/storage";
 import type { Insight } from "@/lib/types";
@@ -18,9 +19,12 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if (!productId) return NextResponse.json({ error: "Choose an owned product workspace" }, { status: 403 });
   const existing = await getRecord<Insight>("insights.json", id);
   if (!existing || existing.productId !== productId) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  const body = await req.json();
+  const body = await req.json().catch(() => null);
+  const validationError = validateRecordInput("insights", body, req.method === "PATCH");
+  if (validationError) return NextResponse.json({ error: validationError }, { status: 400 });
   const updated = await updateRecord<Insight>("insights.json", id, {
     ...body,
+    productId,
     updatedAt: new Date().toISOString(),
   });
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });

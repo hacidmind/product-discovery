@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { checkedFetch as fetch } from "@/lib/api-client";
+import { ModuleError } from "@/components/module-feedback";
 import { Card, Badge, Spinner } from "@/components/ui";
 import type {
   Insight, Opportunity, Persona, Interview, Feature, Experiment, Assumption,
@@ -51,6 +53,7 @@ const TYPE_ICONS: Record<string, string> = {
 
 export default function SearchPage() {
   const router = useRouter();
+  const [requestError, setRequestError] = useState("");
   const [query, setQuery] = useState("");
   const [data, setData] = useState<{
     insights: Insight[];
@@ -78,7 +81,7 @@ export default function SearchPage() {
         ]);
       setData({ insights, opportunities, personas, interviews, features, experiments, assumptions });
     }
-    load();
+    load().catch(error => setRequestError(error instanceof Error ? error.message : "Could not load search data."));
   }, []);
 
   // Focus input on mount
@@ -208,6 +211,7 @@ export default function SearchPage() {
 
   return (
     <div className="max-w-3xl mx-auto animate-fadein">
+      <ModuleError message={requestError} retry={() => window.location.reload()} />
       <div className="mb-6">
         <h1 className="text-lg font-semibold tracking-tight mb-3">Search</h1>
         <div className="relative">
@@ -228,11 +232,11 @@ export default function SearchPage() {
           />
         </div>
         <p className="text-xs text-[var(--text-tertiary)] mt-2">
-          Searches across all your product discovery data. Results appear as you type.
+          Searches the selected workspace. Results appear as you type.
         </p>
       </div>
 
-      {data === null ? (
+      {data === null && !requestError ? (
         <div className="flex items-center justify-center py-10">
           <Spinner size={20} />
         </div>

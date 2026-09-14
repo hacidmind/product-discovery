@@ -1,5 +1,9 @@
 "use client";
 
+import { checkedFetch as fetch } from "@/lib/api-client";
+import { ConfirmDialog } from "@/components/ui";
+import { ModuleError } from "@/components/module-feedback";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Button, Card, Badge, EmptyState, Modal, Spinner } from "@/components/ui";
 import ProgressiveList from "@/components/progressive-list";
@@ -55,6 +59,11 @@ function ListEditor({
 }
 
 export default function PersonasPage() {
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [requestError, setRequestError] = useState("");
+  const handleDelete = (id: string) => { setRequestError(""); setDeleteId(id); };
+  const [busy, setBusy] = useState(false);
+  const busyRef = useRef(false);
   const [personas, setPersonas] = useState<Persona[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
@@ -72,10 +81,15 @@ export default function PersonasPage() {
   const [jobsToBeDone, setJobsToBeDone] = useState<string[]>([]);
 
   const fetchPersonas = useCallback(async () => {
+    setRequestError("");
+    try {
     const res = await fetch("/api/personas");
     const data = await res.json();
     setPersonas(Array.isArray(data) ? data : []);
     setLoading(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { setLoading(false); }
   }, []);
 
   const previousProductRef = useRef("");
@@ -99,11 +113,14 @@ export default function PersonasPage() {
 
   // "Generate from insights" feature
   const generateFromInsights = async () => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch("/api/insights");
     const insights: Insight[] = await res.json();
 
     if (insights.length === 0) {
-      alert("No insights found. Add some insights first.");
+      setRequestError("Add customer insights before generating draft personas.");
       return;
     }
 
@@ -121,11 +138,12 @@ export default function PersonasPage() {
       .sort((a, b) => b[1].length - a[1].length)
       .slice(0, 3);
 
-    const newPersonas: Persona[] = [];
+    if (!topThemes.length) { setRequestError("No themes found yet. Add more detailed customer insights first."); return; }
 
     for (const [theme, themeInsights] of topThemes) {
       const personaName = `${theme.charAt(0).toUpperCase() + theme.slice(1)} User`;
 
+      if (personas.some(persona => persona.name === personaName)) continue;
       const persona: Persona = {
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         name: personaName,
@@ -153,13 +171,20 @@ export default function PersonasPage() {
         body: JSON.stringify(persona),
       });
 
-      newPersonas.push(await resp.json());
+      const created = await resp.json();
+      setPersonas(previous => [created, ...previous]);
     }
 
-    setPersonas((prev) => [...newPersonas, ...prev]);
+
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   const handleCreate = async () => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     if (!name.trim()) return;
 
     const persona: Partial<Persona> = {
@@ -184,14 +209,24 @@ export default function PersonasPage() {
     setPersonas((prev) => [newPersona, ...prev]);
     resetForm();
     setShowCreate(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
-  const handleDelete = async (id: string) => {
+  const deleteRecord = async (id: string) => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch(`/api/personas/${id}`, { method: "DELETE" });
     if (res.ok) {
+      setDeleteId(null);
       setPersonas((prev) => prev.filter((p) => p.id !== id));
       if (selectedPersona?.id === id) setSelectedPersona(null);
     }
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   const resetForm = () => {
@@ -216,18 +251,19 @@ export default function PersonasPage() {
 
   return (
     <div className="max-w-4xl mx-auto animate-fadein">
-      <div className="flex items-center justify-between mb-6">
+      <ModuleError message={requestError} retry={fetchPersonas} />
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold tracking-tight">Personas</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight">Personas</h1>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
             Understand your users through goals, frustrations, behaviors, and JTBD.
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="secondary" onClick={generateFromInsights}>
+          <Button disabled={busy} variant="secondary" onClick={generateFromInsights}>
             Generate from Insights
           </Button>
-          <Button onClick={() => setShowCreate(true)}>+ New Persona</Button>
+          <Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Persona</Button>
         </div>
       </div>
 
@@ -238,8 +274,8 @@ export default function PersonasPage() {
           description="Create personas manually or generate them automatically from your collected insights."
           action={
             <div className="flex gap-2">
-              <Button variant="secondary" onClick={generateFromInsights}>Generate from Insights</Button>
-              <Button onClick={() => setShowCreate(true)}>+ New Persona</Button>
+              <Button disabled={busy} variant="secondary" onClick={generateFromInsights}>Generate from Insights</Button>
+              <Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Persona</Button>
             </div>
           }
         />
@@ -305,6 +341,7 @@ export default function PersonasPage() {
         onClose={() => setSelectedPersona(null)}
         title={selectedPersona?.name || ""}
       >
+        <ModuleError message={requestError} />
         {selectedPersona && (
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -366,6 +403,7 @@ export default function PersonasPage() {
 
       {/* Create Modal */}
       <Modal open={showCreate} onClose={() => { setShowCreate(false); resetForm(); }} title="Create Persona">
+        <ModuleError message={requestError} />
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -409,11 +447,12 @@ export default function PersonasPage() {
           <ListEditor label="Jobs To Be Done" items={jobsToBeDone} onChange={setJobsToBeDone} placeholder="e.g. Schedule social posts" />
 
           <div className="flex justify-end gap-2 pt-2">
-            <Button variant="ghost" onClick={() => { setShowCreate(false); resetForm(); }}>Cancel</Button>
-            <Button onClick={handleCreate} disabled={!name.trim()}>Create Persona</Button>
+            <Button disabled={busy} variant="ghost" onClick={() => { setShowCreate(false); resetForm(); }}>Cancel</Button>
+            <Button onClick={handleCreate} disabled={busy || (!name.trim())}>Create Persona</Button>
           </div>
         </div>
       </Modal>
+      <ConfirmDialog open={!!deleteId} onClose={() => setDeleteId(null)} title="Delete this record?" message={requestError || "This permanently removes this record from the workspace."} onConfirm={() => { if (deleteId) void deleteRecord(deleteId); }} />
     </div>
   );
 }

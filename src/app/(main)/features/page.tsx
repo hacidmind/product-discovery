@@ -1,5 +1,9 @@
 "use client";
 
+import { checkedFetch as fetch } from "@/lib/api-client";
+import { ConfirmDialog } from "@/components/ui";
+import { ModuleError } from "@/components/module-feedback";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Textarea, Button, Card, Badge, PriorityBadge, EmptyState, Modal, Select, ScoreSlider, Spinner } from "@/components/ui";
 import ProgressiveList from "@/components/progressive-list";
@@ -14,6 +18,11 @@ const FRAMEWORKS: { value: Framework; label: string; description: string }[] = [
 ];
 
 export default function FeaturesPage() {
+  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [requestError, setRequestError] = useState("");
+  const handleDelete = (id: string) => { setRequestError(""); setDeleteId(id); };
+  const [busy, setBusy] = useState(false);
+  const busyRef = useRef(false);
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
@@ -48,10 +57,15 @@ export default function FeaturesPage() {
   const [weightEffort, setWeightEffort] = useState(1);
 
   const fetchFeatures = useCallback(async () => {
+    setRequestError("");
+    try {
     const res = await fetch("/api/features");
     const data = await res.json();
     setFeatures(Array.isArray(data) ? data : []);
     setLoading(false);
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { setLoading(false); }
   }, []);
 
   const previousProductRef = useRef("");
@@ -74,6 +88,9 @@ export default function FeaturesPage() {
   }, [fetchFeatures]);
 
   const handleCreate = async () => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     if (!title.trim()) return;
 
     let scores: Record<string, unknown> = {};
@@ -97,9 +114,15 @@ export default function FeaturesPage() {
     setShowCreate(false);
     setTitle("");
     setDescription("");
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   const updateStatus = async (id: string, status: string) => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch("/api/features", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -110,13 +133,23 @@ export default function FeaturesPage() {
         prev.map((f) => (f.id === id ? { ...f, status: status as Feature["status"] } : f))
       );
     }
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
-  const handleDelete = async (id: string) => {
+  const deleteRecord = async (id: string) => {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setRequestError("");
+    try {
     const res = await fetch(`/api/features/${id}`, { method: "DELETE" });
     if (res.ok) {
+      setDeleteId(null);
       setFeatures((prev) => prev.filter((f) => f.id !== id));
     }
+
+    } catch (error) { setRequestError(error instanceof Error ? error.message : "Something went wrong. Please try again."); }
+    finally { busyRef.current = false; setBusy(false); }
   };
 
   const sortedFeatures = [...features].sort((a, b) => {
@@ -153,15 +186,16 @@ export default function FeaturesPage() {
 
   return (
     <div className="max-w-4xl mx-auto animate-fadein">
-      <div className="flex items-center justify-between mb-6">
+      <ModuleError message={requestError} retry={fetchFeatures} />
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold tracking-tight">Feature Prioritization</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight">Feature Prioritization</h1>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
             Score features using RICE, ICE, MoSCoW, Kano, or Weighted Scoring.
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Select
+          <Select disabled={busy}
             value={sortKey}
             onChange={(v) => setSortKey(v as typeof sortKey)}
             options={[
@@ -169,7 +203,7 @@ export default function FeaturesPage() {
               { value: "createdAt", label: "Sort by Date" },
             ]}
           />
-          <Button onClick={() => setShowCreate(true)}>+ New Feature</Button>
+          <Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Feature</Button>
         </div>
       </div>
 
@@ -178,7 +212,7 @@ export default function FeaturesPage() {
           icon="⚡"
           title="No features yet"
           description="Add features and prioritize them using your framework of choice."
-          action={<Button onClick={() => setShowCreate(true)}>+ New Feature</Button>}
+          action={<Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Feature</Button>}
         />
       ) : (
         <ProgressiveList
@@ -209,7 +243,7 @@ export default function FeaturesPage() {
                       />
                     </div>
                     <span className="text-xs font-mono font-semibold w-10 text-right">{feature.totalScore}</span>
-                    <Select
+                    <Select disabled={busy}
                       value={feature.status}
                       onChange={(v) => updateStatus(feature.id, v)}
                       options={[
@@ -222,7 +256,7 @@ export default function FeaturesPage() {
                     />
                   </div>
                 </div>
-                <Button variant="ghost" size="xs" onClick={() => handleDelete(feature.id)}>
+                <Button disabled={busy} variant="ghost" size="xs" aria-label="Delete record" onClick={() => handleDelete(feature.id)}>
                   <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                     <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
@@ -235,6 +269,7 @@ export default function FeaturesPage() {
 
       {/* Create Modal */}
       <Modal open={showCreate} onClose={() => setShowCreate(false)} title="New Feature">
+        <ModuleError message={requestError} />
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -250,7 +285,7 @@ export default function FeaturesPage() {
             </div>
             <div>
               <label className="text-xs font-medium text-[var(--text-secondary)] block mb-1">Framework</label>
-              <Select
+              <Select disabled={busy}
                 value={framework}
                 onChange={(v) => setFramework(v as Framework)}
                 options={FRAMEWORKS.map((f) => ({ value: f.value, label: f.label }))}
@@ -344,11 +379,12 @@ export default function FeaturesPage() {
           </div>
 
           <div className="flex justify-end gap-2 pt-2">
-            <Button variant="ghost" onClick={() => setShowCreate(false)}>Cancel</Button>
-            <Button onClick={handleCreate} disabled={!title.trim()}>Create</Button>
+            <Button disabled={busy} variant="ghost" onClick={() => setShowCreate(false)}>Cancel</Button>
+            <Button onClick={handleCreate} disabled={busy || (!title.trim())}>Create</Button>
           </div>
         </div>
       </Modal>
+      <ConfirmDialog open={!!deleteId} onClose={() => setDeleteId(null)} title="Delete this record?" message={requestError || "This permanently removes this record from the workspace."} onConfirm={() => { if (deleteId) void deleteRecord(deleteId); }} />
     </div>
   );
 }
