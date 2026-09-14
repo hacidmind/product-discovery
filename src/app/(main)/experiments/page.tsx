@@ -6,6 +6,8 @@ import { ModuleError } from "@/components/module-feedback";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Button, Card, Badge, EmptyState, Modal, Spinner, Select } from "@/components/ui";
+import { CategoryBars } from "@/components/analytics-charts";
+import { countBy } from "@/lib/analytics";
 import type { Experiment, ExperimentStatus } from "@/lib/types";
 
 const STATUS_CONFIG: Record<string, { label: string; variant: "default" | "accent" | "success" }> = {
@@ -171,6 +173,11 @@ export default function ExperimentsPage() {
         </div>
         <Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Experiment</Button>
       </div>
+
+      {experiments.length > 0 && <div className="mb-6 grid gap-4 sm:grid-cols-2">
+        <CategoryBars title="Experiment pipeline" description="How many tests are planned, running, or completed." items={countBy(experiments, item => item.status, ["planned", "running", "completed"])} />
+        <CategoryBars title="Risk mix" description="Risk levels recorded for your experiments." items={countBy(experiments, item => item.risk, ["low", "medium", "high"])} color="var(--accent)" />
+      </div>}
 
       {experiments.length === 0 ? (
         <EmptyState

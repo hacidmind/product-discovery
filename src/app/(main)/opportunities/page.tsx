@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Textarea, Button, Card, Badge, PriorityBadge, EmptyState, Modal, ScoreSlider, Spinner, Select, ConfirmDialog, useToast } from "@/components/ui";
 import ProgressiveList from "@/components/progressive-list";
+import { CategoryBars } from "@/components/analytics-charts";
 import type { Insight, Opportunity, OpportunityScore } from "@/lib/types";
 
 const STATUS_OPTIONS = [
@@ -204,6 +205,8 @@ export default function OpportunitiesPage() {
           <Button onClick={() => setShowCreate(true)}>+ New Opportunity</Button>
         </div>
       </div>
+
+      {opportunities.length > 0 && <div className="mb-6"><CategoryBars title="Highest-scoring opportunities" description="Weighted scores for this workspace. Compare the customer problems you have scored." items={sortedOpportunities.slice(0, 8).map(item => ({ label: item.title, value: Number.isFinite(item.totalScore) ? item.totalScore : 0 }))} color="var(--data)" /></div>}
 
       {opportunities.length === 0 ? (
         <EmptyState

@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Button, Spinner } from "@/components/ui";
+import { MonthlyTrend } from "@/components/analytics-charts";
+import { monthlyCounts } from "@/lib/analytics";
 import { ModuleError } from "@/components/module-feedback";
 import { useWorkspace } from "@/components/workspace-context";
 import { checkedFetch } from "@/lib/api-client";
@@ -35,6 +37,7 @@ export default function ResearchLibraryPage() {
         <p className="my-4 max-w-xl text-sm leading-6 text-[var(--text-secondary)]">You have no saved research reports yet. Explore a customer problem, compare competitors, or investigate a market. Save what you learn and return here to continue.</p>
         <Button size="md" onClick={() => data.products[0] ? openWorkspace(data.products[0], "/research?new=1") : createWorkspace()}>Start your first research</Button>
       </section>}
+      {data.reports.length > 0 && <div className="mb-8"><MonthlyTrend title="Research over time" description="Reports saved each month across your workspaces, including the current month." items={monthlyCounts(data.reports.map(report => report.createdAt))} /></div>}
       {data.reports.length > 0 && <section aria-labelledby="reports-heading" className="mb-9">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><h2 id="reports-heading" className="text-lg font-semibold">Saved reports <span className="text-[var(--text-secondary)]">({data.reports.length})</span></h2><input aria-label="Search your research" value={query} onChange={event => setQuery(event.target.value)} placeholder="Search reports or products" className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-2.5 text-sm sm:w-72" /></div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{reports.map(report => {

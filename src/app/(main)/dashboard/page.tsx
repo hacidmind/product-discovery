@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { GettingStarted } from "@/components/workspace-motion";
+import { CategoryBars } from "@/components/analytics-charts";
 import { Card, Badge, PriorityBadge, Spinner, Button, useToast } from "@/components/ui";
 import { AlertTriangle, ArrowUpRight, BrainCircuit, Download, FileDown, FlaskConical, Lightbulb, MessageSquare, ShieldQuestion, Sparkles, Target, Users } from "@/components/icons";
 import type {
@@ -198,6 +199,16 @@ export default function DashboardPage() {
         <StatCard Icon={Sparkles} label="Features" value={stats.totalFeatures} href="/features" />
         <StatCard Icon={FlaskConical} label="Experiments" value={stats.totalExperiments} href="/experiments" tone="data" />
         <StatCard Icon={ShieldQuestion} label="Assumptions" value={stats.totalAssumptions} href="/assumptions" />
+      </div>
+
+      <div className="mb-8 grid gap-4 lg:grid-cols-2">
+        <CategoryBars title="Discovery coverage" description="Saved records in this workspace, grouped by activity type." items={[
+          { label: "Insights", value: stats.totalInsights }, { label: "Opportunities", value: stats.totalOpportunities },
+          { label: "Interviews", value: stats.totalInterviews }, { label: "Personas", value: stats.totalPersonas },
+          { label: "Features", value: stats.totalFeatures }, { label: "Experiments", value: stats.totalExperiments },
+          { label: "Assumptions", value: stats.totalAssumptions },
+        ]} />
+        <CategoryBars title="Recurring customer themes" description="How many insights mention each theme. One insight may mention several themes." items={commonProblems.map(item => ({ label: item.theme, value: item.count }))} color="var(--accent)" />
       </div>
 
       {isBlank ? (

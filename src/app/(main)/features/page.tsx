@@ -7,6 +7,8 @@ import { ModuleError } from "@/components/module-feedback";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Textarea, Button, Card, Badge, PriorityBadge, EmptyState, Modal, Select, ScoreSlider, Spinner } from "@/components/ui";
 import ProgressiveList from "@/components/progressive-list";
+import { CategoryBars } from "@/components/analytics-charts";
+import { countBy } from "@/lib/analytics";
 import type { Feature, Framework, MoSCoW, KanoCategory } from "@/lib/types";
 
 const FRAMEWORKS: { value: Framework; label: string; description: string }[] = [
@@ -206,6 +208,11 @@ export default function FeaturesPage() {
           <Button disabled={busy} onClick={() => setShowCreate(true)}>+ New Feature</Button>
         </div>
       </div>
+
+      {features.length > 0 && <div className="mb-6 grid gap-4 sm:grid-cols-2">
+        <CategoryBars title="Delivery status" description="Number of features at each stage." items={countBy(features, item => item.status, ["backlog", "next", "in_progress", "done"]).map(item => ({ ...item, label: item.label.replaceAll("_", " ") }))} />
+        <CategoryBars title="Prioritization methods" description="Feature count by scoring framework. Scores from different methods are not directly comparable." items={countBy(features, item => item.framework, ["rice", "ice", "moscow", "kano", "weighted"]).map(item => ({ ...item, label: item.label.toUpperCase() }))} color="var(--accent)" />
+      </div>}
 
       {features.length === 0 ? (
         <EmptyState
