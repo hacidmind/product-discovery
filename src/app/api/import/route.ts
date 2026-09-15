@@ -1,3 +1,4 @@
+import { analyzeTranscript } from "@/lib/interview-analysis";
 import { validateRecordInput } from "@/lib/record-validation";
 import { NextRequest, NextResponse } from "next/server";
 import {
@@ -16,10 +17,14 @@ import type {
   Feature,
   Assumption,
   Priority,
+  Interview,
+  Experiment,
 } from "@/lib/types";
 import { getOwnedProductId } from "@/lib/request-context";
 
 type ExtractedItem =
+  | { type: "interview"; data: Interview }
+  | { type: "experiment"; data: Experiment }
   | { type: "insight"; data: Insight }
   | { type: "opportunity"; data: Opportunity }
   | { type: "persona"; data: Persona }
@@ -66,7 +71,7 @@ function detectParagraphType(text: string): string[] {
   if (/\b(opportunity|could|potential|market|gap|unmet need)\b/i.test(lower)) {
     types.push("opportunity");
   }
-  if (/\b(assum|think|believe|probably|maybe|guess|hypothes)\b/i.test(lower)) {
+  if (/\b(assume|assumption|think|believe|probably|maybe|guess|hypothesis)\b/i.test(lower)) {
     types.push("assumption");
   }
   if (/\b(us persona|user type|role|demographic|goal|job to be done|jTbd)\b/i.test(lower)) {
@@ -156,6 +161,23 @@ function extractFromText(text: string): ExtractedItem[] {
   }
 
   for (const section of sections) {
+    if (/interview|transcript/i.test(section.section) && section.content.trim()) {
+      const now = new Date().toISOString();
+      items.push({ type: "interview", data: {
+        id: generateId(), title: section.section, transcript: section.content,
+        interviewee: "", date: now.slice(0, 10), analysis: analyzeTranscript(section.content),
+        tags: extractKeywords(section.content), createdAt: now, updatedAt: now,
+      } });
+    }
+    if (/experiment|hypothesis|test plan/i.test(section.section) && section.content.trim()) {
+      const now = new Date().toISOString();
+      items.push({ type: "experiment", data: {
+        id: generateId(), title: `Draft: ${section.content.slice(0, 70).replace(/\n/g, " ")}`,
+        hypothesis: section.content, metrics: { successMetric: "", failureMetric: "" },
+        duration: "", cost: "", risk: "medium", expectedLearning: "Review the source hypothesis and define success criteria before running.",
+        status: "planned", relatedAssumptionIds: [], createdAt: now, updatedAt: now,
+      } });
+    }
     const paragraphs = splitIntoParagraphs(section.content);
     if (paragraphs.length === 0 && section.content.trim().length > 30) {
       paragraphs.push(section.content.trim());
@@ -164,7 +186,7 @@ function extractFromText(text: string): ExtractedItem[] {
     for (const paragraph of paragraphs) {
       const types = detectParagraphType(paragraph);
 
-      if (types.includes("pain_point") || types.includes("insight")) {
+      {
         const keywords = extractKeywords(paragraph);
         const themes = detectThemes(paragraph);
         const sentiment = analyzeSentiment(paragraph);
@@ -174,7 +196,7 @@ function extractFromText(text: string): ExtractedItem[] {
           id: generateId(),
           title: paragraph.slice(0, 80).replace(/\n/g, " "),
           description: paragraph,
-          source: "interview",
+          source: "other",
           category,
           emotion: sentiment,
           tags: keywords,
@@ -268,12 +290,12 @@ function extractFromText(text: string): ExtractedItem[] {
       const sentiment = analyzeSentiment(bullet);
       const category = classifyInsight(bullet);
 
-      if (types.includes("pain_point") || types.includes("insight")) {
+      {
         const insight: Insight = {
           id: generateId(),
           title: bullet.slice(0, 80),
           description: bullet,
-          source: "interview",
+          source: "other",
           category,
           emotion: sentiment,
           tags: keywords,
@@ -313,6 +335,8 @@ function extractFromStructuredJSON(json: Record<string, unknown>): ExtractedItem
   const remap = new Map<string, string>();
 
   const entityMappings: { key: string; type: ExtractedItem["type"] }[] = [
+    { key: "interviews", type: "interview" },
+    { key: "experiments", type: "experiment" },
     { key: "insights", type: "insight" },
     { key: "opportunities", type: "opportunity" },
     { key: "personas", type: "persona" },
@@ -333,12 +357,14 @@ function extractFromStructuredJSON(json: Record<string, unknown>): ExtractedItem
           const oldId = data.id;
           data.id = generateId();
           if (typeof oldId === "string") remap.set(oldId, data.id as string);
+          if (type === "interview") Object.assign(data, { title: data.title || "Imported interview", interviewee: data.interviewee || "", date: data.date || new Date().toISOString().slice(0, 10), tags: data.tags || [], analysis: analyzeTranscript(String(data.transcript)) });
+          if (type === "experiment") Object.assign(data, { hypothesis: data.hypothesis || "", metrics: { successMetric: "", failureMetric: "", ...(data.metrics as object || {}) }, duration: data.duration || "", cost: data.cost || "", risk: data.risk || "medium", expectedLearning: data.expectedLearning || "", status: data.status || "planned", relatedAssumptionIds: data.relatedAssumptionIds || [] });
           if (type === "insight") Object.assign(data, { title: data.title || String(data.description).slice(0, 80), description: data.description || data.title, source: data.source || "other", category: data.category || "unknown", emotion: data.emotion || "neutral", tags: data.tags || [], themes: data.themes || [], quotes: data.quotes || [], priority: data.priority || "medium" });
           if (type === "persona") for (const field of ["goals", "frustrations", "behaviors", "needs", "quotes", "jobsToBeDone"]) data[field] ||= [];
           if (type === "persona") Object.assign(data, { role: data.role || "", demographics: data.demographics || "" });
           if (type === "opportunity") { const scores = { impact: 5, frequency: 5, urgency: 5, businessValue: 5, strategicAlignment: 5, confidence: 5, ...(data.scores as object || {}) }; Object.assign(data, { scores, ...scoreOpportunity(scores), description: data.description || "", relatedInsightIds: data.relatedInsightIds || [], status: data.status || "new" }); }
           if (type === "feature") Object.assign(data, { description: data.description || "", framework: data.framework || "rice", scores: data.scores || {}, totalScore: typeof data.totalScore === "number" ? data.totalScore : 0, priority: data.priority || "medium", status: data.status || "backlog", relatedOpportunityIds: data.relatedOpportunityIds || [] });
-          if (type === "assumption") Object.assign(data, { area: data.area || "unknown", risk: data.risk || "medium", evidence: data.evidence || "", validationStatus: data.validationStatus || "untested", relatedExperimentIds: [] });
+          if (type === "assumption") Object.assign(data, { area: data.area || "unknown", risk: data.risk || "medium", evidence: data.evidence || "", validationStatus: data.validationStatus || "untested", relatedExperimentIds: data.relatedExperimentIds || [] });
           data.createdAt = (data.createdAt as string) || new Date().toISOString();
           data.updatedAt = new Date().toISOString();
           items.push({ type, data: data as never });
@@ -349,7 +375,7 @@ function extractFromStructuredJSON(json: Record<string, unknown>): ExtractedItem
 
   for (const item of items) {
     const data = item.data as unknown as Record<string, unknown>;
-    for (const key of ["relatedInsightIds", "relatedOpportunityIds"]) if (Array.isArray(data[key])) data[key] = (data[key] as string[]).map(id => remap.get(id)).filter(Boolean);
+    for (const key of ["relatedInsightIds", "relatedOpportunityIds", "relatedExperimentIds", "relatedAssumptionIds"]) if (Array.isArray(data[key])) data[key] = (data[key] as string[]).map(id => remap.get(id)).filter(Boolean);
     delete data.interviewId;
   }
   return items;
@@ -414,14 +440,23 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: error instanceof Error ? error.message : "Use a valid JSON evidence file." }, { status: 400 });
       }
     } else {
-      items = extractFromText(text);
+      items = extractFromText(/interview|transcript/i.test(filename) ? `# Interview transcript\n${text}` : text);
     }
 
-    items = items.slice(0, 200);
+    const seen = new Set<string>();
+    items = items.filter(item => {
+      const data = item.data;
+      const key = item.type + ":" + ("description" in data ? data.description : "statement" in data ? data.statement : "name" in data ? data.name : data.title).trim();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 200);
     if (!items.length) return NextResponse.json({ error: "No usable evidence found. Try a document with customer feedback, findings, or clearly named evidence lists." }, { status: 400 });
 
     let savedCount = 0;
     const fileMapping: Record<string, string> = {
+      interview: "interviews.json",
+      experiment: "experiments.json",
       insight: "insights.json",
       opportunity: "opportunities.json",
       persona: "personas.json",
@@ -438,6 +473,8 @@ export async function POST(req: NextRequest) {
     }
 
     const summary = {
+      totalInterviews: items.filter(i => i.type === "interview").length,
+      totalExperiments: items.filter(i => i.type === "experiment").length,
       totalInsights: items.filter((i) => i.type === "insight").length,
       totalOpportunities: items.filter((i) => i.type === "opportunity").length,
       totalPersonas: items.filter((i) => i.type === "persona").length,

@@ -247,3 +247,41 @@ test('configured admin login does not depend on a database connection', async ()
   assert.equal(rejected.status, 401);
   assert.equal(databaseRead, false);
 });
+
+
+test('document import extracts insights alongside features, interviews and experiment drafts', async () => {
+  const { load, collection } = fixture();
+  const api = load('src/app/api/import/route.ts');
+  const form = new FormData();
+  form.append('file', new File(['# Interview\nI need a dashboard feature to export customer reports quickly.\n\n# Experiment\nWe believe a guided dashboard will help customers find reports faster.'], 'research.md', { type: 'text/markdown' }));
+  const response = await api.POST(new Request('http://localhost/api/import', { method: 'POST', headers: { 'x-product-context': 'workspace-a' }, body: form }));
+  assert.equal(response.status, 200);
+  const result = await response.json();
+  assert.ok(result.summary.totalInsights >= 2);
+  assert.ok(result.summary.totalFeatures >= 1);
+  assert.equal(result.summary.totalInterviews, 1);
+  assert.equal(result.summary.totalExperiments, 1);
+  assert.equal(collection('experiments.json')[0].status, 'planned');
+  assert.equal(collection('experiments.json')[0].metrics.successMetric, '');
+  assert.ok(collection('interviews.json')[0].analysis.featureRequests.length);
+  for (const name of ['insights', 'features', 'interviews', 'experiments']) {
+    assert.ok(collection(name + '.json').every(item => item.productId === 'workspace-a'));
+  }
+});
+
+test('JSON import supports interviews and preserves remapped experiment-assumption links', async () => {
+  const { load, collection } = fixture();
+  const form = new FormData();
+  form.append('file', new File([JSON.stringify({
+    interviews: [{ transcript: 'Customers need a faster way to export their reports.' }],
+    assumptions: [{ id: 'a', statement: 'Exports save time', relatedExperimentIds: ['e'] }],
+    experiments: [{ id: 'e', title: 'Export test', relatedAssumptionIds: ['a'] }],
+  })], 'evidence.json'));
+  const response = await load('src/app/api/import/route.ts').POST(new Request('http://localhost/api/import', { method: 'POST', headers: { 'x-product-context': 'workspace-a' }, body: form }));
+  assert.equal(response.status, 200);
+  const assumption = collection('assumptions.json')[0];
+  const experiment = collection('experiments.json')[0];
+  assert.deepEqual(experiment.relatedAssumptionIds, [assumption.id]);
+  assert.deepEqual(assumption.relatedExperimentIds, [experiment.id]);
+  assert.equal(collection('interviews.json')[0].title, 'Imported interview');
+});
