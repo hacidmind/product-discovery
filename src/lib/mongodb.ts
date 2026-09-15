@@ -18,6 +18,11 @@ const INDEXED_COLLECTIONS = [
     "tree",
 ];
 
+const CONNECTION_OPTIONS = {
+    connectTimeoutMS: 10_000,
+    serverSelectionTimeoutMS: 15_000,
+};
+
 async function ensureIndexes(client: MongoClient) {
     const db = client.db(process.env.MONGODB_DB || "product-discovery");
     await Promise.all([
@@ -37,7 +42,7 @@ export async function getDatabase() {
     if (!uri) throw new Error("Missing MONGODB_URI environment variable");
     if (!globalForMongo.mongoClientPromise || globalForMongo.mongoUri !== uri) {
         globalForMongo.mongoUri = uri;
-        globalForMongo.mongoClientPromise = new MongoClient(uri).connect();
+        globalForMongo.mongoClientPromise = new MongoClient(uri, CONNECTION_OPTIONS).connect();
         globalForMongo.indexesEnsured = false;
     }
     try {

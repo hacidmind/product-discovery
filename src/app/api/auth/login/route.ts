@@ -17,8 +17,10 @@ export async function POST(req: NextRequest) {
   const admin = adminCredentials();
   let user: SessionUser | null = null;
 
-  if (admin && admin.email === email && (await bcrypt.compare(password, admin.passwordHash))) {
-    user = { id: "admin", name: "Admin", email: admin.email };
+  if (admin && admin.email === email) {
+    if (await bcrypt.compare(password, admin.passwordHash)) {
+      user = { id: "admin", name: "Admin", email: admin.email };
+    }
   } else {
     let users: User[];
     try { users = await getRecords<User>("users.json"); }

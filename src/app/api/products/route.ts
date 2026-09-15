@@ -38,7 +38,10 @@ export async function POST(request: NextRequest) {
     try {
     const products = await getRecords<Product>("products.json");
     const existing = products.find((product) => product.userId === user.id && product.name.toLowerCase() === name.toLowerCase());
-    if (existing) return NextResponse.json(existing);
+    if (existing) return NextResponse.json(
+        { error: `You already have a research workspace named "${existing.name}". Choose it from the switcher or use a different name.` },
+        { status: 409 },
+    );
     const now = new Date().toISOString();
     return NextResponse.json(await createRecord("products.json", { id: randomUUID(), userId: user.id, name, createdAt: now, updatedAt: now }), { status: 201 });
     } catch (error) { const response = databaseFailureResponse(error); if (response) return response; throw error; }

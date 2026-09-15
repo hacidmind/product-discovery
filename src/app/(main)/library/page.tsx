@@ -26,8 +26,8 @@ export default function ResearchLibraryPage() {
   const reports = data.reports.filter(report => `${report.query} ${report.product}`.toLowerCase().includes(query.toLowerCase()));
   return <div className="mx-auto max-w-6xl">
     <div className="mb-7 flex flex-wrap items-start justify-between gap-4">
-      <div><p className="mb-2 text-xs font-semibold uppercase tracking-[.16em] text-[var(--accent)]">Your discovery workspace</p><h1 className="font-display text-3xl font-semibold">Your research</h1><p className="mt-2 text-sm text-[var(--text-secondary)]">Pick up where you left off, or explore your next product question.</p></div>
-      <Button onClick={createWorkspace} size="md">+ New research workspace</Button>
+      <div><p className="mb-2 text-xs font-semibold uppercase tracking-[.16em] text-[var(--accent)]">Your discovery portfolio</p><h1 className="font-display text-3xl font-semibold">Your research</h1><p className="mt-2 text-sm text-[var(--text-secondary)]">Open a research workspace or create another one. Each keeps its own data and Solution Tree.</p></div>
+      <Button onClick={createWorkspace} size="md">+ New research</Button>
     </div>
     <ModuleError message={error} retry={() => { setLoading(true); setError(""); void load(); }} />
     {loading ? <div className="grid min-h-48 place-items-center"><Spinner size={24} /></div> : !error && <>
@@ -48,7 +48,7 @@ export default function ResearchLibraryPage() {
         })}</div>
         {reports.length === 0 && <p className="py-8 text-sm text-[var(--text-secondary)]">No reports match that search. Try a different keyword.</p>}
       </section>}
-      {data.products.length > 0 && <section aria-labelledby="workspaces-heading"><h2 id="workspaces-heading" className="mb-2 text-lg font-semibold">Research workspaces</h2><p className="mb-4 text-sm text-[var(--text-secondary)]">Each workspace brings together its evidence, priorities, experiments, and Solution Tree.</p><div className="grid gap-4 md:grid-cols-2">{data.products.map(product => <article key={product.id} className="rounded-xl border border-[var(--border)] p-5"><h3 className="break-words font-semibold">{product.name}</h3><p className="my-2 text-xs text-[var(--text-secondary)]">{product.researchCount || 0} saved reports</p><div className="mt-4 flex flex-wrap gap-2"><Button variant="secondary" onClick={() => openWorkspace(product)}>Open workspace</Button><Button variant="ghost" onClick={() => openWorkspace(product, "/research?new=1")}>+ New report</Button></div></article>)}</div></section>}
+      {data.products.length > 0 && <section aria-labelledby="workspaces-heading"><h2 id="workspaces-heading" className="mb-2 text-lg font-semibold">Research workspaces</h2><p className="mb-4 text-sm text-[var(--text-secondary)]">Open one to work with only its evidence, priorities, experiments, and Solution Tree.</p><div className="grid gap-4 md:grid-cols-2">{data.products.map(product => <article key={product.id} className="rounded-xl border border-[var(--border)] p-5"><h3 className="break-words font-semibold">{product.name}</h3><p className="my-2 text-xs text-[var(--text-secondary)]">{product.researchCount || 0} saved reports</p><div className="mt-4 flex flex-wrap gap-2"><Button variant="secondary" onClick={() => openWorkspace(product)}>Open research</Button><Button variant="ghost" onClick={() => openWorkspace(product, "/research?new=1")}>+ New report in this research</Button></div></article>)}</div></section>}
     </>}
   </div>;
 }

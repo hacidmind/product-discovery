@@ -146,6 +146,38 @@ test('research library only includes owned reports with unambiguous workspace ID
   assert.equal(response.products.length, 2);
 });
 
+test('two research workspaces keep their records isolated', async () => {
+  const records = [];
+  const storage = {
+    getRecords: async () => structuredClone(records),
+    createRecord: async (_name, record) => { records.push(structuredClone(record)); return record; },
+    filterByProduct: (items, productId) => items.filter(item => item.productId === productId),
+    generateId: randomUUID,
+  };
+  const api = loader({
+    '@/lib/storage': storage,
+    '@/lib/request-context': { getOwnedProductId: async request => ['research-one', 'research-two'].includes(request.headers.get('x-product-context')) ? request.headers.get('x-product-context') : null },
+  })('src/app/api/insights/route.ts');
+  const first = await api.POST(req('POST', { description: 'Evidence belonging only to the first research.', source: 'interview' }, 'research-one'));
+  const second = await api.POST(req('POST', { description: 'Evidence belonging only to the second research.', source: 'interview' }, 'research-two'));
+  assert.equal(first.status, 201); assert.equal(second.status, 201);
+  const firstList = await (await api.GET(req('GET', undefined, 'research-one'))).json();
+  const secondList = await (await api.GET(req('GET', undefined, 'research-two'))).json();
+  assert.deepEqual(firstList.map(item => item.description), ['Evidence belonging only to the first research.']);
+  assert.deepEqual(secondList.map(item => item.description), ['Evidence belonging only to the second research.']);
+});
+
+test('creating a duplicate research name returns a clear conflict', async () => {
+  const products = [{ id: 'existing', userId: 'alice', name: 'Card issuance' }];
+  const api = loader({
+    '@/lib/storage': { getRecords: async () => products, createRecord: async (_name, record) => record },
+    '@/lib/request-context': { getRequestUser: async () => ({ id: 'alice' }) },
+  })('src/app/api/products/route.ts');
+  const response = await api.POST(req('POST', { name: ' card ISSUANCE ' }));
+  assert.equal(response.status, 409);
+  assert.match((await response.json()).error, /already have a research workspace/i);
+});
+
 
 test('record validation accepts unclassified assumptions and rejects malformed scoring inputs', () => {
   const { validateRecordInput } = loader({})('src/lib/record-validation.ts');
@@ -167,6 +199,14 @@ test('MongoDB DNS failures give a safe, actionable 503 response', async () => {
   assert.equal(databaseFailureResponse(new Error('Unrelated application bug')), null);
 });
 
+test('MongoDB server-selection timeouts return an actionable 503 response', async () => {
+  const { databaseFailureResponse } = loader({})('src/lib/database-errors.ts');
+  const failure = Object.assign(new Error('Server selection timed out'), { name: 'MongoServerSelectionError' });
+  const response = databaseFailureResponse(failure);
+  assert.equal(response.status, 503);
+  assert.match((await response.json()).error, /within 15 seconds/);
+});
+
 
 test('login and workspace APIs report MongoDB DNS failures without an error page', async () => {
   const failure = Object.assign(new Error('querySrv ESERVFAIL _mongodb._tcp.example.mongodb.net'), { code: 'ESERVFAIL', syscall: 'querySrv' });
@@ -184,4 +224,26 @@ test('login and workspace APIs report MongoDB DNS failures without an error page
   const productsResponse = await products.GET(req());
   assert.equal(productsResponse.status, 503);
   assert.match((await productsResponse.json()).error, /DNS lookup failed/);
+});
+
+test('configured admin login does not depend on a database connection', async () => {
+  const bcrypt = require('bcryptjs');
+  const hash = await bcrypt.hash('correct-password', 4);
+  let databaseRead = false;
+  const login = loader({
+    bcryptjs: { default: bcrypt },
+    '@/lib/storage': { getRecords: async () => { databaseRead = true; throw new Error('Database should not be queried'); } },
+    '@/lib/auth': {
+      adminCredentials: () => ({ email: 'admin@example.test', passwordHash: hash }),
+      createSessionToken: async () => 'test-session-token',
+      SESSION_COOKIE: 'pda_session',
+      SESSION_COOKIE_OPTIONS: { httpOnly: true, sameSite: 'lax', path: '/' },
+    },
+  })('src/app/api/auth/login/route.ts');
+  const success = await login.POST(req('POST', { email: 'ADMIN@example.test', password: 'correct-password' }));
+  assert.equal(success.status, 200);
+  assert.equal((await success.json()).user.id, 'admin');
+  const rejected = await login.POST(req('POST', { email: 'admin@example.test', password: 'wrong-password' }));
+  assert.equal(rejected.status, 401);
+  assert.equal(databaseRead, false);
 });

@@ -7,6 +7,11 @@ import AuthCard from "@/components/auth-card";
 import { Button, Input, Spinner } from "@/components/ui";
 import { fetchSession, type SessionUser } from "@/lib/auth";
 
+function loginDestination(): string {
+  const requested = new URLSearchParams(window.location.search).get("next");
+  return requested?.startsWith("/") && !requested.startsWith("//") ? requested : "/library";
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -18,7 +23,7 @@ export default function LoginPage() {
   useEffect(() => {
     fetchSession().then((user) => {
       setReady(true);
-      if (user) router.replace("/library");
+      if (user) router.replace(loginDestination());
     });
   }, [router]);
 
@@ -43,7 +48,7 @@ export default function LoginPage() {
         setSubmitting(false);
         return;
       }
-      router.replace("/library");
+      router.replace(loginDestination());
     } catch {
       setError("Network error. Please try again.");
       setSubmitting(false);
