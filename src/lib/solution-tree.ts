@@ -1,5 +1,9 @@
 import type { TreeNode, Opportunity, Feature } from "@/lib/types";
 
+export const TREE_CHILD_TYPES: Record<TreeNode["type"], TreeNode["type"][]> = {
+  outcome: ["opportunity"], opportunity: ["opportunity", "solution"], solution: ["experiment"], experiment: [],
+};
+
 export function parseTree(value: unknown): TreeNode {
   const ids = new Set<string>();
   let count = 0;
@@ -11,7 +15,19 @@ export function parseTree(value: unknown): TreeNode {
     if (typeof node.label !== "string" || !node.label.trim() || node.label.length > 200) throw new Error("Give each item a title of 1 to 200 characters.");
     if (!["outcome", "opportunity", "solution", "experiment"].includes(String(node.type)) || !Array.isArray(node.children)) throw new Error("Invalid tree item.");
     const result: TreeNode = { id: node.id, label: node.label.trim(), type: node.type as TreeNode["type"], expanded: node.expanded !== false, children: node.children.map(child => visit(child, depth + 1)) };
-    for (const key of ["opportunityId", "featureId", "experimentId"] as const) if (typeof node[key] === "string") result[key] = node[key];
+    if (result.children.some(child => !TREE_CHILD_TYPES[result.type].includes(child.type))) throw new Error("Connect outcomes to opportunities, opportunities to solutions, and solutions to experiments.");
+    if (node.guidance !== undefined) {
+      const guidance = node.guidance as Record<string, unknown>;
+      if (!guidance || typeof guidance !== "object" || !["workspace", "starter"].includes(String(guidance.basis)) || typeof guidance.rationale !== "string" || !guidance.rationale.trim()) throw new Error("Invalid suggestion context.");
+      result.guidance = { basis: guidance.basis as "workspace" | "starter", rationale: guidance.rationale };
+      for (const key of ["rationale", "evidence", "assumption", "testPlan", "successSignal"] as const) {
+        if (guidance[key] !== undefined) {
+          if (typeof guidance[key] !== "string" || guidance[key].length > 2000) throw new Error("Suggestion details must contain up to 2000 characters.");
+          result.guidance[key] = guidance[key];
+        }
+      }
+    }
+    for (const key of ["opportunityId", "featureId", "experimentId", "insightId"] as const) if (typeof node[key] === "string") result[key] = node[key];
     return result;
   }
   const tree = visit(value, 0);

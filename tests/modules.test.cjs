@@ -302,3 +302,60 @@ test('persona fields remain together for plain labels and Markdown subheadings',
     assert.equal(collection('experiments.json').length, 1);
   }
 });
+
+
+test('solution tree rejects invalid hierarchy and retains reviewed suggestion context', () => {
+  const { parseTree } = loader({})('src/lib/solution-tree.ts');
+  const node = (id, type, children = []) => ({ id, type, label: id, children, expanded: true });
+  assert.throws(() => parseTree(node('root', 'outcome', [node('feature', 'solution')])), /Connect outcomes/);
+  assert.throws(() => parseTree(node('root', 'outcome', [node('opp', 'opportunity', [node('exp', 'experiment')])])), /Connect outcomes/);
+  const experiment = { ...node('exp', 'experiment'), guidance: { basis: 'starter', rationale: 'Test a risky assumption', assumption: 'Customers can finish unaided', testPlan: 'Observe five customers', successSignal: 'Set the threshold first' } };
+  const opportunity = { ...node('opp', 'opportunity', [node('solution', 'solution', [experiment])]), insightId: 'signal-1' };
+  const tree = parseTree(node('root', 'outcome', [opportunity]));
+  assert.equal(tree.children[0].insightId, 'signal-1');
+  assert.deepEqual(tree.children[0].children[0].children[0].guidance, experiment.guidance);
+  experiment.guidance.testPlan = 123;
+  assert.throws(() => parseTree(node('root', 'outcome', [opportunity])), /Suggestion details/);
+});
+
+test('tree suggestions guide an empty workspace through every level without inventing evidence', () => {
+  const { getTreeSuggestions, suggestionToNode } = loader({})('src/lib/tree-suggestions.ts');
+  const context = { insights: [], opportunities: [], features: [], experiments: [] };
+  let selected = null;
+  for (const type of ['outcome', 'opportunity', 'solution', 'experiment']) {
+    const choices = getTreeSuggestions(selected, context);
+    assert.ok(choices.length >= 2);
+    assert.ok(choices.every(choice => choice.type === type && choice.guidance.basis === 'starter' && !choice.guidance.evidence));
+    const choice = choices[0];
+    const child = suggestionToNode(choice, randomUUID());
+    if (selected) {
+      selected.children.push(child);
+      assert.ok(!getTreeSuggestions(selected, context).some(item => item.label === child.label));
+    }
+    selected = child;
+  }
+  assert.ok(selected.guidance.assumption);
+  assert.ok(selected.guidance.testPlan);
+  assert.ok(selected.guidance.successSignal);
+  assert.deepEqual(getTreeSuggestions(selected, context), []);
+});
+
+test('tree suggestions prioritize linked evidence and do not relink accepted siblings', () => {
+  const { getTreeSuggestions, suggestionToNode } = loader({})('src/lib/tree-suggestions.ts');
+  const context = {
+    insights: [{ id: 'i', title: 'Setup is confusing', description: 'Customers cannot find their next step.', category: 'pain_point', themes: ['onboarding'] }],
+    opportunities: [{ id: 'o', title: 'Help new customers finish setup', description: 'Customers get lost in setup', totalScore: 5 }],
+    features: [{ id: 'f', title: 'Welcome checklist', description: 'Guided setup', relatedOpportunityIds: ['o'] }, { id: 'unrelated', title: 'Billing export', description: '', relatedOpportunityIds: [] }], experiments: [],
+  };
+  assert.match(getTreeSuggestions(null, context)[0].label, /activation/);
+  const root = { id: 'root', type: 'outcome', label: 'Improve activation', expanded: true, children: [] };
+  const opportunities = getTreeSuggestions(root, context);
+  assert.equal(opportunities[0].opportunityId, 'o');
+  assert.ok(opportunities.some(choice => choice.insightId === 'i' && choice.guidance.evidence === context.insights[0].description));
+  const opportunity = suggestionToNode(opportunities[0], 'opp');
+  const solutions = getTreeSuggestions(opportunity, context);
+  assert.equal(solutions[0].featureId, 'f');
+  assert.ok(!solutions.some(choice => choice.featureId === 'unrelated'));
+  opportunity.children.push(suggestionToNode(solutions[0], 'solution'));
+  assert.ok(!getTreeSuggestions(opportunity, context).some(choice => choice.featureId === 'f'));
+});

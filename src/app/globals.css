@@ -173,3 +173,75 @@ div[class~="z-[100]"] {
 .solution-node { display: flex; border: 1px solid var(--border); border-left: 3px solid; border-radius: 12px; background: var(--bg); }
 .solution-node-selected { outline: 2px solid var(--accent); outline-offset: 2px; }
 @media (max-width: 640px) { .solution-children { margin-left: 5px; padding-left: 9px; } .solution-children > .solution-branch::before { left: -9px; width: 9px; } }
+
+/* A top-down opportunity solution tree; long branches scroll inside the canvas. */
+.solution-canvas {
+  overflow: auto;
+  max-height: 76vh;
+  min-height: 320px;
+  padding: 36px 20px;
+  background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+  background-size: 20px 20px;
+  overscroll-behavior: contain;
+}
+.solution-diagram .solution-root {
+  display: flex;
+  justify-content: center;
+  width: max-content;
+  min-width: 100%;
+}
+.solution-diagram .solution-children {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  padding: 32px 0 0;
+  border: 0;
+}
+.solution-diagram .solution-children::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 32px;
+  border-left: 2px solid var(--border-strong);
+}
+.solution-diagram .solution-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  padding: 32px 14px 0;
+  flex: 0 0 auto;
+}
+.solution-diagram .solution-root > .solution-branch { padding-top: 0; }
+.solution-diagram .solution-children > .solution-branch::before,
+.solution-diagram .solution-children > .solution-branch::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 32px;
+  border-top: 2px solid var(--border-strong);
+}
+.solution-diagram .solution-children > .solution-branch::after {
+  left: 50%;
+  border-left: 2px solid var(--border-strong);
+}
+.solution-diagram .solution-children > .solution-branch:first-child::before,
+.solution-diagram .solution-children > .solution-branch:last-child::after { border-top: 0; }
+.solution-diagram .solution-node {
+  width: 228px;
+  min-height: 112px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+  transition: outline-color .15s, box-shadow .15s;
+}
+.solution-diagram .solution-node-selected { box-shadow: 0 0 28px var(--accent-light); }
+.solution-outline .solution-root { max-width: 900px; margin-inline: auto; }
+@media (max-width: 640px) {
+  .solution-canvas { padding: 24px 12px; min-height: 260px; max-height: 60vh; }
+  .solution-diagram .solution-node { width: 206px; }
+  .solution-diagram .solution-branch { padding-inline: 10px; }
+}

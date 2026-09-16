@@ -229,7 +229,18 @@ export interface Experiment {
 
 // ─── Opportunity Solution Tree ──────────────────────────────────────
 
+export interface TreeGuidance {
+  basis: "workspace" | "starter";
+  rationale: string;
+  evidence?: string;
+  assumption?: string;
+  testPlan?: string;
+  successSignal?: string;
+}
+
 export interface TreeNode {
+  guidance?: TreeGuidance;
+  insightId?: string;
   revision?: number;
   updatedAt?: string;
   featureId?: string;
