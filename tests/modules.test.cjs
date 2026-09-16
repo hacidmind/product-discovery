@@ -285,3 +285,20 @@ test('JSON import supports interviews and preserves remapped experiment-assumpti
   assert.deepEqual(assumption.relatedExperimentIds, [experiment.id]);
   assert.equal(collection('interviews.json')[0].title, 'Imported interview');
 });
+
+
+test('persona fields remain together for plain labels and Markdown subheadings', async () => {
+  for (const fields of ['Goals:\n- Export customer reports weekly\nNeeds:\n- Reliable reporting', '## Goals\n- Export customer reports weekly\n## Needs\n- Reliable reporting']) {
+    const { load, collection } = fixture();
+    const form = new FormData();
+    form.append('file', new File(['# Persona\nName: Operations manager\nRole: Operations lead\n' + fields + '\n\n# Experiment\nTest whether guided reporting saves customers time.'], 'research.md'));
+    const response = await load('src/app/api/import/route.ts').POST(new Request('http://localhost/api/import', { method: 'POST', headers: { 'x-product-context': 'workspace-a' }, body: form }));
+    assert.equal(response.status, 200);
+    const personas = collection('personas.json');
+    assert.equal(personas.length, 1);
+    assert.equal(personas[0].name, 'Operations manager');
+    assert.deepEqual(personas[0].goals, ['Export customer reports weekly']);
+    assert.deepEqual(personas[0].needs, ['Reliable reporting']);
+    assert.equal(collection('experiments.json').length, 1);
+  }
+});

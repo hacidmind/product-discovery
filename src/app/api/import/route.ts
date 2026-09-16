@@ -39,6 +39,14 @@ function parseTextIntoSections(text: string): { section: string; content: string
   let currentContent: string[] = [];
 
   for (const line of lines) {
+    // Persona fields belong to their parent persona, including Markdown subheadings.
+    const personaField = /^(?:#{1,3}\s+)?(?:goals?|frustrations?|pain points?|challenges?|behaviors?|habits?|needs?|requirements?|jobs? to be done|jtbd):?$/i.test(line.trim());
+    const inPersona = /persona|user type|target user/i.test(currentSection)
+      || currentContent.some(content => /^(?:name|role|persona):/i.test(content.trim()));
+    if (personaField && inPersona) {
+      currentContent.push(line);
+      continue;
+    }
     const sectionMatch = line.match(/^#{1,3}\s+(.+)$/) || line.match(/^([A-Z][A-Za-z\s]{2,40}):$/);
     if (sectionMatch) {
       if (currentContent.length > 0) {

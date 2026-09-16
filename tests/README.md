@@ -36,3 +36,14 @@ The walkthrough checks login routing, saved and empty research libraries, popula
 ## Integration limits
 
 These checks do not confirm live MongoDB connectivity, external research-provider responses, or CDN animation loading. The browser walkthrough explicitly tests usable rendering when external scripts are blocked. GSAP and Anime.js are configured as progressive enhancements with reduced-motion support.
+
+
+## File-to-insights browser verification
+
+With the localhost:3007 review server running using the test session secret above, run:
+
+```powershell
+node tests/browser-import.cjs
+```
+
+This walkthrough uses the actual import, module-list, and dashboard route handlers with isolated in-memory storage. It checks the upload control across modules, selected-file retention during navigation, multipart extraction into all seven record types, immediate module refresh, workspace separation, empty-file errors, mobile layout, and removal of the redundant overview charts. No test records are written to MongoDB. Screenshots are saved as `browser-import-overview-desktop.png` and `browser-import-mobile.png`.

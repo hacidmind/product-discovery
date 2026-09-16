@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import { Upload } from "@/components/icons";
 import { Button, Card, Badge, Spinner, EmptyState, useToast } from "@/components/ui";
 
 interface ImportSummary {
@@ -45,7 +46,8 @@ function getItemLabel(item: ImportItem): string {
   return item.data.title || item.data.name || item.data.statement || "Untitled";
 }
 
-export default function DocumentImport({ onImported }: { onImported?: () => void }) {
+export default function DocumentImport({ onImported, embedded = false }: { onImported?: () => void; embedded?: boolean }) {
+  const Heading = embedded ? "h2" : "h1";
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ImportResult | null>(null);
@@ -129,7 +131,7 @@ export default function DocumentImport({ onImported }: { onImported?: () => void
   return (
     <div className="max-w-3xl mx-auto animate-fadein">
       <div className="mb-6">
-        <h1 className="text-lg font-semibold text-[var(--text)]">Import Document</h1>
+        <Heading className="text-lg font-semibold text-[var(--text)]">Import Document</Heading>
         <p className="text-xs text-[var(--text-secondary)] mt-1">
           Upload a research document, interview transcript, or product brief. The app will
           extract insights, opportunities, personas, features, assumptions, interviews, and experiment drafts where supported by the text.
@@ -138,10 +140,10 @@ export default function DocumentImport({ onImported }: { onImported?: () => void
 
       {!reviewMode && (
         <>
-          <Card className="p-8">
+          <Card className="p-4 sm:p-8">
             <div
               className={`
-                border-2 border-dashed rounded-lg p-12 text-center transition-colors cursor-pointer
+                border-2 border-dashed rounded-lg p-5 sm:p-12 text-center transition-colors cursor-pointer
                 ${dragOver
                   ? "border-[var(--accent)] bg-[var(--accent-light)]"
                   : "border-[var(--border)] hover:border-[var(--accent)]"
@@ -172,9 +174,9 @@ export default function DocumentImport({ onImported }: { onImported?: () => void
 
               {file ? (
                 <div className="space-y-3">
-                  <div className="text-3xl">\uD83D\uDCC4</div>
+                  <Upload size={28} className="mx-auto text-[var(--accent)]" />
                   <div>
-                    <p className="text-sm font-medium text-[var(--text)]">{file.name}</p>
+                    <p title={file.name} className="line-clamp-2 break-all text-sm font-medium text-[var(--text)]">{file.name}</p>
                     <p className="text-xs text-[var(--text-tertiary)] mt-1">
                       {(file.size / 1024).toFixed(1)} KB
                     </p>
@@ -185,7 +187,7 @@ export default function DocumentImport({ onImported }: { onImported?: () => void
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <div className="text-3xl opacity-30">\u2B07\uFE0F</div>
+                  <Upload size={28} className="mx-auto text-[var(--text-secondary)]" />
                   <div>
                     <p className="text-sm font-medium text-[var(--text)]">
                       Drop your document here or click to browse
@@ -273,7 +275,7 @@ export default function DocumentImport({ onImported }: { onImported?: () => void
             <h3 className="text-sm font-medium text-[var(--text)]">Extracted Items</h3>
             {result.items.length === 0 ? (
               <EmptyState
-                icon="\uD83D\uDCC4"
+                icon={"\uD83D\uDCC4"}
                 title="No items extracted"
                 description="No recognizable content was found in the document. Try a document with clear sections and bullet points."
               />
